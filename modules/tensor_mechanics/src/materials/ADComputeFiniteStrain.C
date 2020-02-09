@@ -136,7 +136,7 @@ ADComputeFiniteStrain<compute_stage>::computeQpIncrements(ADRankTwoTensor & tota
       const ADRankTwoTensor invFhat = _Fhat[_qp].inverse();
 
       // A = I - _Fhat^-1
-      ADRankTwoTensor A(RankTwoTensorType<compute_stage>::type::initIdentity);
+      ADRankTwoTensor A(RankTwoTensorTempl<ADReal>::initIdentity);
       A -= invFhat;
 
       // Cinv - I = A A^T - A - A^T;
@@ -233,3 +233,5 @@ ADComputeFiniteStrain<compute_stage>::computeQpIncrements(ADRankTwoTensor & tota
                  "EigenSolution.");
   }
 }
+
+adBaseClass(ADComputeFiniteStrain);
