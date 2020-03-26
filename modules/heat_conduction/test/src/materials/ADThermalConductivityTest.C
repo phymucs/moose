@@ -9,7 +9,7 @@
 
 #include "ADThermalConductivityTest.h"
 
-registerADMooseObject("HeatConductionTestApp", ADThermalConductivityTest);
+registerMooseObject("HeatConductionTestApp", ADThermalConductivityTest);
 
 defineADValidParams(
     ADThermalConductivityTest,

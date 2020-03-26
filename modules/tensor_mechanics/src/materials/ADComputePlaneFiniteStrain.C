@@ -9,7 +9,7 @@
 
 #include "ADComputePlaneFiniteStrain.h"
 
-registerADMooseObject("TensorMechanicsApp", ADComputePlaneFiniteStrain);
+registerMooseObject("TensorMechanicsApp", ADComputePlaneFiniteStrain);
 
 defineADLegacyParams(ADComputePlaneFiniteStrain);
 

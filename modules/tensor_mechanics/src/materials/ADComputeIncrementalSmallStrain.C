@@ -10,7 +10,7 @@
 #include "ADComputeIncrementalSmallStrain.h"
 #include "libmesh/quadrature.h"
 
-registerADMooseObject("TensorMechanicsApp", ADComputeIncrementalSmallStrain);
+registerMooseObject("TensorMechanicsApp", ADComputeIncrementalSmallStrain);
 
 defineADLegacyParams(ADComputeIncrementalSmallStrain);
 

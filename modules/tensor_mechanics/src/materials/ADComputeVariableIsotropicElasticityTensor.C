@@ -10,7 +10,7 @@
 #include "ADComputeVariableIsotropicElasticityTensor.h"
 #include "Function.h"
 
-registerADMooseObject("TensorMechanicsApp", ADComputeVariableIsotropicElasticityTensor);
+registerMooseObject("TensorMechanicsApp", ADComputeVariableIsotropicElasticityTensor);
 
 defineADLegacyParams(ADComputeVariableIsotropicElasticityTensor);
 

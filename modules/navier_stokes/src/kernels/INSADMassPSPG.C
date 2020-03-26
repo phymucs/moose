@@ -9,7 +9,7 @@
 
 #include "INSADMassPSPG.h"
 
-registerADMooseObject("NavierStokesApp", INSADMassPSPG);
+registerMooseObject("NavierStokesApp", INSADMassPSPG);
 
 defineADLegacyParams(INSADMassPSPG);
 

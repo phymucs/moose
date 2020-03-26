@@ -9,7 +9,7 @@
 
 #include "ADMatAnisoDiffusion.h"
 
-registerADMooseObject("MooseApp", ADMatAnisoDiffusion);
+registerMooseObject("MooseApp", ADMatAnisoDiffusion);
 
 defineADLegacyParams(ADMatAnisoDiffusion);
 

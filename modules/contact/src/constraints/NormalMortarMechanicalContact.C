@@ -9,7 +9,7 @@
 
 #include "NormalMortarMechanicalContact.h"
 
-registerADMooseObject("MooseApp", NormalMortarMechanicalContact);
+registerMooseObject("MooseApp", NormalMortarMechanicalContact);
 
 defineADLegacyParams(NormalMortarMechanicalContact);
 

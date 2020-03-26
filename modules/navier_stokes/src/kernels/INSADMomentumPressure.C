@@ -9,7 +9,7 @@
 
 #include "INSADMomentumPressure.h"
 
-registerADMooseObject("NavierStokesApp", INSADMomentumPressure);
+registerMooseObject("NavierStokesApp", INSADMomentumPressure);
 
 defineADLegacyParams(INSADMomentumPressure);
 

@@ -9,7 +9,7 @@
 
 #include "ADSoretCoeffTest.h"
 
-registerADMooseObject("MiscTestApp", ADSoretCoeffTest);
+registerMooseObject("MiscTestApp", ADSoretCoeffTest);
 
 defineADLegacyParams(ADSoretCoeffTest);
 

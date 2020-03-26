@@ -9,7 +9,7 @@
 
 #include "ADSplitCHWResAniso.h"
 
-registerADMooseObject("PhaseFieldApp", ADSplitCHWResAniso);
+registerMooseObject("PhaseFieldApp", ADSplitCHWResAniso);
 
 defineADLegacyParams(ADSplitCHWResAniso);
 

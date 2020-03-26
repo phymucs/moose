@@ -9,7 +9,7 @@
 
 #include "ADComputeThermalExpansionEigenstrain.h"
 
-registerADMooseObject("TensorMechanicsApp", ADComputeThermalExpansionEigenstrain);
+registerMooseObject("TensorMechanicsApp", ADComputeThermalExpansionEigenstrain);
 
 defineADLegacyParams(ADComputeThermalExpansionEigenstrain);
 

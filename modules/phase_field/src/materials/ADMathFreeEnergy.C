@@ -9,7 +9,7 @@
 
 #include "ADMathFreeEnergy.h"
 
-registerADMooseObject("PhaseFieldApp", ADMathFreeEnergy);
+registerMooseObject("PhaseFieldApp", ADMathFreeEnergy);
 
 defineADLegacyParams(ADMathFreeEnergy);
 

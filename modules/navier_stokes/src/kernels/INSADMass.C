@@ -9,7 +9,7 @@
 
 #include "INSADMass.h"
 
-registerADMooseObject("NavierStokesApp", INSADMass);
+registerMooseObject("NavierStokesApp", INSADMass);
 
 defineADLegacyParams(INSADMass);
 

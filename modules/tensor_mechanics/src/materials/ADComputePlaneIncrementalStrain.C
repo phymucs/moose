@@ -9,7 +9,7 @@
 
 #include "ADComputePlaneIncrementalStrain.h"
 
-registerADMooseObject("TensorMechanicsApp", ADComputePlaneIncrementalStrain);
+registerMooseObject("TensorMechanicsApp", ADComputePlaneIncrementalStrain);
 
 defineADLegacyParams(ADComputePlaneIncrementalStrain);
 

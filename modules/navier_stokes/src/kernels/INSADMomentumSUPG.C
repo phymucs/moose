@@ -9,7 +9,7 @@
 
 #include "INSADMomentumSUPG.h"
 
-registerADMooseObject("NavierStokesApp", INSADMomentumSUPG);
+registerMooseObject("NavierStokesApp", INSADMomentumSUPG);
 
 defineADLegacyParams(INSADMomentumSUPG);
 

@@ -11,7 +11,7 @@
 #include "ADStressUpdateBase.h"
 #include "MooseException.h"
 
-registerADMooseObject("TensorMechanicsApp", ADComputeMultipleInelasticStress);
+registerMooseObject("TensorMechanicsApp", ADComputeMultipleInelasticStress);
 
 defineADLegacyParams(ADComputeMultipleInelasticStress);
 

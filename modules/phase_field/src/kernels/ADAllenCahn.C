@@ -9,7 +9,7 @@
 
 #include "ADAllenCahn.h"
 
-registerADMooseObject("PhaseFieldApp", ADAllenCahn);
+registerMooseObject("PhaseFieldApp", ADAllenCahn);
 
 defineADLegacyParams(ADAllenCahn);
 

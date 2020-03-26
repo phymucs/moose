@@ -9,7 +9,7 @@
 
 #include "ADHeatConduction.h"
 
-registerADMooseObject("HeatConductionApp", ADHeatConduction);
+registerMooseObject("HeatConductionApp", ADHeatConduction);
 
 defineADLegacyParams(ADHeatConduction);
 

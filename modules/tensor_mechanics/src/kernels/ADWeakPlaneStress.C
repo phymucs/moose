@@ -9,7 +9,7 @@
 
 #include "ADWeakPlaneStress.h"
 
-registerADMooseObject("TensorMechanicsApp", ADWeakPlaneStress);
+registerMooseObject("TensorMechanicsApp", ADWeakPlaneStress);
 
 defineADLegacyParams(ADWeakPlaneStress);
 

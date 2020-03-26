@@ -9,7 +9,7 @@
 
 #include "INSADTemperatureAdvection.h"
 
-registerADMooseObject("NavierStokesApp", INSADTemperatureAdvection);
+registerMooseObject("NavierStokesApp", INSADTemperatureAdvection);
 
 defineADLegacyParams(INSADTemperatureAdvection);
 
@@ -45,7 +45,7 @@ INSADTemperatureAdvection<compute_stage>::precomputeQpResidual()
 
 adBaseClass(INSADTemperatureAdvection);
 
-registerADMooseObject("NavierStokesApp", INSADTemperatureAdvectionSUPG);
+registerMooseObject("NavierStokesApp", INSADTemperatureAdvectionSUPG);
 
 defineADValidParams(
     INSADTemperatureAdvectionSUPG,

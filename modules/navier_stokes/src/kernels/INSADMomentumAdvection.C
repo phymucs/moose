@@ -9,7 +9,7 @@
 
 #include "INSADMomentumAdvection.h"
 
-registerADMooseObject("NavierStokesApp", INSADMomentumAdvection);
+registerMooseObject("NavierStokesApp", INSADMomentumAdvection);
 
 defineADLegacyParams(INSADMomentumAdvection);
 

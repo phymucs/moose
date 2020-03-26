@@ -9,7 +9,7 @@
 
 #include "INSADMomentumTimeDerivative.h"
 
-registerADMooseObject("NavierStokesApp", INSADMomentumTimeDerivative);
+registerMooseObject("NavierStokesApp", INSADMomentumTimeDerivative);
 
 defineADLegacyParams(INSADMomentumTimeDerivative);
 

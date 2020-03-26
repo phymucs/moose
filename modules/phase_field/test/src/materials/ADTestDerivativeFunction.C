@@ -9,7 +9,7 @@
 
 #include "ADTestDerivativeFunction.h"
 
-registerADMooseObject("PhaseFieldTestApp", ADTestDerivativeFunction);
+registerMooseObject("PhaseFieldTestApp", ADTestDerivativeFunction);
 
 defineADLegacyParams(ADTestDerivativeFunction);
 

@@ -11,7 +11,7 @@
 #include "FEProblem.h"
 #include "MooseMesh.h"
 
-registerADMooseObject("TensorMechanicsApp", ADComputeAxisymmetricRZSmallStrain);
+registerMooseObject("TensorMechanicsApp", ADComputeAxisymmetricRZSmallStrain);
 
 defineADLegacyParams(ADComputeAxisymmetricRZSmallStrain);
 
