@@ -13,25 +13,23 @@
 
 #define usingViscoplasticityStressUpdateBaseMembers                                                \
   usingStressUpdateBaseMembers;                                                                    \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::updateIntermediatePorosity;              \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::computeStressInitialize;                 \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::computeStressFinalize;                   \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::_intermediate_porosity;                  \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::_effective_inelastic_strain;             \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::_effective_inelastic_strain_old;         \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::_inelastic_strain;                       \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::_inelastic_strain_old;                   \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::_verbose;                                \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::_porosity_old;                           \
-  using ADViscoplasticityStressUpdateBase<compute_stage>::_max_inelastic_increment
+  using ADViscoplasticityStressUpdateBase::updateIntermediatePorosity;              \
+  using ADViscoplasticityStressUpdateBase::computeStressInitialize;                 \
+  using ADViscoplasticityStressUpdateBase::computeStressFinalize;                   \
+  using ADViscoplasticityStressUpdateBase::_intermediate_porosity;                  \
+  using ADViscoplasticityStressUpdateBase::_effective_inelastic_strain;             \
+  using ADViscoplasticityStressUpdateBase::_effective_inelastic_strain_old;         \
+  using ADViscoplasticityStressUpdateBase::_inelastic_strain;                       \
+  using ADViscoplasticityStressUpdateBase::_inelastic_strain_old;                   \
+  using ADViscoplasticityStressUpdateBase::_verbose;                                \
+  using ADViscoplasticityStressUpdateBase::_porosity_old;                           \
+  using ADViscoplasticityStressUpdateBase::_max_inelastic_increment
 
-template <ComputeStage>
 class ADViscoplasticityStressUpdateBase;
 
 declareADValidParams(ADViscoplasticityStressUpdateBase);
 
-template <ComputeStage compute_stage>
-class ADViscoplasticityStressUpdateBase : public ADStressUpdateBase<compute_stage>
+class ADViscoplasticityStressUpdateBase : public ADStressUpdateBase
 {
 public:
   static InputParameters validParams();
@@ -76,15 +74,15 @@ protected:
   const std::string _total_strain_base_name;
 
   /// Material property for the total strain increment
-  const ADMaterialProperty(RankTwoTensor) & _strain_increment;
+  const ADMaterialProperty<RankTwoTensor> & _strain_increment;
 
   ///@{ Effective inelastic strain material property
-  ADMaterialProperty(Real) & _effective_inelastic_strain;
+  ADMaterialProperty<Real> & _effective_inelastic_strain;
   const MaterialProperty<Real> & _effective_inelastic_strain_old;
   ///@}
 
   ///@{ Creep strain material property
-  ADMaterialProperty(RankTwoTensor) & _inelastic_strain;
+  ADMaterialProperty<RankTwoTensor> & _inelastic_strain;
   const MaterialProperty<RankTwoTensor> & _inelastic_strain_old;
   ///@}
 
@@ -100,5 +98,4 @@ protected:
   /// Flag to enable verbose output
   const bool _verbose;
 
-  usingStressUpdateBaseMembers;
 };

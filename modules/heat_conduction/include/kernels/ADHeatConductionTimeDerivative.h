@@ -11,13 +11,11 @@
 
 #include "ADTimeDerivative.h"
 
-template <ComputeStage compute_stage>
 class ADHeatConductionTimeDerivative;
 
 declareADValidParams(ADHeatConductionTimeDerivative);
 
-template <ComputeStage compute_stage>
-class ADHeatConductionTimeDerivative : public ADTimeDerivative<compute_stage>
+class ADHeatConductionTimeDerivative : public ADTimeDerivative
 {
 public:
   static InputParameters validParams();
@@ -28,11 +26,10 @@ protected:
   virtual ADReal precomputeQpResidual() override;
 
   /// Specific heat material property
-  const ADMaterialProperty(Real) & _specific_heat;
+  const ADMaterialProperty<Real> & _specific_heat;
 
   /// Density material property
-  const ADMaterialProperty(Real) & _density;
+  const ADMaterialProperty<Real> & _density;
 
-  usingTimeDerivativeMembers;
 };
 

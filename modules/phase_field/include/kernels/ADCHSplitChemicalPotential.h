@@ -12,7 +12,6 @@
 #include "ADKernel.h"
 
 // Forward Declaration
-template <ComputeStage>
 class ADCHSplitChemicalPotential;
 
 declareADValidParams(ADCHSplitChemicalPotential);
@@ -23,8 +22,7 @@ declareADValidParams(ADCHSplitChemicalPotential);
  * coupled to material state such as stress, etc.  Can be used to model species diffusion mediated
  * creep
  **/
-template <ComputeStage compute_stage>
-class ADCHSplitChemicalPotential : public ADKernel<compute_stage>
+class ADCHSplitChemicalPotential : public ADKernel
 {
 public:
   static InputParameters validParams();
@@ -35,7 +33,6 @@ protected:
   virtual ADReal computeQpResidual();
 
   // Chemical potential property evaluated at material points
-  const ADMaterialProperty(Real) & _chemical_potential;
+  const ADMaterialProperty<Real> & _chemical_potential;
 
-  usingKernelMembers;
 };

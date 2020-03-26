@@ -12,11 +12,10 @@
 
 defineADLegacyParams(ADComputeElasticityTensorBase);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeElasticityTensorBase<compute_stage>::validParams()
+ADComputeElasticityTensorBase::validParams()
 {
-  InputParameters params = ADMaterial<compute_stage>::validParams();
+  InputParameters params = ADMaterial::validParams();
   params.addParam<FunctionName>(
       "elasticity_tensor_prefactor",
       "Optional function to use as a scalar prefactor on the elasticity tensor.");
@@ -27,10 +26,9 @@ ADComputeElasticityTensorBase<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeElasticityTensorBase<compute_stage>::ADComputeElasticityTensorBase(
+ADComputeElasticityTensorBase::ADComputeElasticityTensorBase(
     const InputParameters & parameters)
-  : ADMaterial<compute_stage>(parameters),
+  : ADMaterial(parameters),
     GuaranteeProvider(this),
     _base_name(isParamValid("base_name") ? getParam<std::string>("base_name") + "_" : ""),
     _elasticity_tensor_name(_base_name + "elasticity_tensor"),
@@ -41,9 +39,8 @@ ADComputeElasticityTensorBase<compute_stage>::ADComputeElasticityTensorBase(
 {
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeElasticityTensorBase<compute_stage>::computeQpProperties()
+ADComputeElasticityTensorBase::computeQpProperties()
 {
   computeQpElasticityTensor();
 
@@ -52,5 +49,4 @@ ADComputeElasticityTensorBase<compute_stage>::computeQpProperties()
     _elasticity_tensor[_qp] *= _prefactor_function->value(_t, _q_point[_qp]);
 }
 
-// explicit instantiation is required for AD base classes
-adBaseClass(ADComputeElasticityTensorBase);
+

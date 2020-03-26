@@ -14,7 +14,6 @@
 #define usingComputeIsotropicElasticityTensorShellMembers usingMaterialMembers
 
 // Forward Declarations
-template <ComputeStage>
 class ADComputeIsotropicElasticityTensorShell;
 
 namespace libMesh
@@ -24,8 +23,7 @@ class QGauss;
 
 declareADValidParams(ADComputeIsotropicElasticityTensorShell);
 
-template <ComputeStage compute_stage>
-class ADComputeIsotropicElasticityTensorShell : public ADMaterial<compute_stage>
+class ADComputeIsotropicElasticityTensorShell : public ADMaterial
 {
 public:
   static InputParameters validParams();
@@ -47,10 +45,9 @@ protected:
   std::vector<Point> _t_points;
 
   /// Material property elasticity tensor
-  std::vector<ADMaterialProperty(RankFourTensor) *> _elasticity_tensor;
+  std::vector<ADMaterialProperty<RankFourTensor> *> _elasticity_tensor;
 
   /// Material property for ge matrix
-  std::vector<const ADMaterialProperty(RankTwoTensor) *> _ge;
+  std::vector<const ADMaterialProperty<RankTwoTensor> *> _ge;
 
-  usingMaterialMembers;
 };

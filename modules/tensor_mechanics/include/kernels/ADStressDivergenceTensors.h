@@ -13,18 +13,17 @@
 
 #define usingStressDivergenceTensorsMembers                                                        \
   usingKernelMembers;                                                                              \
-  using ADStressDivergenceTensors<compute_stage>::_base_name;                                      \
-  using ADStressDivergenceTensors<compute_stage>::_stress;                                         \
-  using ADStressDivergenceTensors<compute_stage>::_component;                                      \
-  using ADStressDivergenceTensors<compute_stage>::_ndisp;                                          \
-  using ADStressDivergenceTensors<compute_stage>::_disp_var;                                       \
-  using ADStressDivergenceTensors<compute_stage>::_avg_grad_test;                                  \
-  using ADStressDivergenceTensors<compute_stage>::_out_of_plane_strain_coupled;                    \
-  using ADStressDivergenceTensors<compute_stage>::_out_of_plane_strain;                            \
-  using ADStressDivergenceTensors<compute_stage>::_volumetric_locking_correction
+  using ADStressDivergenceTensors::_base_name;                                      \
+  using ADStressDivergenceTensors::_stress;                                         \
+  using ADStressDivergenceTensors::_component;                                      \
+  using ADStressDivergenceTensors::_ndisp;                                          \
+  using ADStressDivergenceTensors::_disp_var;                                       \
+  using ADStressDivergenceTensors::_avg_grad_test;                                  \
+  using ADStressDivergenceTensors::_out_of_plane_strain_coupled;                    \
+  using ADStressDivergenceTensors::_out_of_plane_strain;                            \
+  using ADStressDivergenceTensors::_volumetric_locking_correction
 
 // Forward Declarations
-template <ComputeStage>
 class ADStressDivergenceTensors;
 template <typename>
 class RankTwoTensorTempl;
@@ -36,8 +35,7 @@ declareADValidParams(ADStressDivergenceTensors);
 /**
  * ADStressDivergenceTensors is the automatic differentiation version of StressDivergenceTensors
  */
-template <ComputeStage compute_stage>
-class ADStressDivergenceTensors : public ADKernel<compute_stage>
+class ADStressDivergenceTensors : public ADKernel
 {
 public:
   static InputParameters validParams();
@@ -54,7 +52,7 @@ protected:
   const std::string _base_name;
 
   /// The stress tensor that the divergence operator operates on
-  const ADMaterialProperty(RankTwoTensor) & _stress;
+  const ADMaterialProperty<RankTwoTensor> & _stress;
 
   /// An integer corresponding to the direction this kernel acts in
   const unsigned int _component;
@@ -77,5 +75,4 @@ protected:
   /// Flag for volumetric locking correction
   const bool _volumetric_locking_correction;
 
-  usingKernelMembers;
 };

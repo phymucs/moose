@@ -13,10 +13,9 @@
 
 #define usingCompute1DSmallStrainMembers                                                           \
   usingComputeSmallStrainMembers;                                                                  \
-  using ADCompute1DSmallStrain<compute_stage>::computeStrainYY;                                    \
-  using ADCompute1DSmallStrain<compute_stage>::computeStrainZZ
+  using ADCompute1DSmallStrain::computeStrainYY;                                    \
+  using ADCompute1DSmallStrain::computeStrainZZ
 
-template <ComputeStage>
 class ADCompute1DSmallStrain;
 
 declareADValidParams(ADCompute1DSmallStrain);
@@ -27,8 +26,7 @@ declareADValidParams(ADCompute1DSmallStrain);
  * ADCompute1DSmallStrain contains virtual methods to define the strain_yy and strain_zz
  * as a general nonzero value.
  */
-template <ComputeStage compute_stage>
-class ADCompute1DSmallStrain : public ADComputeSmallStrain<compute_stage>
+class ADCompute1DSmallStrain : public ADComputeSmallStrain
 {
 public:
   static InputParameters validParams();
@@ -46,5 +44,4 @@ protected:
   /// overwritten for the specific geometries defined by inheriting classes
   virtual ADReal computeStrainZZ() = 0;
 
-  usingComputeSmallStrainMembers;
 };

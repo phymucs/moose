@@ -15,46 +15,42 @@ registerMooseObject("TensorMechanicsTestApp", ADPowerLawCreepExceptionTest);
 
 defineADLegacyParams(ADPowerLawCreepExceptionTest);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADPowerLawCreepExceptionTest<compute_stage>::validParams()
+ADPowerLawCreepExceptionTest::validParams()
 {
-  InputParameters params = ADPowerLawCreepStressUpdate<compute_stage>::validParams();
+  InputParameters params = ADPowerLawCreepStressUpdate::validParams();
   params.addClassDescription(
       "This class duplicates the ADPowerLawCreepStressUpdate, except at the 2nd time step and the "
       "1st iteration, at which time a high residual is computed, forcing an exception.");
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADPowerLawCreepExceptionTest<compute_stage>::ADPowerLawCreepExceptionTest(
+ADPowerLawCreepExceptionTest::ADPowerLawCreepExceptionTest(
     const InputParameters & parameters)
-  : ADPowerLawCreepStressUpdate<compute_stage>(parameters)
+  : ADPowerLawCreepStressUpdate(parameters)
 {
 }
 
-template <ComputeStage compute_stage>
 ADReal
-ADPowerLawCreepExceptionTest<compute_stage>::computeResidual(const ADReal & effective_trial_stress,
+ADPowerLawCreepExceptionTest::computeResidual(const ADReal & effective_trial_stress,
                                                              const ADReal & scalar)
 {
   if (_fe_problem.getNonlinearSystemBase().getCurrentNonlinearIterationNumber() == 1 &&
       _t_step == 1 && _dt > 0.9)
     return 1.0;
 
-  return ADPowerLawCreepStressUpdate<compute_stage>::computeResidual(effective_trial_stress,
+  return ADPowerLawCreepStressUpdate::computeResidual(effective_trial_stress,
                                                                      scalar);
 }
 
-template <ComputeStage compute_stage>
 ADReal
-ADPowerLawCreepExceptionTest<compute_stage>::computeDerivative(
+ADPowerLawCreepExceptionTest::computeDerivative(
     const ADReal & effective_trial_stress, const ADReal & scalar)
 {
   if (_fe_problem.getNonlinearSystemBase().getCurrentNonlinearIterationNumber() == 1 &&
       _t_step == 1 && _dt > 0.9)
     return 1.0;
 
-  return ADPowerLawCreepStressUpdate<compute_stage>::computeDerivative(effective_trial_stress,
+  return ADPowerLawCreepStressUpdate::computeDerivative(effective_trial_stress,
                                                                        scalar);
 }

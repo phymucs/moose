@@ -13,24 +13,21 @@
 
 defineADLegacyParams(ADCompute1DSmallStrain);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADCompute1DSmallStrain<compute_stage>::validParams()
+ADCompute1DSmallStrain::validParams()
 {
-  InputParameters params = ADComputeSmallStrain<compute_stage>::validParams();
+  InputParameters params = ADComputeSmallStrain::validParams();
   params.addClassDescription("Compute a small strain in 1D problem");
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADCompute1DSmallStrain<compute_stage>::ADCompute1DSmallStrain(const InputParameters & parameters)
-  : ADComputeSmallStrain<compute_stage>(parameters)
+ADCompute1DSmallStrain::ADCompute1DSmallStrain(const InputParameters & parameters)
+  : ADComputeSmallStrain(parameters)
 {
 }
 
-template <ComputeStage compute_stage>
 void
-ADCompute1DSmallStrain<compute_stage>::computeProperties()
+ADCompute1DSmallStrain::computeProperties()
 {
   for (_qp = 0; _qp < _qrule->n_points(); ++_qp)
   {
@@ -47,6 +44,3 @@ ADCompute1DSmallStrain<compute_stage>::computeProperties()
 
   copyDualNumbersToValues();
 }
-
-// explicit instantiation is required for AD base classes
-adBaseClass(ADCompute1DSmallStrain);

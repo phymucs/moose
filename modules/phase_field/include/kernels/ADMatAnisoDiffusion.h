@@ -16,13 +16,10 @@
  * RealTensorValue. All logic is implemnted in the MatDiffusionBase class
  * template.
  */
-template <ComputeStage compute_stage>
-class ADMatAnisoDiffusion : public ADMatDiffusionBase<compute_stage, RealTensorValue>
+class ADMatAnisoDiffusion : public ADMatDiffusionBase<RealTensorValue>
 {
 public:
   static InputParameters validParams();
 
   ADMatAnisoDiffusion(const InputParameters & parameters);
 };
-
-declareADValidParams(ADMatAnisoDiffusion);

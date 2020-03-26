@@ -16,11 +16,10 @@ registerMooseObject("TensorMechanicsApp", ADIsotropicPlasticityStressUpdate);
 
 defineADLegacyParams(ADIsotropicPlasticityStressUpdate);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADIsotropicPlasticityStressUpdate<compute_stage>::validParams()
+ADIsotropicPlasticityStressUpdate::validParams()
 {
-  InputParameters params = ADRadialReturnStressUpdate<compute_stage>::validParams();
+  InputParameters params = ADRadialReturnStressUpdate::validParams();
   params.addClassDescription("This class uses the discrete material in a radial return isotropic "
                              "plasticity model.  This class is one of the basic radial return "
                              "constitutive models, yet it can be used in conjunction with other "
@@ -43,10 +42,9 @@ ADIsotropicPlasticityStressUpdate<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADIsotropicPlasticityStressUpdate<compute_stage>::ADIsotropicPlasticityStressUpdate(
+ADIsotropicPlasticityStressUpdate::ADIsotropicPlasticityStressUpdate(
     const InputParameters & parameters)
-  : ADRadialReturnStressUpdate<compute_stage>(parameters),
+  : ADRadialReturnStressUpdate(parameters),
     _plastic_prepend(getParam<std::string>("plastic_prepend")),
     _yield_stress_function(
         isParamValid("yield_stress_function") ? &getFunction("yield_stress_function") : NULL),
@@ -78,17 +76,15 @@ ADIsotropicPlasticityStressUpdate<compute_stage>::ADIsotropicPlasticityStressUpd
         "Only the hardening_constant or only the hardening_function can be defined but not both");
 }
 
-template <ComputeStage compute_stage>
 void
-ADIsotropicPlasticityStressUpdate<compute_stage>::initQpStatefulProperties()
+ADIsotropicPlasticityStressUpdate::initQpStatefulProperties()
 {
   _hardening_variable[_qp] = 0.0;
   _plastic_strain[_qp].zero();
 }
 
-template <ComputeStage compute_stage>
 void
-ADIsotropicPlasticityStressUpdate<compute_stage>::propagateQpStatefulProperties()
+ADIsotropicPlasticityStressUpdate::propagateQpStatefulProperties()
 {
   _hardening_variable[_qp] = _hardening_variable_old[_qp];
   _plastic_strain[_qp] = _plastic_strain_old[_qp];
@@ -96,9 +92,8 @@ ADIsotropicPlasticityStressUpdate<compute_stage>::propagateQpStatefulProperties(
   propagateQpStatefulPropertiesRadialReturn();
 }
 
-template <ComputeStage compute_stage>
 void
-ADIsotropicPlasticityStressUpdate<compute_stage>::computeStressInitialize(
+ADIsotropicPlasticityStressUpdate::computeStressInitialize(
     const ADReal & effective_trial_stress, const ADRankFourTensor & elasticity_tensor)
 {
   computeYieldStress(elasticity_tensor);
@@ -108,10 +103,9 @@ ADIsotropicPlasticityStressUpdate<compute_stage>::computeStressInitialize(
   _plastic_strain[_qp] = _plastic_strain_old[_qp];
 }
 
-template <ComputeStage compute_stage>
 ADReal
-ADIsotropicPlasticityStressUpdate<compute_stage>::computeResidual(
-    const ADReal & effective_trial_stress, const ADReal & scalar)
+ADIsotropicPlasticityStressUpdate::computeResidual(const ADReal & effective_trial_stress,
+                                                   const ADReal & scalar)
 {
   ADReal residual = 0.0;
 
@@ -130,10 +124,9 @@ ADIsotropicPlasticityStressUpdate<compute_stage>::computeResidual(
   return residual;
 }
 
-template <ComputeStage compute_stage>
 ADReal
-ADIsotropicPlasticityStressUpdate<compute_stage>::computeDerivative(
-    const ADReal & /*effective_trial_stress*/, const ADReal & /*scalar*/)
+ADIsotropicPlasticityStressUpdate::computeDerivative(const ADReal & /*effective_trial_stress*/,
+                                                     const ADReal & /*scalar*/)
 {
   if (_yield_condition > 0.0)
     return -1.0 - _hardening_slope / _three_shear_modulus;
@@ -141,41 +134,22 @@ ADIsotropicPlasticityStressUpdate<compute_stage>::computeDerivative(
   return 1.0;
 }
 
-template <ComputeStage compute_stage>
 void
-ADIsotropicPlasticityStressUpdate<compute_stage>::iterationFinalize(ADReal scalar)
+ADIsotropicPlasticityStressUpdate::iterationFinalize(ADReal scalar)
 {
   if (_yield_condition > 0.0)
     _hardening_variable[_qp] = computeHardeningValue(scalar);
 }
 
-template <ComputeStage compute_stage>
 void
-ADIsotropicPlasticityStressUpdate<compute_stage>::computeStressFinalize(
+ADIsotropicPlasticityStressUpdate::computeStressFinalize(
     const ADRankTwoTensor & plastic_strain_increment)
 {
   _plastic_strain[_qp] += plastic_strain_increment;
 }
 
-template <ComputeStage compute_stage>
 ADReal
-ADIsotropicPlasticityStressUpdate<compute_stage>::computeHardeningValue(const ADReal & scalar)
-{
-  if (_hardening_function)
-  {
-    const Real strain_old = _effective_inelastic_strain_old[_qp];
-    const Point p;
-    const Real t = strain_old + MetaPhysicL::raw_value(scalar);
-
-    return _hardening_function->value(t, p) - _yield_stress;
-  }
-
-  return _hardening_variable_old[_qp] + _hardening_slope * scalar;
-}
-
-template <>
-DualReal
-ADIsotropicPlasticityStressUpdate<JACOBIAN>::computeHardeningValue(const DualReal & scalar)
+ADIsotropicPlasticityStressUpdate::computeHardeningValue(const ADReal & scalar)
 {
   if (_hardening_function)
   {
@@ -193,10 +167,8 @@ ADIsotropicPlasticityStressUpdate<JACOBIAN>::computeHardeningValue(const DualRea
   return _hardening_variable_old[_qp] + _hardening_slope * scalar;
 }
 
-template <ComputeStage compute_stage>
 ADReal
-ADIsotropicPlasticityStressUpdate<compute_stage>::computeHardeningDerivative(
-    const ADReal & /*scalar*/)
+ADIsotropicPlasticityStressUpdate::computeHardeningDerivative(const ADReal & /*scalar*/)
 {
   if (_hardening_function)
   {
@@ -209,25 +181,9 @@ ADIsotropicPlasticityStressUpdate<compute_stage>::computeHardeningDerivative(
   return _hardening_constant;
 }
 
-template <ComputeStage compute_stage>
 void
-ADIsotropicPlasticityStressUpdate<compute_stage>::computeYieldStress(
+ADIsotropicPlasticityStressUpdate::computeYieldStress(
     const ADRankFourTensor & /*elasticity_tensor*/)
-{
-  if (_yield_stress_function)
-  {
-    const Point p;
-    _yield_stress = _yield_stress_function->value(MetaPhysicL::raw_value(_temperature[_qp]), p);
-    if (_yield_stress <= 0.0)
-      mooseException(
-          "In ", _name, ": The calculated yield stress (", _yield_stress, ") is less than zero");
-  }
-}
-
-template <>
-void
-ADIsotropicPlasticityStressUpdate<JACOBIAN>::computeYieldStress(
-    const DualRankFourTensor & /*elasticity_tensor*/)
 {
   if (_yield_stress_function)
   {
@@ -246,6 +202,3 @@ ADIsotropicPlasticityStressUpdate<JACOBIAN>::computeYieldStress(
                      ") is less than zero");
   }
 }
-
-// explicit instantiation is required for AD base classes
-adBaseClass(ADIsotropicPlasticityStressUpdate);

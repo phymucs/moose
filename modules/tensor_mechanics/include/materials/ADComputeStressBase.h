@@ -14,14 +14,13 @@
 
 #define usingComputeStressBaseMembers                                                              \
   usingMaterialMembers;                                                                            \
-  using ADComputeStressBase<compute_stage>::_stress;                                               \
-  using ADComputeStressBase<compute_stage>::_mechanical_strain;                                    \
-  using ADComputeStressBase<compute_stage>::_elastic_strain;                                       \
-  using ADComputeStressBase<compute_stage>::_base_name;                                            \
-  using ADComputeStressBase<compute_stage>::_initial_stress_fcn
+  using ADComputeStressBase::_stress;                                               \
+  using ADComputeStressBase::_mechanical_strain;                                    \
+  using ADComputeStressBase::_elastic_strain;                                       \
+  using ADComputeStressBase::_base_name;                                            \
+  using ADComputeStressBase::_initial_stress_fcn
 
 // Forward Declarations
-template <ComputeStage>
 class ADComputeStressBase;
 template <typename>
 class RankTwoTensorTempl;
@@ -37,8 +36,7 @@ declareADValidParams(ADComputeStressBase);
 /**
  * ADComputeStressBase is the base class for stress tensors
  */
-template <ComputeStage compute_stage>
-class ADComputeStressBase : public ADMaterial<compute_stage>
+class ADComputeStressBase : public ADMaterial
 {
 public:
   static InputParameters validParams();
@@ -53,11 +51,11 @@ protected:
   /// Base name of the material system
   const std::string _base_name;
 
-  const ADMaterialProperty(RankTwoTensor) & _mechanical_strain;
+  const ADMaterialProperty<RankTwoTensor> & _mechanical_strain;
 
   /// The stress tensor to be calculated
-  ADMaterialProperty(RankTwoTensor) & _stress;
-  ADMaterialProperty(RankTwoTensor) & _elastic_strain;
+  ADMaterialProperty<RankTwoTensor> & _stress;
+  ADMaterialProperty<RankTwoTensor> & _elastic_strain;
 
   /// Extra stress tensors
   std::vector<const MaterialProperty<RankTwoTensor> *> _extra_stresses;
@@ -65,5 +63,4 @@ protected:
   /// initial stress components
   std::vector<const Function *> _initial_stress_fcn;
 
-  usingMaterialMembers;
 };

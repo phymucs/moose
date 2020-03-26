@@ -13,11 +13,10 @@
 
 #define usingCompute2DFiniteStrainMembers                                                          \
   usingComputeFiniteStrainMembers;                                                                 \
-  using ADCompute2DFiniteStrain<compute_stage>::_out_of_plane_direction;                           \
-  using ADCompute2DFiniteStrain<compute_stage>::computeOutOfPlaneGradDisp;                         \
-  using ADCompute2DFiniteStrain<compute_stage>::computeOutOfPlaneGradDispOld
+  using ADCompute2DFiniteStrain::_out_of_plane_direction;                           \
+  using ADCompute2DFiniteStrain::computeOutOfPlaneGradDisp;                         \
+  using ADCompute2DFiniteStrain::computeOutOfPlaneGradDispOld
 
-template <ComputeStage>
 class ADCompute2DFiniteStrain;
 
 declareADValidParams(ADCompute2DFiniteStrain);
@@ -29,8 +28,7 @@ declareADValidParams(ADCompute2DFiniteStrain);
  * as a general nonzero value in the inherited classes ComputePlaneFiniteStrain
  * and ComputeAxisymmetricRZFiniteStrain.
  */
-template <ComputeStage compute_stage>
-class ADCompute2DFiniteStrain : public ADComputeFiniteStrain<compute_stage>
+class ADCompute2DFiniteStrain : public ADComputeFiniteStrain
 {
 public:
   static InputParameters validParams();
@@ -58,5 +56,4 @@ protected:
 
   const unsigned int _out_of_plane_direction;
 
-  usingComputeFiniteStrainMembers;
 };

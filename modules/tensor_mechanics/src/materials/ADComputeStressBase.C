@@ -13,11 +13,10 @@
 
 defineADLegacyParams(ADComputeStressBase);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeStressBase<compute_stage>::validParams()
+ADComputeStressBase::validParams()
 {
-  InputParameters params = ADMaterial<compute_stage>::validParams();
+  InputParameters params = ADMaterial::validParams();
   params.addParam<std::string>("base_name",
                                "Optional parameter that allows the user to define "
                                "multiple mechanics material systems on the same "
@@ -30,9 +29,8 @@ ADComputeStressBase<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeStressBase<compute_stage>::ADComputeStressBase(const InputParameters & parameters)
-  : ADMaterial<compute_stage>(parameters),
+ADComputeStressBase::ADComputeStressBase(const InputParameters & parameters)
+  : ADMaterial(parameters),
     _base_name(isParamValid("base_name") ? getParam<std::string>("base_name") + "_" : ""),
     _mechanical_strain(getADMaterialProperty<RankTwoTensor>(_base_name + "mechanical_strain")),
     _stress(declareADProperty<RankTwoTensor>(_base_name + "stress")),
@@ -48,17 +46,15 @@ ADComputeStressBase<compute_stage>::ADComputeStressBase(const InputParameters & 
     _extra_stresses[i] = &getMaterialProperty<RankTwoTensor>(extra_stress_names[i]);
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeStressBase<compute_stage>::initQpStatefulProperties()
+ADComputeStressBase::initQpStatefulProperties()
 {
   _elastic_strain[_qp].zero();
   _stress[_qp].zero();
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeStressBase<compute_stage>::computeQpProperties()
+ADComputeStressBase::computeQpProperties()
 {
   computeQpStress();
 
@@ -67,5 +63,4 @@ ADComputeStressBase<compute_stage>::computeQpProperties()
     _stress[_qp] += (*_extra_stresses[i])[_qp];
 }
 
-// explicit instantiation is required for AD base classes
-adBaseClass(ADComputeStressBase);
+

@@ -13,11 +13,10 @@ registerMooseObject("PhaseFieldApp", ADCHSplitChemicalPotential);
 
 defineADLegacyParams(ADCHSplitChemicalPotential);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADCHSplitChemicalPotential<compute_stage>::validParams()
+ADCHSplitChemicalPotential::validParams()
 {
-  InputParameters params = ADKernel<compute_stage>::validParams();
+  InputParameters params = ADKernel::validParams();
   params.addClassDescription("Chemical potential kernel in Split Cahn-Hilliard that solves "
                              "chemical potential in a weak form");
   params.addRequiredParam<MaterialPropertyName>("chemical_potential",
@@ -25,17 +24,15 @@ ADCHSplitChemicalPotential<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADCHSplitChemicalPotential<compute_stage>::ADCHSplitChemicalPotential(
+ADCHSplitChemicalPotential::ADCHSplitChemicalPotential(
     const InputParameters & parameters)
-  : ADKernel<compute_stage>(parameters),
+  : ADKernel(parameters),
     _chemical_potential(getADMaterialProperty<Real>("chemical_potential"))
 {
 }
 
-template <ComputeStage compute_stage>
 ADReal
-ADCHSplitChemicalPotential<compute_stage>::computeQpResidual()
+ADCHSplitChemicalPotential::computeQpResidual()
 {
   return _test[_i][_qp] * (_u[_qp] - _chemical_potential[_qp]);
 }

@@ -11,16 +11,14 @@
 
 #include "ADPowerLawCreepStressUpdate.h"
 
-template <ComputeStage compute_stage>
 class ADPowerLawCreepExceptionTest;
 
 declareADValidParams(ADPowerLawCreepExceptionTest);
 
-template <ComputeStage compute_stage>
-class ADPowerLawCreepExceptionTest : public ADPowerLawCreepStressUpdate<compute_stage>
+class ADPowerLawCreepExceptionTest : public ADPowerLawCreepStressUpdate
 {
 public:
-  ADPowerLawCreepExceptionTest<compute_stage>(const InputParameters & parameters);
+  ADPowerLawCreepExceptionTest(const InputParameters & parameters);
 
   static InputParameters validParams();
 
@@ -30,5 +28,4 @@ protected:
   virtual ADReal computeDerivative(const ADReal & effective_trial_stress,
                                    const ADReal & scalar) override;
 
-  usingRadialReturnCreepStressUpdateBaseMembers;
 };

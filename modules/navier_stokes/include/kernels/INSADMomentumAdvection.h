@@ -12,7 +12,6 @@
 #include "ADKernelValue.h"
 
 // Forward Declarations
-template <ComputeStage>
 class INSADMomentumAdvection;
 
 declareADValidParams(INSADMomentumAdvection);
@@ -22,8 +21,7 @@ declareADValidParams(INSADMomentumAdvection);
  * contributions for the convective term of the incompressible Navier-Stokes momentum
  * equation.
  */
-template <ComputeStage compute_stage>
-class INSADMomentumAdvection : public ADVectorKernelValue<compute_stage>
+class INSADMomentumAdvection : public ADVectorKernelValue
 {
 public:
   static InputParameters validParams();
@@ -33,8 +31,7 @@ public:
 protected:
   virtual ADRealVectorValue precomputeQpResidual() override;
 
-  const ADMaterialProperty(RealVectorValue) & _convective_strong_residual;
+  const ADMaterialProperty<RealVectorValue> & _convective_strong_residual;
 
-  usingVectorKernelValueMembers;
 };
 

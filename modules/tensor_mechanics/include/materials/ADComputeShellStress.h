@@ -15,7 +15,6 @@
 #define usingComputeShellStressMembers usingMaterialMembers
 
 // Forward Declarations
-template <ComputeStage>
 class ADComputeShellStress;
 template <typename>
 class RankTwoTensorTempl;
@@ -33,8 +32,7 @@ class QGauss;
 
 declareADValidParams(ADComputeShellStress);
 
-template <ComputeStage compute_stage>
-class ADComputeShellStress : public ADMaterial<compute_stage>
+class ADComputeShellStress : public ADMaterial
 {
 public:
   static InputParameters validParams();
@@ -46,16 +44,16 @@ protected:
   virtual void computeQpProperties() override;
 
   /// Material property for strain increment
-  std::vector<const ADMaterialProperty(RankTwoTensor) *> _strain_increment;
+  std::vector<const ADMaterialProperty<RankTwoTensor> *> _strain_increment;
 
   /// Material property for current stress
-  std::vector<ADMaterialProperty(RankTwoTensor) *> _stress;
+  std::vector<ADMaterialProperty<RankTwoTensor> *> _stress;
 
   /// Material property for old stress
   std::vector<const MaterialProperty<RankTwoTensor> *> _stress_old;
 
   /// Material property for elasticity tensor
-  std::vector<const ADMaterialProperty(RankFourTensor) *> _elasticity_tensor;
+  std::vector<const ADMaterialProperty<RankFourTensor> *> _elasticity_tensor;
 
   /// Quadrature points along thickness
   std::vector<Point> _t_points;
@@ -69,5 +67,4 @@ protected:
   /// Real value of stress in the local coordinate system
   RankTwoTensor _unrotated_stress;
 
-  usingMaterialMembers;
 };

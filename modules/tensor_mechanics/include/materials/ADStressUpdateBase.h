@@ -11,17 +11,7 @@
 
 #include "ADMaterial.h"
 
-#define usingStressUpdateBaseMembers                                                               \
-  usingMaterialMembers;                                                                            \
-  using ADStressUpdateBase<compute_stage>::updateState;                                            \
-  using ADStressUpdateBase<compute_stage>::setQp;                                                  \
-  using ADStressUpdateBase<compute_stage>::propagateQpStatefulProperties;                          \
-  using ADStressUpdateBase<compute_stage>::requiresIsotropicTensor;                                \
-  using ADStressUpdateBase<compute_stage>::computeTimeStepLimit;                                   \
-  using ADStressUpdateBase<compute_stage>::_base_name
-
 // Forward declarations
-template <ComputeStage>
 class ADStressUpdateBase;
 template <typename>
 class RankTwoTensorTempl;
@@ -32,8 +22,6 @@ class RankFourTensorTempl;
 typedef RankFourTensorTempl<Real> RankFourTensor;
 typedef RankFourTensorTempl<DualReal> DualRankFourTensor;
 class InputParameters;
-
-declareADValidParams(ADStressUpdateBase);
 
 /**
  * ADStressUpdateBase is a material that is not called by MOOSE because
@@ -47,8 +35,7 @@ declareADValidParams(ADStressUpdateBase);
  * All materials inheriting from this class must be called by a separate material,
  * such as ComputeMultipleInelasticStress
  */
-template <ComputeStage compute_stage>
-class ADStressUpdateBase : public ADMaterial<compute_stage>
+class ADStressUpdateBase : public ADMaterial
 {
 public:
   static InputParameters validParams();
@@ -107,6 +94,4 @@ public:
 protected:
   /// Name used as a prefix for all material properties related to the stress update model.
   const std::string _base_name;
-
-  usingMaterialMembers;
 };

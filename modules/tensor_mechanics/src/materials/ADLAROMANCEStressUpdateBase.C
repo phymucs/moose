@@ -14,11 +14,10 @@
 
 defineADLegacyParams(ADLAROMANCEStressUpdateBase);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADLAROMANCEStressUpdateBase<compute_stage>::validParams()
+ADLAROMANCEStressUpdateBase::validParams()
 {
-  InputParameters params = ADRadialReturnCreepStressUpdateBase<compute_stage>::validParams();
+  InputParameters params = ADRadialReturnCreepStressUpdateBase::validParams();
   params.addClassDescription(
       "Calculates the effective creep strain based on the rates predicted by a material "
       "specific Los Alamos Reduced Order Model derived from a Visco-Plastic Self Consistent "
@@ -82,10 +81,8 @@ ADLAROMANCEStressUpdateBase<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADLAROMANCEStressUpdateBase<compute_stage>::ADLAROMANCEStressUpdateBase(
-    const InputParameters & parameters)
-  : ADRadialReturnCreepStressUpdateBase<compute_stage>(parameters),
+ADLAROMANCEStressUpdateBase::ADLAROMANCEStressUpdateBase(const InputParameters & parameters)
+  : ADRadialReturnCreepStressUpdateBase(parameters),
     _temperature(adCoupledValue("temperature")),
     _environmental(adCoupledValue("environmental_factor")),
     _window(getParam<Real>("input_window_limit")),
@@ -124,9 +121,8 @@ ADLAROMANCEStressUpdateBase<compute_stage>::ADLAROMANCEStressUpdateBase(
 {
 }
 
-template <ComputeStage compute_stage>
 void
-ADLAROMANCEStressUpdateBase<compute_stage>::initialSetup()
+ADLAROMANCEStressUpdateBase::initialSetup()
 {
   _transform = getTransform();
 
@@ -165,20 +161,18 @@ ADLAROMANCEStressUpdateBase<compute_stage>::initialSetup()
              << "\n  number of coefficients:\t" << _num_coefs << std::endl;
 }
 
-template <ComputeStage compute_stage>
 void
-ADLAROMANCEStressUpdateBase<compute_stage>::initQpStatefulProperties()
+ADLAROMANCEStressUpdateBase::initQpStatefulProperties()
 {
   _mobile_dislocations[_qp] = _initial_mobile_dislocations;
   _immobile_dislocations[_qp] = _initial_immobile_dislocations;
 
-  ADRadialReturnCreepStressUpdateBase<compute_stage>::initQpStatefulProperties();
+  ADRadialReturnCreepStressUpdateBase::initQpStatefulProperties();
 }
 
-template <ComputeStage compute_stage>
 ADReal
-ADLAROMANCEStressUpdateBase<compute_stage>::computeResidual(const ADReal & effective_trial_stress,
-                                                            const ADReal & scalar)
+ADLAROMANCEStressUpdateBase::computeResidual(const ADReal & effective_trial_stress,
+                                             const ADReal & scalar)
 {
   if (_immobile_function)
     _immobile_old = _immobile_function->value(_t, _q_point[_qp]);
@@ -223,7 +217,7 @@ ADLAROMANCEStressUpdateBase<compute_stage>::computeResidual(const ADReal & effec
                        rom_effective_strain,
                        derivative_rom_effective_strain);
 
-  if (_verbose && compute_stage == RESIDUAL)
+  if (_verbose)
   {
     Moose::out << "Verbose information from " << _name << ": \n";
     Moose::out << "  dt: " << _dt << "\n";
@@ -251,15 +245,13 @@ ADLAROMANCEStressUpdateBase<compute_stage>::computeResidual(const ADReal & effec
   return rom_effective_strain - scalar;
 }
 
-template <ComputeStage compute_stage>
 void
-ADLAROMANCEStressUpdateBase<compute_stage>::computeStressFinalize(
-    const ADRankTwoTensor & plastic_strain_increment)
+ADLAROMANCEStressUpdateBase::computeStressFinalize(const ADRankTwoTensor & plastic_strain_increment)
 {
   _mobile_dislocations[_qp] = _mobile_old + _mobile_dislocation_increment;
   _immobile_dislocations[_qp] = _immobile_old + _immobile_dislocation_increment;
 
-  if (_verbose && compute_stage == RESIDUAL)
+  if (_verbose)
   {
     Moose::out << "Finalized verbose information from " << _name << "\n";
     Moose::out << "  increment effective creep strain: "
@@ -274,15 +266,13 @@ ADLAROMANCEStressUpdateBase<compute_stage>::computeStressFinalize(
                << std::endl;
   }
 
-  ADRadialReturnCreepStressUpdateBase<compute_stage>::computeStressFinalize(
-      plastic_strain_increment);
+  ADRadialReturnCreepStressUpdateBase::computeStressFinalize(plastic_strain_increment);
 }
 
-template <ComputeStage compute_stage>
 Real
-ADLAROMANCEStressUpdateBase<compute_stage>::computeTimeStepLimit()
+ADLAROMANCEStressUpdateBase::computeTimeStepLimit()
 {
-  Real limited_dt = ADRadialReturnStressUpdate<compute_stage>::computeTimeStepLimit();
+  Real limited_dt = ADRadialReturnStressUpdate::computeTimeStepLimit();
 
   Real mobile_strain_inc = std::abs(MetaPhysicL::raw_value(_mobile_dislocation_increment));
   if (mobile_strain_inc && _mobile_old)
@@ -296,20 +286,18 @@ ADLAROMANCEStressUpdateBase<compute_stage>::computeTimeStepLimit()
   return limited_dt;
 }
 
-template <ComputeStage compute_stage>
 void
-ADLAROMANCEStressUpdateBase<compute_stage>::computeROMStrainRate(
-    const Real dt,
-    const Real & mobile_dislocations_old,
-    const Real & immobile_dislocations_old,
-    const ADReal & trial_stress,
-    const Real & effective_strain_old,
-    const ADReal & temperature,
-    const ADReal & environmental,
-    ADReal & mobile_dislocation_increment,
-    ADReal & immobile_dislocation_increment,
-    ADReal & rom_effective_strain,
-    ADReal & rom_effective_strain_derivative)
+ADLAROMANCEStressUpdateBase::computeROMStrainRate(const Real dt,
+                                                  const Real & mobile_dislocations_old,
+                                                  const Real & immobile_dislocations_old,
+                                                  const ADReal & trial_stress,
+                                                  const Real & effective_strain_old,
+                                                  const ADReal & temperature,
+                                                  const ADReal & environmental,
+                                                  ADReal & mobile_dislocation_increment,
+                                                  ADReal & immobile_dislocation_increment,
+                                                  ADReal & rom_effective_strain,
+                                                  ADReal & rom_effective_strain_derivative)
 {
   // Prepare input
   std::vector<ADReal> input_values = {mobile_dislocations_old,
@@ -355,13 +343,9 @@ ADLAROMANCEStressUpdateBase<compute_stage>::computeROMStrainRate(
   rom_effective_strain_derivative = dinput_value_increments[2];
 }
 
-template <ComputeStage compute_stage>
 void
-ADLAROMANCEStressUpdateBase<compute_stage>::checkInputWindows(std::vector<ADReal> & input)
+ADLAROMANCEStressUpdateBase::checkInputWindows(std::vector<ADReal> & input)
 {
-  if (compute_stage != RESIDUAL)
-    return;
-
   _failed[_qp] = 0.0;
   for (unsigned int i = 0; i < _num_outputs; ++i)
   {
@@ -411,12 +395,10 @@ ADLAROMANCEStressUpdateBase<compute_stage>::checkInputWindows(std::vector<ADReal
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADLAROMANCEStressUpdateBase<compute_stage>::convertInput(
-    const std::vector<ADReal> & input,
-    std::vector<std::vector<ADReal>> & converted,
-    std::vector<std::vector<ADReal>> & dconverted)
+ADLAROMANCEStressUpdateBase::convertInput(const std::vector<ADReal> & input,
+                                          std::vector<std::vector<ADReal>> & converted,
+                                          std::vector<std::vector<ADReal>> & dconverted)
 {
   for (unsigned int i = 0; i < _num_outputs; ++i)
   {
@@ -446,9 +428,8 @@ ADLAROMANCEStressUpdateBase<compute_stage>::convertInput(
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADLAROMANCEStressUpdateBase<compute_stage>::buildPolynomials(
+ADLAROMANCEStressUpdateBase::buildPolynomials(
     const std::vector<std::vector<ADReal>> & rom_inputs,
     const std::vector<std::vector<ADReal>> & drom_inputs,
     std::vector<std::vector<std::vector<ADReal>>> & polynomial_inputs,
@@ -476,9 +457,8 @@ ADLAROMANCEStressUpdateBase<compute_stage>::buildPolynomials(
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADLAROMANCEStressUpdateBase<compute_stage>::computeValues(
+ADLAROMANCEStressUpdateBase::computeValues(
     const std::vector<std::vector<Real>> & coefs,
     const std::vector<std::vector<std::vector<ADReal>>> & polynomial_inputs,
     const std::vector<std::vector<std::vector<ADReal>>> & dpolynomial_inputs,
@@ -505,15 +485,13 @@ ADLAROMANCEStressUpdateBase<compute_stage>::computeValues(
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADLAROMANCEStressUpdateBase<compute_stage>::convertOutput(
-    const Real dt,
-    const std::vector<ADReal> & old_input_values,
-    const std::vector<ADReal> & rom_outputs,
-    const std::vector<ADReal> & drom_outputs,
-    std::vector<ADReal> & input_value_increments,
-    std::vector<ADReal> & dinput_value_increments)
+ADLAROMANCEStressUpdateBase::convertOutput(const Real dt,
+                                           const std::vector<ADReal> & old_input_values,
+                                           const std::vector<ADReal> & rom_outputs,
+                                           const std::vector<ADReal> & drom_outputs,
+                                           std::vector<ADReal> & input_value_increments,
+                                           std::vector<ADReal> & dinput_value_increments)
 {
   for (unsigned int i = 0; i < _num_outputs; ++i)
   {
@@ -530,11 +508,10 @@ ADLAROMANCEStressUpdateBase<compute_stage>::convertOutput(
   }
 }
 
-template <ComputeStage compute_stage>
 ADReal
-ADLAROMANCEStressUpdateBase<compute_stage>::computePolynomial(const ADReal & value,
-                                                              const unsigned int degree,
-                                                              const bool derivative)
+ADLAROMANCEStressUpdateBase::computePolynomial(const ADReal & value,
+                                               const unsigned int degree,
+                                               const bool derivative)
 {
   if (degree == 0)
   {
@@ -562,9 +539,8 @@ ADLAROMANCEStressUpdateBase<compute_stage>::computePolynomial(const ADReal & val
   }
 }
 
-template <ComputeStage compute_stage>
 std::vector<std::vector<std::vector<Real>>>
-ADLAROMANCEStressUpdateBase<compute_stage>::getTransformedLimits() const
+ADLAROMANCEStressUpdateBase::getTransformedLimits() const
 {
   std::vector<std::vector<std::vector<Real>>> transformed_limits(
       _num_outputs, std::vector<std::vector<Real>>(_num_inputs, std::vector<Real>(2)));
@@ -588,9 +564,8 @@ ADLAROMANCEStressUpdateBase<compute_stage>::getTransformedLimits() const
   return transformed_limits;
 }
 
-template <ComputeStage compute_stage>
 std::vector<std::vector<unsigned int>>
-ADLAROMANCEStressUpdateBase<compute_stage>::getMakeFrameHelper() const
+ADLAROMANCEStressUpdateBase::getMakeFrameHelper() const
 {
   std::vector<std::vector<unsigned int>> v(_num_coefs, std::vector<unsigned int>(_num_inputs));
 
@@ -601,5 +576,4 @@ ADLAROMANCEStressUpdateBase<compute_stage>::getMakeFrameHelper() const
   return v;
 }
 
-// explicit instantiation is required for AD base classes
-adBaseClass(ADLAROMANCEStressUpdateBase);
+

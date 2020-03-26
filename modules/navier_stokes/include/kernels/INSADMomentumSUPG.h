@@ -12,7 +12,6 @@
 #include "ADKernelSUPG.h"
 
 // Forward Declarations
-template <ComputeStage>
 class INSADMomentumSUPG;
 
 declareADValidParams(INSADMomentumSUPG);
@@ -22,8 +21,7 @@ declareADValidParams(INSADMomentumSUPG);
  * contributions for SUPG stabilization terms of the incompressible Navier-Stokes momentum
  * equation.
  */
-template <ComputeStage compute_stage>
-class INSADMomentumSUPG : public ADVectorKernelSUPG<compute_stage>
+class INSADMomentumSUPG : public ADVectorKernelSUPG
 {
 public:
   static InputParameters validParams();
@@ -33,8 +31,7 @@ public:
 protected:
   virtual ADRealVectorValue precomputeQpStrongResidual() override;
 
-  const ADMaterialProperty(RealVectorValue) & _momentum_strong_residual;
+  const ADMaterialProperty<RealVectorValue> & _momentum_strong_residual;
 
-  usingVectorKernelSUPGMembers;
 };
 

@@ -13,11 +13,10 @@
 
 #define usingCompute2DIncrementalStrainMembers                                                     \
   usingComputeIncrementalSmallStrainMembers;                                                       \
-  using ADCompute2DIncrementalStrain<compute_stage>::_out_of_plane_direction;                      \
-  using ADCompute2DIncrementalStrain<compute_stage>::computeOutOfPlaneGradDisp;                    \
-  using ADCompute2DIncrementalStrain<compute_stage>::computeOutOfPlaneGradDispOld
+  using ADCompute2DIncrementalStrain::_out_of_plane_direction;                      \
+  using ADCompute2DIncrementalStrain::computeOutOfPlaneGradDisp;                    \
+  using ADCompute2DIncrementalStrain::computeOutOfPlaneGradDispOld
 
-template <ComputeStage>
 class ADCompute2DIncrementalStrain;
 
 declareADValidParams(ADCompute2DIncrementalStrain);
@@ -29,8 +28,7 @@ declareADValidParams(ADCompute2DIncrementalStrain);
  * as a general nonzero value in the inherited classes ComputePlaneIncrementalStrain
  * and ComputeAxisymmetricRZIncrementalStrain.
  */
-template <ComputeStage compute_stage>
-class ADCompute2DIncrementalStrain : public ADComputeIncrementalSmallStrain<compute_stage>
+class ADCompute2DIncrementalStrain : public ADComputeIncrementalSmallStrain
 {
 public:
   static InputParameters validParams();
@@ -63,5 +61,4 @@ protected:
 
   const unsigned int _out_of_plane_direction;
 
-  usingComputeIncrementalSmallStrainMembers;
 };

@@ -11,13 +11,9 @@
 
 #include "ADLAROMANCEStressUpdateBase.h"
 
-template <ComputeStage>
 class SS316HLAROMANCEStressUpdateTest;
 
-declareADValidParams(SS316HLAROMANCEStressUpdateTest);
-
-template <ComputeStage compute_stage>
-class SS316HLAROMANCEStressUpdateTest : public ADLAROMANCEStressUpdateBase<compute_stage>
+class SS316HLAROMANCEStressUpdateTest : public ADLAROMANCEStressUpdateBase
 {
 public:
   static InputParameters validParams();
@@ -43,6 +39,4 @@ protected:
 
   /// Material specific coefficients multiplied by the Legendre polynomials for each of the input variables
   virtual std::vector<std::vector<Real>> getCoefs() override;
-
-  usingADLAROMANCEStressUpdateBase;
 };

@@ -13,10 +13,9 @@
 
 #define usingGrainGrowthMembers                                                                    \
   usingGrainGrowthBaseMembers;                                                                     \
-  using ADACInterface<compute_stage>::_gamma
+  using ADACInterface::_gamma
 
 // Forward Declarations
-template <ComputeStage compute_stage>
 class ADGrainGrowth;
 
 declareADValidParams(ADGrainGrowth);
@@ -27,8 +26,7 @@ declareADValidParams(ADGrainGrowth);
  * the prefactor of the cross-terms between order parameters.
  * This is the AD version of ACGrGrPoly
  */
-template <ComputeStage compute_stage>
-class ADGrainGrowth : public ADGrainGrowthBase<compute_stage>
+class ADGrainGrowth : public ADGrainGrowthBase
 {
 public:
   static InputParameters validParams();
@@ -38,7 +36,6 @@ public:
 protected:
   virtual ADReal computeDFDOP();
 
-  const ADMaterialProperty(Real) & _gamma;
+  const ADMaterialProperty<Real> & _gamma;
 
-  usingGrainGrowthBaseMembers;
 };

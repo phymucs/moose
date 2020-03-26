@@ -11,7 +11,6 @@
 
 #include "ADComputeFiniteStrain.h"
 
-template <ComputeStage>
 class ADComputeRSphericalFiniteStrain;
 
 declareADValidParams(ADComputeRSphericalFiniteStrain);
@@ -22,8 +21,7 @@ declareADValidParams(ADComputeRSphericalFiniteStrain);
  * polar and azimuthal directions are functions of the radial displacement.
 
  */
-template <ComputeStage compute_stage>
-class ADComputeRSphericalFiniteStrain : public ADComputeFiniteStrain<compute_stage>
+class ADComputeRSphericalFiniteStrain : public ADComputeFiniteStrain
 {
 public:
   static InputParameters validParams();
@@ -40,5 +38,4 @@ protected:
   /// the old value of the first component of the displacements vector
   const VariableValue & _disp_old_0;
 
-  usingComputeFiniteStrainMembers;
 };

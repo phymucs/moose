@@ -13,12 +13,11 @@
 
 #define usingCompute1DIncrementalStrainMembers                                                     \
   usingComputeIncrementalSmallStrainMembers;                                                       \
-  using ADCompute1DIncrementalStrain<compute_stage>::computeGradDispYY;                            \
-  using ADCompute1DIncrementalStrain<compute_stage>::computeGradDispYYOld;                         \
-  using ADCompute1DIncrementalStrain<compute_stage>::computeGradDispZZ;                            \
-  using ADCompute1DIncrementalStrain<compute_stage>::computeGradDispZZOld
+  using ADCompute1DIncrementalStrain::computeGradDispYY;                            \
+  using ADCompute1DIncrementalStrain::computeGradDispYYOld;                         \
+  using ADCompute1DIncrementalStrain::computeGradDispZZ;                            \
+  using ADCompute1DIncrementalStrain::computeGradDispZZOld
 
-template <ComputeStage>
 class ADCompute1DIncrementalStrain;
 
 declareADValidParams(ADCompute1DIncrementalStrain);
@@ -29,8 +28,7 @@ declareADValidParams(ADCompute1DIncrementalStrain);
  * ADCompute1DIncrementalStrain contains virtual methods to define the displacement gradients
  * as a general nonzero value.
  */
-template <ComputeStage compute_stage>
-class ADCompute1DIncrementalStrain : public ADComputeIncrementalSmallStrain<compute_stage>
+class ADCompute1DIncrementalStrain : public ADComputeIncrementalSmallStrain
 {
 public:
   static InputParameters validParams();
@@ -68,5 +66,4 @@ protected:
    */
   virtual Real computeGradDispZZOld() = 0;
 
-  usingComputeIncrementalSmallStrainMembers;
 };

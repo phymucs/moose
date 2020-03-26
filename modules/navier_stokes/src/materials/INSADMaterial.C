@@ -14,11 +14,10 @@ registerMooseObject("NavierStokesApp", INSADMaterial);
 
 defineADLegacyParams(INSADMaterial);
 
-template <ComputeStage compute_stage>
 InputParameters
-INSADMaterial<compute_stage>::validParams()
+INSADMaterial::validParams()
 {
-  InputParameters params = ADMaterial<compute_stage>::validParams();
+  InputParameters params = ADMaterial::validParams();
   params.addClassDescription("This is the material class used to compute some of the strong "
                              "residuals for the INS equations.");
   params.addRequiredCoupledVar("velocity", "The velocity");
@@ -41,9 +40,8 @@ INSADMaterial<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-INSADMaterial<compute_stage>::INSADMaterial(const InputParameters & parameters)
-  : ADMaterial<compute_stage>(parameters),
+INSADMaterial::INSADMaterial(const InputParameters & parameters)
+  : ADMaterial(parameters),
     _velocity(adCoupledVectorValue("velocity")),
     _grad_velocity(adCoupledVectorGradient("velocity")),
     _grad_p(adCoupledGradient("pressure")),
@@ -76,9 +74,8 @@ INSADMaterial<compute_stage>::INSADMaterial(const InputParameters & parameters)
                "introduces no error, and in general for bi-linear elements, the error is small");
 }
 
-template <ComputeStage compute_stage>
 void
-INSADMaterial<compute_stage>::computeQpProperties()
+INSADMaterial::computeQpProperties()
 {
   _mass_strong_residual[_qp] = -_grad_velocity[_qp].tr();
   _convective_strong_residual[_qp] = _rho[_qp] * _grad_velocity[_qp] * _velocity[_qp];

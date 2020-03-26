@@ -12,7 +12,6 @@
 #include "ADKernel.h"
 
 // Forward Declarations
-template <ComputeStage>
 class INSADMomentumPressure;
 
 declareADValidParams(INSADMomentumPressure);
@@ -22,8 +21,7 @@ declareADValidParams(INSADMomentumPressure);
  * contributions for the pressure term of the incompressible Navier-Stokes momentum
  * equation.
  */
-template <ComputeStage compute_stage>
-class INSADMomentumPressure : public ADVectorKernel<compute_stage>
+class INSADMomentumPressure : public ADVectorKernel
 {
 public:
   static InputParameters validParams();
@@ -37,6 +35,5 @@ protected:
   const ADVariableValue & _p;
   const ADVariableGradient & _grad_p;
 
-  usingVectorKernelMembers;
 };
 

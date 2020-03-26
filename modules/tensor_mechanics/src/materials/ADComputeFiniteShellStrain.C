@@ -21,19 +21,17 @@ registerMooseObject("TensorMechanicsApp", ADComputeFiniteShellStrain);
 
 defineADLegacyParams(ADComputeFiniteShellStrain);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeFiniteShellStrain<compute_stage>::validParams()
+ADComputeFiniteShellStrain::validParams()
 {
-  InputParameters params = ADComputeIncrementalShellStrain<compute_stage>::validParams();
+  InputParameters params = ADComputeIncrementalShellStrain::validParams();
   params.addClassDescription("Compute a large strain increment for the shell.");
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeFiniteShellStrain<compute_stage>::ADComputeFiniteShellStrain(
+ADComputeFiniteShellStrain::ADComputeFiniteShellStrain(
     const InputParameters & parameters)
-  : ADComputeIncrementalShellStrain<compute_stage>(parameters), _B_nl()
+  : ADComputeIncrementalShellStrain(parameters), _B_nl()
 {
   _B_nl.resize(_t_points.size());
 
@@ -41,9 +39,8 @@ ADComputeFiniteShellStrain<compute_stage>::ADComputeFiniteShellStrain(
     _B_nl[i] = &declareADProperty<DenseMatrix<Real>>("B_nl_t_points_" + std::to_string(i));
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeFiniteShellStrain<compute_stage>::initQpStatefulProperties()
+ADComputeFiniteShellStrain::initQpStatefulProperties()
 {
   computeGMatrix();
 
@@ -52,9 +49,8 @@ ADComputeFiniteShellStrain<compute_stage>::initQpStatefulProperties()
     (*_B_nl[t])[_qp] = b;
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeFiniteShellStrain<compute_stage>::computeProperties()
+ADComputeFiniteShellStrain::computeProperties()
 {
   // quadrature points in isoparametric space
   _2d_points = _qrule->get_points(); // would be in 2D
@@ -120,9 +116,8 @@ ADComputeFiniteShellStrain<compute_stage>::computeProperties()
   copyDualNumbersToValues();
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeFiniteShellStrain<compute_stage>::computeNodeNormal()
+ADComputeFiniteShellStrain::computeNodeNormal()
 {
   // update _node_normal
   for (unsigned int k = 0; k < _nodes.size(); ++k)
@@ -133,9 +128,8 @@ ADComputeFiniteShellStrain<compute_stage>::computeNodeNormal()
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeFiniteShellStrain<compute_stage>::updatedxyz()
+ADComputeFiniteShellStrain::updatedxyz()
 {
   for (unsigned int i = 0; i < _2d_points.size(); ++i)
   {
@@ -166,9 +160,8 @@ ADComputeFiniteShellStrain<compute_stage>::updatedxyz()
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeFiniteShellStrain<compute_stage>::updateGVectors()
+ADComputeFiniteShellStrain::updateGVectors()
 {
   for (unsigned int component = 0; component < 3; ++component)
   {
@@ -183,9 +176,8 @@ ADComputeFiniteShellStrain<compute_stage>::updateGVectors()
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeFiniteShellStrain<compute_stage>::computeBNLMatrix()
+ADComputeFiniteShellStrain::computeBNLMatrix()
 {
   // compute BNL matrix - rows correspond to [ux1, ux2, ux3, ux4, uy1, uy2, uy3, uy4, uz1, uz2, uz3,
   // uz4, a1, a2, a3, a4, b1, b2, b3, b4]

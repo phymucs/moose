@@ -12,11 +12,10 @@
 
 defineADLegacyParams(ADComputeThermalExpansionEigenstrainBase);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeThermalExpansionEigenstrainBase<compute_stage>::validParams()
+ADComputeThermalExpansionEigenstrainBase::validParams()
 {
-  InputParameters params = ADComputeEigenstrainBase<compute_stage>::validParams();
+  InputParameters params = ADComputeEigenstrainBase::validParams();
   params.addCoupledVar("temperature", "Coupled temperature");
   params.addRequiredCoupledVar("stress_free_temperature",
                                "Reference temperature at which there is no "
@@ -25,18 +24,16 @@ ADComputeThermalExpansionEigenstrainBase<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeThermalExpansionEigenstrainBase<compute_stage>::ADComputeThermalExpansionEigenstrainBase(
+ADComputeThermalExpansionEigenstrainBase::ADComputeThermalExpansionEigenstrainBase(
     const InputParameters & parameters)
-  : ADComputeEigenstrainBase<compute_stage>(parameters),
+  : ADComputeEigenstrainBase(parameters),
     _temperature(adCoupledValue("temperature")),
     _stress_free_temperature(adCoupledValue("stress_free_temperature"))
 {
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeThermalExpansionEigenstrainBase<compute_stage>::computeQpEigenstrain()
+ADComputeThermalExpansionEigenstrainBase::computeQpEigenstrain()
 {
   ADReal thermal_strain = 0.0;
 
@@ -46,4 +43,4 @@ ADComputeThermalExpansionEigenstrainBase<compute_stage>::computeQpEigenstrain()
   _eigenstrain[_qp].addIa(thermal_strain);
 }
 
-adBaseClass(ADComputeThermalExpansionEigenstrainBase);
+

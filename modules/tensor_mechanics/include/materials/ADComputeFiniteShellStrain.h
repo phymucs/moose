@@ -15,7 +15,6 @@
 #define usingComputeFiniteShellStrainMembers usingComputeIncrementalShellStrainMembers
 
 // Forward Declarations
-template <ComputeStage>
 class ADComputeFiniteShellStrain;
 
 declareADValidParams(ADComputeFiniteShellStrain);
@@ -25,8 +24,7 @@ declareADValidParams(ADComputeFiniteShellStrain);
  *displacement/rotation scenarios.
  **/
 
-template <ComputeStage compute_stage>
-class ADComputeFiniteShellStrain : public ADComputeIncrementalShellStrain<compute_stage>
+class ADComputeFiniteShellStrain : public ADComputeIncrementalShellStrain
 {
 public:
   static InputParameters validParams();
@@ -44,7 +42,6 @@ protected:
   virtual void computeBNLMatrix();
 
   /// Material property to store the B_nl matrix at each quadrature point
-  std::vector<ADMaterialProperty(DenseMatrix<Real>) *> _B_nl;
+  std::vector<ADMaterialProperty<DenseMatrix<Real>> *> _B_nl;
 
-  usingComputeIncrementalShellStrainMembers;
 };

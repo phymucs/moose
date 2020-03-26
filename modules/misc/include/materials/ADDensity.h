@@ -12,13 +12,11 @@
 #include "ADMaterial.h"
 
 // Forward Declarations
-template <ComputeStage>
 class ADDensity;
 
 declareADValidParams(ADDensity);
 
-template <ComputeStage compute_stage>
-class ADDensity : public ADMaterial<compute_stage>
+class ADDensity : public ADMaterial
 {
 public:
   static InputParameters validParams();
@@ -35,8 +33,7 @@ private:
   const ADVariableValue & _disp_r;
 
   const Real _initial_density;
-  ADMaterialProperty(Real) & _density;
+  ADMaterialProperty<Real> & _density;
 
-  usingMaterialMembers;
 };
 

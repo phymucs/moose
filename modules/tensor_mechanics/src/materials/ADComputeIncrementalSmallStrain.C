@@ -14,26 +14,23 @@ registerMooseObject("TensorMechanicsApp", ADComputeIncrementalSmallStrain);
 
 defineADLegacyParams(ADComputeIncrementalSmallStrain);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeIncrementalSmallStrain<compute_stage>::validParams()
+ADComputeIncrementalSmallStrain::validParams()
 {
-  InputParameters params = ADComputeIncrementalStrainBase<compute_stage>::validParams();
+  InputParameters params = ADComputeIncrementalStrainBase::validParams();
   params.addClassDescription(
       "Compute a strain increment and rotation increment for small strains.");
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeIncrementalSmallStrain<compute_stage>::ADComputeIncrementalSmallStrain(
+ADComputeIncrementalSmallStrain::ADComputeIncrementalSmallStrain(
     const InputParameters & parameters)
-  : ADComputeIncrementalStrainBase<compute_stage>(parameters)
+  : ADComputeIncrementalStrainBase(parameters)
 {
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeIncrementalSmallStrain<compute_stage>::computeProperties()
+ADComputeIncrementalSmallStrain::computeProperties()
 {
   ADReal volumetric_strain = 0.0;
   for (_qp = 0; _qp < _qrule->n_points(); ++_qp)
@@ -81,9 +78,8 @@ ADComputeIncrementalSmallStrain<compute_stage>::computeProperties()
   copyDualNumbersToValues();
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeIncrementalSmallStrain<compute_stage>::computeTotalStrainIncrement(
+ADComputeIncrementalSmallStrain::computeTotalStrainIncrement(
     ADRankTwoTensor & total_strain_increment)
 {
   // Deformation gradient
@@ -98,5 +94,4 @@ ADComputeIncrementalSmallStrain<compute_stage>::computeTotalStrainIncrement(
   total_strain_increment = 0.5 * (A + A.transpose());
 }
 
-// explicit instantiation is required for AD base classes
-adBaseClass(ADComputeIncrementalSmallStrain);
+

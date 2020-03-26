@@ -14,19 +14,17 @@ registerMooseObject("TensorMechanicsApp", ADComputeGreenLagrangeStrain);
 
 defineADLegacyParams(ADComputeGreenLagrangeStrain);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeGreenLagrangeStrain<compute_stage>::validParams()
+ADComputeGreenLagrangeStrain::validParams()
 {
-  InputParameters params = ADComputeStrainBase<compute_stage>::validParams();
+  InputParameters params = ADComputeStrainBase::validParams();
   params.addClassDescription("Compute a Green-Lagrange strain.");
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeGreenLagrangeStrain<compute_stage>::ADComputeGreenLagrangeStrain(
+ADComputeGreenLagrangeStrain::ADComputeGreenLagrangeStrain(
     const InputParameters & parameters)
-  : ADComputeStrainBase<compute_stage>(parameters)
+  : ADComputeStrainBase(parameters)
 {
   // error out if unsupported features are to be used
   if (_global_strain)
@@ -40,9 +38,8 @@ ADComputeGreenLagrangeStrain<compute_stage>::ADComputeGreenLagrangeStrain(
                "Volumetric locking correction is not implemented for Green-Lagrange strains");
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeGreenLagrangeStrain<compute_stage>::computeProperties()
+ADComputeGreenLagrangeStrain::computeProperties()
 {
   for (_qp = 0; _qp < _qrule->n_points(); ++_qp)
   {

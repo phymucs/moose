@@ -13,11 +13,10 @@ registerMooseObject("PhaseFieldTestApp", ADTestDerivativeFunction);
 
 defineADLegacyParams(ADTestDerivativeFunction);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADTestDerivativeFunction<compute_stage>::validParams()
+ADTestDerivativeFunction::validParams()
 {
-  InputParameters params = ADMaterial<compute_stage>::validParams();
+  InputParameters params = ADMaterial::validParams();
   params.addClassDescription(
       "Material that implements the a function of one variable and its first derivative.");
   MooseEnum functionEnum("F1 F2 F3");
@@ -31,10 +30,9 @@ ADTestDerivativeFunction<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADTestDerivativeFunction<compute_stage>::ADTestDerivativeFunction(
+ADTestDerivativeFunction::ADTestDerivativeFunction(
     const InputParameters & parameters)
-  : ADMaterial<compute_stage>(parameters),
+  : ADMaterial(parameters),
     _function(getParam<MooseEnum>("function").template getEnum<FunctionEnum>()),
     _op(coupledComponents("op")),
     _f_name(getParam<MaterialPropertyName>("f_name")),
@@ -56,9 +54,8 @@ ADTestDerivativeFunction<compute_stage>::ADTestDerivativeFunction(
     paramError("op", "Specify exactly two variables to an F3 type function.");
 }
 
-template <ComputeStage compute_stage>
 void
-ADTestDerivativeFunction<compute_stage>::computeQpProperties()
+ADTestDerivativeFunction::computeQpProperties()
 {
   const ADReal & a = (*_op[0])[_qp];
 

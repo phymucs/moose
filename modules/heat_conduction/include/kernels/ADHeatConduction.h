@@ -11,13 +11,11 @@
 
 #include "ADDiffusion.h"
 
-template <ComputeStage>
 class ADHeatConduction;
 
 declareADValidParams(ADHeatConduction);
 
-template <ComputeStage compute_stage>
-class ADHeatConduction : public ADDiffusion<compute_stage>
+class ADHeatConduction : public ADDiffusion
 {
 public:
   static InputParameters validParams();
@@ -27,7 +25,6 @@ public:
 protected:
   virtual ADRealVectorValue precomputeQpResidual() override;
 
-  const ADMaterialProperty(Real) & _thermal_conductivity;
+  const ADMaterialProperty<Real> & _thermal_conductivity;
 
-  usingKernelGradMembers;
 };

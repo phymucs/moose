@@ -11,11 +11,9 @@
 
 #include "ADMortarConstraint.h"
 
-template <ComputeStage>
 class TangentialMortarLMMechanicalContact;
 
-template <ComputeStage compute_stage>
-class TangentialMortarLMMechanicalContact : public ADMortarConstraint<compute_stage>
+class TangentialMortarLMMechanicalContact : public ADMortarConstraint
 {
 public:
   static InputParameters validParams();
@@ -44,5 +42,4 @@ protected:
 
   const Real _c;
 
-  usingMortarConstraintMembers;
 };

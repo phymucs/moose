@@ -12,13 +12,11 @@
 #include "ADMaterial.h"
 
 // Forward Declarations
-template <ComputeStage>
 class ADThermalConductivityTest;
 
 declareADValidParams(ADThermalConductivityTest);
 
-template <ComputeStage compute_stage>
-class ADThermalConductivityTest : public ADMaterial<compute_stage>
+class ADThermalConductivityTest : public ADMaterial
 {
 public:
   ADThermalConductivityTest(const InputParameters & parameters);
@@ -27,10 +25,9 @@ protected:
   virtual void computeQpProperties();
 
 private:
-  ADMaterialProperty(Real) & _diffusivity;
+  ADMaterialProperty<Real> & _diffusivity;
   const ADVariableValue & _temperature;
   const ADVariableValue & _c;
 
-  usingMaterialMembers;
 };
 

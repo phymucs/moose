@@ -11,13 +11,11 @@
 
 #include "ADMortarConstraint.h"
 
-template <ComputeStage>
 class TangentialMortarMechanicalContact;
 
 declareADValidParams(TangentialMortarMechanicalContact);
 
-template <ComputeStage compute_stage>
-class TangentialMortarMechanicalContact : public ADMortarConstraint<compute_stage>
+class TangentialMortarMechanicalContact : public ADMortarConstraint
 {
 public:
   static InputParameters validParams();
@@ -29,5 +27,4 @@ protected:
 
   const MooseEnum _component;
 
-  usingMortarConstraintMembers;
 };

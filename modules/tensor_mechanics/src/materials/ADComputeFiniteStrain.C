@@ -16,38 +16,34 @@ registerMooseObject("TensorMechanicsApp", ADComputeFiniteStrain);
 
 defineADLegacyParams(ADComputeFiniteStrain);
 
-template <ComputeStage compute_stage>
 MooseEnum
-ADComputeFiniteStrain<compute_stage>::decompositionType()
+ADComputeFiniteStrain::decompositionType()
 {
   return MooseEnum("TaylorExpansion EigenSolution", "TaylorExpansion");
 }
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeFiniteStrain<compute_stage>::validParams()
+ADComputeFiniteStrain::validParams()
 {
-  InputParameters params = ADComputeIncrementalStrainBase<compute_stage>::validParams();
+  InputParameters params = ADComputeIncrementalStrainBase::validParams();
   params.addClassDescription(
       "Compute a strain increment and rotation increment for finite strains.");
   params.addParam<MooseEnum>("decomposition_method",
-                             ADComputeFiniteStrain<compute_stage>::decompositionType(),
+                             ADComputeFiniteStrain::decompositionType(),
                              "Methods to calculate the strain and rotation increments");
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeFiniteStrain<compute_stage>::ADComputeFiniteStrain(const InputParameters & parameters)
-  : ADComputeIncrementalStrainBase<compute_stage>(parameters),
+ADComputeFiniteStrain::ADComputeFiniteStrain(const InputParameters & parameters)
+  : ADComputeIncrementalStrainBase(parameters),
     _Fhat(_fe_problem.getMaxQps()),
     _decomposition_method(
         getParam<MooseEnum>("decomposition_method").template getEnum<DecompMethod>())
 {
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeFiniteStrain<compute_stage>::computeProperties()
+ADComputeFiniteStrain::computeProperties()
 {
   ADRankTwoTensor ave_Fhat;
   for (_qp = 0; _qp < _qrule->n_points(); ++_qp)
@@ -90,9 +86,8 @@ ADComputeFiniteStrain<compute_stage>::computeProperties()
   copyDualNumbersToValues();
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeFiniteStrain<compute_stage>::computeQpStrain()
+ADComputeFiniteStrain::computeQpStrain()
 {
   ADRankTwoTensor total_strain_increment;
 
@@ -123,9 +118,8 @@ ADComputeFiniteStrain<compute_stage>::computeQpStrain()
     _total_strain[_qp] += (*_global_strain)[_qp];
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeFiniteStrain<compute_stage>::computeQpIncrements(ADRankTwoTensor & total_strain_increment,
+ADComputeFiniteStrain::computeQpIncrements(ADRankTwoTensor & total_strain_increment,
                                                           ADRankTwoTensor & rotation_increment)
 {
   switch (_decomposition_method)
@@ -234,4 +228,4 @@ ADComputeFiniteStrain<compute_stage>::computeQpIncrements(ADRankTwoTensor & tota
   }
 }
 
-adBaseClass(ADComputeFiniteStrain);
+

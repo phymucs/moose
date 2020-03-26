@@ -13,18 +13,16 @@
 
 #define usingINSMaterialMembers                                                                    \
   usingMaterialMembers;                                                                            \
-  using INSADMaterial<compute_stage>::_mu;                                                         \
-  using INSADMaterial<compute_stage>::_rho;                                                        \
-  using INSADMaterial<compute_stage>::_velocity;                                                   \
-  using INSADMaterial<compute_stage>::_transient_term
+  using INSADMaterial::_mu;                                                         \
+  using INSADMaterial::_rho;                                                        \
+  using INSADMaterial::_velocity;                                                   \
+  using INSADMaterial::_transient_term
 
-template <ComputeStage>
 class INSADMaterial;
 
 declareADValidParams(INSADMaterial);
 
-template <ComputeStage compute_stage>
-class INSADMaterial : public ADMaterial<compute_stage>
+class INSADMaterial : public ADMaterial
 {
 public:
   static InputParameters validParams();
@@ -44,10 +42,10 @@ protected:
   const ADVariableGradient & _grad_p;
 
   /// viscosity
-  const ADMaterialProperty(Real) & _mu;
+  const ADMaterialProperty<Real> & _mu;
 
   /// density
-  const ADMaterialProperty(Real) & _rho;
+  const ADMaterialProperty<Real> & _rho;
 
   /// Whether we are performing a transient or steady simulation
   const bool _transient_term;
@@ -70,22 +68,22 @@ protected:
   RealVectorValue _gravity;
 
   /// The strong residual of the mass continuity equation
-  ADMaterialProperty(Real) & _mass_strong_residual;
+  ADMaterialProperty<Real> & _mass_strong_residual;
 
   /// Strong residual corresponding to the momentum convective term
-  ADMaterialProperty(RealVectorValue) & _convective_strong_residual;
+  ADMaterialProperty<RealVectorValue> & _convective_strong_residual;
 
   /// Strong residual corresponding to the momentum transient term
-  ADMaterialProperty(RealVectorValue) & _td_strong_residual;
+  ADMaterialProperty<RealVectorValue> & _td_strong_residual;
 
   /// Strong residual corresponding to the momentum gravity term
-  ADMaterialProperty(RealVectorValue) & _gravity_strong_residual;
+  ADMaterialProperty<RealVectorValue> & _gravity_strong_residual;
 
   /// Strong residual corresponding to the mms function term
   MaterialProperty<RealVectorValue> & _mms_function_strong_residual;
 
   /// The strong residual of the momentum equation
-  ADMaterialProperty(RealVectorValue) & _momentum_strong_residual;
+  ADMaterialProperty<RealVectorValue> & _momentum_strong_residual;
 
   /// The x velocity mms forcing function
   const Function & _x_vel_fn;
@@ -96,5 +94,4 @@ protected:
   /// The z velocity mms forcing function
   const Function & _z_vel_fn;
 
-  usingMaterialMembers;
 };

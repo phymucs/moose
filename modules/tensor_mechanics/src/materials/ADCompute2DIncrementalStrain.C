@@ -13,11 +13,10 @@
 
 defineADLegacyParams(ADCompute2DIncrementalStrain);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADCompute2DIncrementalStrain<compute_stage>::validParams()
+ADCompute2DIncrementalStrain::validParams()
 {
-  InputParameters params = ADComputeIncrementalSmallStrain<compute_stage>::validParams();
+  InputParameters params = ADComputeIncrementalSmallStrain::validParams();
   params.addClassDescription("Compute strain increment for incremental strains in 2D geometries.");
 
   MooseEnum outOfPlaneDirection("x y z", "z");
@@ -26,17 +25,14 @@ ADCompute2DIncrementalStrain<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADCompute2DIncrementalStrain<compute_stage>::ADCompute2DIncrementalStrain(
-    const InputParameters & parameters)
-  : ADComputeIncrementalSmallStrain<compute_stage>(parameters),
+ADCompute2DIncrementalStrain::ADCompute2DIncrementalStrain(const InputParameters & parameters)
+  : ADComputeIncrementalSmallStrain(parameters),
     _out_of_plane_direction(getParam<MooseEnum>("out_of_plane_direction"))
 {
 }
 
-template <ComputeStage compute_stage>
 void
-ADCompute2DIncrementalStrain<compute_stage>::initialSetup()
+ADCompute2DIncrementalStrain::initialSetup()
 {
   for (unsigned int i = 0; i < 3; ++i)
   {
@@ -58,10 +54,8 @@ ADCompute2DIncrementalStrain<compute_stage>::initialSetup()
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADCompute2DIncrementalStrain<compute_stage>::computeTotalStrainIncrement(
-    ADRankTwoTensor & total_strain_increment)
+ADCompute2DIncrementalStrain::computeTotalStrainIncrement(ADRankTwoTensor & total_strain_increment)
 {
   // Deformation gradient calculation for 2D problems
   ADRankTwoTensor A(
@@ -80,9 +74,8 @@ ADCompute2DIncrementalStrain<compute_stage>::computeTotalStrainIncrement(
   total_strain_increment = 0.5 * (A + A.transpose());
 }
 
-template <ComputeStage compute_stage>
 void
-ADCompute2DIncrementalStrain<compute_stage>::displacementIntegrityCheck()
+ADCompute2DIncrementalStrain::displacementIntegrityCheck()
 {
   if (_out_of_plane_direction != 2 && _ndisp != 3)
     mooseError("For 2D simulations where the out-of-plane direction is x or y the number of "
@@ -91,6 +84,3 @@ ADCompute2DIncrementalStrain<compute_stage>::displacementIntegrityCheck()
     mooseError("For 2D simulations where the out-of-plane direction is z the number of supplied "
                "displacements must be two.");
 }
-
-// explicit instantiation is required for AD base classes
-adBaseClass(ADCompute2DIncrementalStrain);

@@ -12,18 +12,12 @@
 #include "ADCompute2DIncrementalStrain.h"
 #include "SubblockIndexProvider.h"
 
-template <ComputeStage>
-class ADComputePlaneIncrementalStrain;
-
-declareADValidParams(ADComputePlaneIncrementalStrain);
-
 /**
  * ADComputePlaneIncrementalStrain defines strain increment
  * for small strains in a 2D planar simulation.
  */
 
-template <ComputeStage compute_stage>
-class ADComputePlaneIncrementalStrain : public ADCompute2DIncrementalStrain<compute_stage>
+class ADComputePlaneIncrementalStrain : public ADCompute2DIncrementalStrain
 {
 public:
   static InputParameters validParams();
@@ -61,6 +55,4 @@ protected:
   const ADVariableValue & _out_of_plane_strain;
   const VariableValue & _out_of_plane_strain_old;
   ///@}
-
-  usingCompute2DIncrementalStrainMembers;
 };

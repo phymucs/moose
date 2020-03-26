@@ -11,19 +11,17 @@
 
 defineADLegacyParams(ADGrainGrowthBase);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADGrainGrowthBase<compute_stage>::validParams()
+ADGrainGrowthBase::validParams()
 {
-  InputParameters params = ADAllenCahnBase<compute_stage, Real>::validParams();
+  InputParameters params = ADAllenCahnBase<Real>::validParams();
   params.addRequiredCoupledVar("v",
                                "Array of coupled order parameter names for other order parameters");
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADGrainGrowthBase<compute_stage>::ADGrainGrowthBase(const InputParameters & parameters)
-  : ADAllenCahnBase<compute_stage, Real>(parameters),
+ADGrainGrowthBase::ADGrainGrowthBase(const InputParameters & parameters)
+  : ADAllenCahnBase<Real>(parameters),
     _op_num(coupledComponents("v")),
     _vals(_op_num),
     _mu(getADMaterialProperty<Real>("mu"))
@@ -32,5 +30,3 @@ ADGrainGrowthBase<compute_stage>::ADGrainGrowthBase(const InputParameters & para
   for (unsigned int i = 0; i < _op_num; ++i)
     _vals[i] = &adCoupledValue("v", i);
 }
-
-adBaseClass(ADGrainGrowthBase);

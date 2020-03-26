@@ -13,11 +13,10 @@
 
 #define usingSplitCHCResMembers                                                                    \
   usingSplitCHBaseMembers;                                                                         \
-  using ADSplitCHCRes<compute_stage>::_kappa;                                                      \
-  using ADSplitCHCRes<compute_stage>::_w
+  using ADSplitCHCRes::_kappa;                                                      \
+  using ADSplitCHCRes::_w
 
 // Forward Declarations
-template <ComputeStage>
 class ADSplitCHCRes;
 
 declareADValidParams(ADSplitCHCRes);
@@ -26,8 +25,7 @@ declareADValidParams(ADSplitCHCRes);
  * The pair, ADSplitCHCRes and ADSplitCHWRes, splits the Cahn-Hilliard equation
  * by replacing chemical potential with 'w'.
  */
-template <ComputeStage compute_stage>
-class ADSplitCHCRes : public ADSplitCHBase<compute_stage>
+class ADSplitCHCRes : public ADSplitCHBase
 {
 public:
   static InputParameters validParams();
@@ -37,9 +35,8 @@ public:
 protected:
   virtual ADReal computeQpResidual();
 
-  const ADMaterialProperty(Real) & _kappa;
+  const ADMaterialProperty<Real> & _kappa;
   const ADVariableValue & _w;
 
-  usingSplitCHBaseMembers;
 };
 

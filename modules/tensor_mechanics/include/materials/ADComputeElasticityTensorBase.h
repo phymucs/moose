@@ -16,11 +16,10 @@
 
 #define usingComputeElasticityTensorBaseMembers                                                    \
   usingMaterialMembers;                                                                            \
-  using ADComputeElasticityTensorBase<compute_stage>::_elasticity_tensor_name;                     \
-  using ADComputeElasticityTensorBase<compute_stage>::_elasticity_tensor;                          \
-  using ADComputeElasticityTensorBase<compute_stage>::issueGuarantee
+  using ADComputeElasticityTensorBase::_elasticity_tensor_name;                     \
+  using ADComputeElasticityTensorBase::_elasticity_tensor;                          \
+  using ADComputeElasticityTensorBase::issueGuarantee
 
-template <ComputeStage>
 class ADComputeElasticityTensorBase;
 template <typename>
 class RankFourTensorTempl;
@@ -31,8 +30,7 @@ declareADValidParams(ADComputeElasticityTensorBase);
 /**
  * ADComputeElasticityTensorBase is a the base class for computing elasticity tensors
  */
-template <ComputeStage compute_stage>
-class ADComputeElasticityTensorBase : public ADMaterial<compute_stage>,
+class ADComputeElasticityTensorBase : public ADMaterial,
                                       public DerivativeMaterialPropertyNameInterface,
                                       public GuaranteeProvider
 {
@@ -50,10 +48,9 @@ protected:
 
   std::string _elasticity_tensor_name;
 
-  ADMaterialProperty(RankFourTensor) & _elasticity_tensor;
+  ADMaterialProperty<RankFourTensor> & _elasticity_tensor;
 
   /// prefactor function to multiply the elasticity tensor with
   const Function * const _prefactor_function;
 
-  usingMaterialMembers;
 };

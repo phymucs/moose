@@ -11,13 +11,11 @@
 
 #include "ADKernel.h"
 
-template <ComputeStage>
 class ADMatHeatSource;
 
 declareADValidParams(ADMatHeatSource);
 
-template <ComputeStage compute_stage>
-class ADMatHeatSource : public ADKernel<compute_stage>
+class ADMatHeatSource : public ADKernel
 {
 public:
   static InputParameters validParams();
@@ -28,8 +26,7 @@ protected:
   virtual ADReal computeQpResidual();
 
   const Real _scalar;
-  const ADMaterialProperty(Real) & _material_property;
+  const ADMaterialProperty<Real> & _material_property;
 
-  usingKernelMembers;
 };
 

@@ -11,7 +11,6 @@
 
 #include "ADCompute2DIncrementalStrain.h"
 
-template <ComputeStage>
 class ADComputeAxisymmetricRZIncrementalStrain;
 
 declareADValidParams(ADComputeAxisymmetricRZIncrementalStrain);
@@ -21,8 +20,7 @@ declareADValidParams(ADComputeAxisymmetricRZIncrementalStrain);
  * for incremental strains in an Axisymmetric simulation.
  * The COORD_TYPE in the Problem block must be set to RZ.
  */
-template <ComputeStage compute_stage>
-class ADComputeAxisymmetricRZIncrementalStrain : public ADCompute2DIncrementalStrain<compute_stage>
+class ADComputeAxisymmetricRZIncrementalStrain : public ADCompute2DIncrementalStrain
 {
 public:
   static InputParameters validParams();
@@ -38,6 +36,4 @@ protected:
 
   /// the old value of the first component of the displacements vector
   const VariableValue & _disp_old_0;
-
-  usingCompute2DIncrementalStrainMembers;
 };

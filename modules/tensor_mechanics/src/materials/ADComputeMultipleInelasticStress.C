@@ -15,11 +15,10 @@ registerMooseObject("TensorMechanicsApp", ADComputeMultipleInelasticStress);
 
 defineADLegacyParams(ADComputeMultipleInelasticStress);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeMultipleInelasticStress<compute_stage>::validParams()
+ADComputeMultipleInelasticStress::validParams()
 {
-  InputParameters params = ADComputeFiniteStrainElasticStress<compute_stage>::validParams();
+  InputParameters params = ADComputeFiniteStrainElasticStress::validParams();
   params.addClassDescription("Compute state (stress and internal parameters such as plastic "
                              "strains and internal parameters) using an iterative process.  "
                              "Combinations of creep models and plastic models may be used.");
@@ -64,10 +63,9 @@ ADComputeMultipleInelasticStress<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeMultipleInelasticStress<compute_stage>::ADComputeMultipleInelasticStress(
+ADComputeMultipleInelasticStress::ADComputeMultipleInelasticStress(
     const InputParameters & parameters)
-  : ADComputeFiniteStrainElasticStress<compute_stage>(parameters),
+  : ADComputeFiniteStrainElasticStress(parameters),
     _max_iterations(parameters.get<unsigned int>("max_iterations")),
     _relative_tolerance(parameters.get<Real>("relative_tolerance")),
     _absolute_tolerance(parameters.get<Real>("absolute_tolerance")),
@@ -91,17 +89,15 @@ ADComputeMultipleInelasticStress<compute_stage>::ADComputeMultipleInelasticStres
                _num_models);
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeMultipleInelasticStress<compute_stage>::initQpStatefulProperties()
+ADComputeMultipleInelasticStress::initQpStatefulProperties()
 {
-  ADComputeStressBase<compute_stage>::initQpStatefulProperties();
+  ADComputeStressBase::initQpStatefulProperties();
   _inelastic_strain[_qp].zero();
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeMultipleInelasticStress<compute_stage>::initialSetup()
+ADComputeMultipleInelasticStress::initialSetup()
 {
   _is_elasticity_tensor_guaranteed_isotropic =
       this->hasGuaranteedMaterialProperty(_elasticity_tensor_name, Guarantee::ISOTROPIC);
@@ -110,8 +106,8 @@ ADComputeMultipleInelasticStress<compute_stage>::initialSetup()
 
   for (unsigned int i = 0; i < _num_models; ++i)
   {
-    ADStressUpdateBase<compute_stage> * rrr = dynamic_cast<ADStressUpdateBase<compute_stage> *>(
-        &this->template getMaterialByName<compute_stage>(models[i]));
+    ADStressUpdateBase * rrr =
+        dynamic_cast<ADStressUpdateBase *>(&this->getMaterialByName(models[i]));
 
     if (rrr)
     {
@@ -126,18 +122,16 @@ ADComputeMultipleInelasticStress<compute_stage>::initialSetup()
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeMultipleInelasticStress<compute_stage>::computeQpStress()
+ADComputeMultipleInelasticStress::computeQpStress()
 {
   computeQpStressIntermediateConfiguration();
   if (_perform_finite_strain_rotations)
     finiteStrainRotation();
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeMultipleInelasticStress<compute_stage>::computeQpStressIntermediateConfiguration()
+ADComputeMultipleInelasticStress::computeQpStressIntermediateConfiguration()
 {
   ADRankTwoTensor elastic_strain_increment;
   ADRankTwoTensor combined_inelastic_strain_increment;
@@ -167,9 +161,8 @@ ADComputeMultipleInelasticStress<compute_stage>::computeQpStressIntermediateConf
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeMultipleInelasticStress<compute_stage>::finiteStrainRotation()
+ADComputeMultipleInelasticStress::finiteStrainRotation()
 {
   _elastic_strain[_qp] =
       _rotation_increment[_qp] * _elastic_strain[_qp] * _rotation_increment[_qp].transpose();
@@ -178,9 +171,8 @@ ADComputeMultipleInelasticStress<compute_stage>::finiteStrainRotation()
       _rotation_increment[_qp] * _inelastic_strain[_qp] * _rotation_increment[_qp].transpose();
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeMultipleInelasticStress<compute_stage>::updateQpState(
+ADComputeMultipleInelasticStress::updateQpState(
     ADRankTwoTensor & elastic_strain_increment,
     ADRankTwoTensor & combined_inelastic_strain_increment)
 {
@@ -292,9 +284,8 @@ ADComputeMultipleInelasticStress<compute_stage>::updateQpState(
     _matl_timestep_limit[_qp] = 1.0 / _matl_timestep_limit[_qp];
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeMultipleInelasticStress<compute_stage>::updateQpStateSingleModel(
+ADComputeMultipleInelasticStress::updateQpStateSingleModel(
     unsigned model_number,
     ADRankTwoTensor & elastic_strain_increment,
     ADRankTwoTensor & combined_inelastic_strain_increment)
@@ -323,9 +314,8 @@ ADComputeMultipleInelasticStress<compute_stage>::updateQpStateSingleModel(
       _models[i_rmm]->propagateQpStatefulProperties();
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeMultipleInelasticStress<compute_stage>::computeAdmissibleState(
+ADComputeMultipleInelasticStress::computeAdmissibleState(
     unsigned model_number,
     ADRankTwoTensor & elastic_strain_increment,
     ADRankTwoTensor & inelastic_strain_increment)

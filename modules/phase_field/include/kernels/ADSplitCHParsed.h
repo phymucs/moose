@@ -13,7 +13,6 @@
 #include "DerivativeMaterialPropertyNameInterface.h"
 
 // Forward Declarations
-template <ComputeStage>
 class ADSplitCHParsed;
 
 declareADValidParams(ADSplitCHParsed);
@@ -23,8 +22,7 @@ declareADValidParams(ADSplitCHParsed);
  * provided by an ADMaterial. Derivatives w.r.t DOFs provided by the MOOSE AD
  * system are required for a correct Jacobian to be formed.
  */
-template <ComputeStage compute_stage>
-class ADSplitCHParsed : public ADSplitCHCRes<compute_stage>,
+class ADSplitCHParsed : public ADSplitCHCRes,
                         public DerivativeMaterialPropertyNameInterface
 {
 public:
@@ -39,8 +37,7 @@ protected:
   const MaterialPropertyName _f_name;
 
   /// chemical potential property
-  const ADMaterialProperty(Real) & _dFdc;
+  const ADMaterialProperty<Real> & _dFdc;
 
-  usingSplitCHCResMembers;
 };
 

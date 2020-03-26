@@ -13,12 +13,11 @@
 
 #define usingWeakPlaneStressMembers                                                                \
   usingKernelValueMembers;                                                                         \
-  using ADWeakPlaneStress<compute_stage>::_base_name;                                              \
-  using ADWeakPlaneStress<compute_stage>::_stress;                                                 \
-  using ADWeakPlaneStress<compute_stage>::_direction;
+  using ADWeakPlaneStress::_base_name;                                              \
+  using ADWeakPlaneStress::_stress;                                                 \
+  using ADWeakPlaneStress::_direction;
 
 // Forward Declarations
-template <ComputeStage>
 class ADWeakPlaneStress;
 
 declareADValidParams(ADWeakPlaneStress);
@@ -26,8 +25,7 @@ declareADValidParams(ADWeakPlaneStress);
 /**
  * ADWeakPlaneStress is the automatic differentiation version of WeakPlaneStress
  */
-template <ComputeStage compute_stage>
-class ADWeakPlaneStress : public ADKernelValue<compute_stage>
+class ADWeakPlaneStress : public ADKernelValue
 {
 public:
   static InputParameters validParams();
@@ -41,10 +39,9 @@ protected:
   const std::string _base_name;
 
   /// The stress tensor that provides the out-of-plane stress
-  const ADMaterialProperty(RankTwoTensor) & _stress;
+  const ADMaterialProperty<RankTwoTensor> & _stress;
 
   /// The direction of the out-of-plane strain variable
   const unsigned int _direction;
 
-  usingKernelValueMembers;
 };

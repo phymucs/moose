@@ -13,10 +13,9 @@
 
 #define usingComputeMeanThermalExpansionEigenstrainBaseMembers                                     \
   usingComputeThermalExpansionEigenstrainBaseMembers;                                              \
-  using ADComputeMeanThermalExpansionEigenstrainBase<compute_stage>::referenceTemperature;         \
-  using ADComputeMeanThermalExpansionEigenstrainBase<compute_stage>::meanThermalExpansionCoefficient
+  using ADComputeMeanThermalExpansionEigenstrainBase::referenceTemperature;         \
+  using ADComputeMeanThermalExpansionEigenstrainBase::meanThermalExpansionCoefficient
 
-template <ComputeStage>
 class ADComputeMeanThermalExpansionEigenstrainBase;
 
 declareADValidParams(ADComputeMeanThermalExpansionEigenstrainBase);
@@ -32,9 +31,8 @@ declareADValidParams(ADComputeMeanThermalExpansionEigenstrainBase);
  * M. Niffenegger and K. Reichlin. The proper use of thermal expansion coefficients
  * in finite element calculations. Nuclear Engineering and Design, 243:356-359, Feb. 2012.
  */
-template <ComputeStage compute_stage>
 class ADComputeMeanThermalExpansionEigenstrainBase
-  : public ADComputeThermalExpansionEigenstrainBase<compute_stage>
+  : public ADComputeThermalExpansionEigenstrainBase
 {
 public:
   static InputParameters validParams();
@@ -63,5 +61,4 @@ protected:
    */
   virtual ADReal meanThermalExpansionCoefficient(const ADReal & temperature) = 0;
 
-  usingComputeThermalExpansionEigenstrainBaseMembers;
 };

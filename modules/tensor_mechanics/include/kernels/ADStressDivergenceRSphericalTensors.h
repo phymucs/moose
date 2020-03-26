@@ -12,7 +12,6 @@
 #include "ADStressDivergenceTensors.h"
 
 // Forward Declarations
-template <ComputeStage>
 class ADStressDivergenceRSphericalTensors;
 
 declareADValidParams(ADStressDivergenceRSphericalTensors);
@@ -23,8 +22,7 @@ declareADValidParams(ADStressDivergenceRSphericalTensors);
  * displacement in the radial direction. The COORD_TYPE in the Problem block must be set to
  * RSPHERICAL.
  */
-template <ComputeStage compute_stage>
-class ADStressDivergenceRSphericalTensors : public ADStressDivergenceTensors<compute_stage>
+class ADStressDivergenceRSphericalTensors : public ADStressDivergenceTensors
 {
 public:
   static InputParameters validParams();
@@ -37,5 +35,4 @@ protected:
   ADReal computeQpResidual() override;
   void precalculateResidual() override {}
 
-  usingStressDivergenceTensorsMembers;
 };

@@ -13,17 +13,16 @@
 
 #define usingIsotropicPlasticityStressUpdateMembers                                                \
   usingRadialReturnStressUpdateMembers;                                                            \
-  using ADIsotropicPlasticityStressUpdate<compute_stage>::computeYieldStress;                      \
-  using ADIsotropicPlasticityStressUpdate<compute_stage>::computeHardeningValue;                   \
-  using ADIsotropicPlasticityStressUpdate<compute_stage>::computeHardeningDerivative;              \
-  using ADIsotropicPlasticityStressUpdate<compute_stage>::_yield_stress;                           \
-  using ADIsotropicPlasticityStressUpdate<compute_stage>::_yield_condition;                        \
-  using ADIsotropicPlasticityStressUpdate<compute_stage>::_plastic_strain;                         \
-  using ADIsotropicPlasticityStressUpdate<compute_stage>::_plastic_strain_old;                     \
-  using ADIsotropicPlasticityStressUpdate<compute_stage>::_hardening_variable;                     \
-  using ADIsotropicPlasticityStressUpdate<compute_stage>::_hardening_variable_old
+  using ADIsotropicPlasticityStressUpdate::computeYieldStress;                      \
+  using ADIsotropicPlasticityStressUpdate::computeHardeningValue;                   \
+  using ADIsotropicPlasticityStressUpdate::computeHardeningDerivative;              \
+  using ADIsotropicPlasticityStressUpdate::_yield_stress;                           \
+  using ADIsotropicPlasticityStressUpdate::_yield_condition;                        \
+  using ADIsotropicPlasticityStressUpdate::_plastic_strain;                         \
+  using ADIsotropicPlasticityStressUpdate::_plastic_strain_old;                     \
+  using ADIsotropicPlasticityStressUpdate::_hardening_variable;                     \
+  using ADIsotropicPlasticityStressUpdate::_hardening_variable_old
 
-template <ComputeStage>
 class ADIsotropicPlasticityStressUpdate;
 
 declareADValidParams(ADIsotropicPlasticityStressUpdate);
@@ -45,8 +44,7 @@ declareADValidParams(ADIsotropicPlasticityStressUpdate);
  * Petrinic's Introduction to Computational Plasticity (2004) Oxford University
  * Press, pg. 146 - 149.
  */
-template <ComputeStage compute_stage>
-class ADIsotropicPlasticityStressUpdate : public ADRadialReturnStressUpdate<compute_stage>
+class ADIsotropicPlasticityStressUpdate : public ADRadialReturnStressUpdate
 {
 public:
   static InputParameters validParams();
@@ -82,14 +80,13 @@ protected:
   ADReal _hardening_slope;
 
   /// plastic strain in this model
-  ADMaterialProperty(RankTwoTensor) & _plastic_strain;
+  ADMaterialProperty<RankTwoTensor> & _plastic_strain;
 
   /// old value of plastic strain
   const MaterialProperty<RankTwoTensor> & _plastic_strain_old;
 
-  ADMaterialProperty(Real) & _hardening_variable;
+  ADMaterialProperty<Real> & _hardening_variable;
   const MaterialProperty<Real> & _hardening_variable_old;
   const ADVariableValue & _temperature;
 
-  usingRadialReturnStressUpdateMembers;
 };

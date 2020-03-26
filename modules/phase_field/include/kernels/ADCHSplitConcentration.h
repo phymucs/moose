@@ -12,7 +12,6 @@
 #include "ADKernel.h"
 
 // Forward Declaration
-template <ComputeStage>
 class ADCHSplitConcentration;
 
 declareADValidParams(ADCHSplitConcentration);
@@ -20,8 +19,7 @@ declareADValidParams(ADCHSplitConcentration);
 /**
  * Solves Cahn-Hilliard equation using chemical potential as non-linear variable
  **/
-template <ComputeStage compute_stage>
-class ADCHSplitConcentration : public ADKernel<compute_stage>
+class ADCHSplitConcentration : public ADKernel
 {
 public:
   static InputParameters validParams();
@@ -35,7 +33,6 @@ protected:
   const ADVariableGradient & _grad_mu;
 
   // Mobility property name
-  const ADMaterialProperty(Real) & _mobility;
+  const ADMaterialProperty<Real> & _mobility;
 
-  usingKernelMembers;
 };

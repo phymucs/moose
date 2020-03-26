@@ -11,18 +11,6 @@
 
 #include "ADRadialReturnCreepStressUpdateBase.h"
 
-#define usingADLAROMANCEStressUpdateBase                                                           \
-  usingRadialReturnCreepStressUpdateBaseMembers;                                                   \
-  using ADLAROMANCEStressUpdateBase<compute_stage>::getTransform;                                  \
-  using ADLAROMANCEStressUpdateBase<compute_stage>::getTransformCoefs;                             \
-  using ADLAROMANCEStressUpdateBase<compute_stage>::getInputLimits;                                \
-  using ADLAROMANCEStressUpdateBase<compute_stage>::getCoefs
-
-template <ComputeStage>
-class ADLAROMANCEStressUpdateBase;
-
-declareADValidParams(ADLAROMANCEStressUpdateBase);
-
 enum class ROMInputTransform
 {
   LINEAR,
@@ -30,8 +18,7 @@ enum class ROMInputTransform
   EXP
 };
 
-template <ComputeStage compute_stage>
-class ADLAROMANCEStressUpdateBase : public ADRadialReturnCreepStressUpdateBase<compute_stage>
+class ADLAROMANCEStressUpdateBase : public ADRadialReturnCreepStressUpdateBase
 {
 public:
   static InputParameters validParams();
@@ -226,7 +213,7 @@ protected:
   const bool _verbose;
 
   ///@{Material properties for mobile (glissile) dislocation densities (1/m^2)
-  ADMaterialProperty(Real) & _mobile_dislocations;
+  ADMaterialProperty<Real> & _mobile_dislocations;
   const MaterialProperty<Real> & _mobile_dislocations_old;
   ///@}
 
@@ -246,7 +233,7 @@ protected:
   Real _mobile_old;
 
   ///@{Material properties for immobile (locked) dislocation densities (1/m^2)
-  ADMaterialProperty(Real) & _immobile_dislocations;
+  ADMaterialProperty<Real> & _immobile_dislocations;
   const MaterialProperty<Real> & _immobile_dislocations_old;
   ///@}
 
@@ -305,13 +292,11 @@ protected:
   std::vector<std::vector<unsigned int>> _makeframe_helper;
 
   /// Creep rate material property
-  ADMaterialProperty(Real) & _creep_rate;
+  ADMaterialProperty<Real> & _creep_rate;
 
   /// Material property to indicate if material point is outside of input limits
   MaterialProperty<Real> & _failed;
 
   /// Container for derivative of creep rate with respect to strain
   ADReal _derivative;
-
-  usingRadialReturnCreepStressUpdateBaseMembers;
 };

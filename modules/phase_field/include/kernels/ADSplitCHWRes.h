@@ -15,14 +15,10 @@
  * ADSplitCHWRes creates the residual for the chemical potential in the split
  * form of the Cahn-Hilliard equation with a scalar (isotropic) mobility.
  */
-template <ComputeStage compute_stage>
-class ADSplitCHWRes : public ADSplitCHWResBase<compute_stage, Real>
+class ADSplitCHWRes : public ADSplitCHWResBase<Real>
 {
 public:
   static InputParameters validParams();
 
   ADSplitCHWRes(const InputParameters & parameters);
 };
-
-declareADValidParams(ADSplitCHWRes);
-

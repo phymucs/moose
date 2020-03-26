@@ -13,7 +13,6 @@
 #include "DerivativeMaterialPropertyNameInterface.h"
 
 // Forward Declarations
-template <ComputeStage>
 class ADTestDerivativeFunction;
 
 declareADValidParams(ADTestDerivativeFunction);
@@ -22,8 +21,7 @@ declareADValidParams(ADTestDerivativeFunction);
  * Material class that creates the math free energy and its derivatives
  * for use with ADSplitCHParsed. \f$ F = \frac14(1 + c)^2(1 - c)^2 \f$.
  */
-template <ComputeStage compute_stage>
-class ADTestDerivativeFunction : public ADMaterial<compute_stage>,
+class ADTestDerivativeFunction : public ADMaterial,
                                  public DerivativeMaterialPropertyNameInterface
 {
 public:
@@ -48,10 +46,9 @@ protected:
   const MaterialPropertyName _f_name;
 
   /// function value
-  ADMaterialProperty(Real) & _prop_F;
+  ADMaterialProperty<Real> & _prop_F;
 
   /// function value derivative
-  std::vector<ADMaterialProperty(Real) *> _prop_dFdop;
+  std::vector<ADMaterialProperty<Real> *> _prop_dFdop;
 
-  usingMaterialMembers;
 };

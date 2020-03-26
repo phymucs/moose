@@ -141,8 +141,7 @@ GrainGrowthAction::act()
         std::string kernel_type = _use_ad ? "ADTimeDerivative" : "TimeDerivative";
 
         std::string kernel_name = var_name + "_" + kernel_type;
-        InputParameters params =
-            _factory.getValidParams(kernel_type + (_use_ad ? "<RESIDUAL>" : ""));
+        InputParameters params = _factory.getValidParams(kernel_type);
         params.set<NonlinearVariableName>("variable") = var_name;
         params.applyParameters(parameters());
 
@@ -166,8 +165,7 @@ GrainGrowthAction::act()
             v[ind++] = _var_name_base + Moose::stringify(j);
 
         std::string kernel_name = var_name + "_" + kernel_type;
-        InputParameters params =
-            _factory.getValidParams(kernel_type + (_use_ad ? "<RESIDUAL>" : ""));
+        InputParameters params = _factory.getValidParams(kernel_type);
         params.set<NonlinearVariableName>("variable") = var_name;
         params.set<std::vector<VariableName>>("v") = v;
         params.set<MaterialPropertyName>("mob_name") = getParam<MaterialPropertyName>("mobility");
@@ -184,8 +182,7 @@ GrainGrowthAction::act()
         std::string kernel_type = _use_ad ? "ADACInterface" : "ACInterface";
 
         std::string kernel_name = var_name + "_" + kernel_type;
-        InputParameters params =
-            _factory.getValidParams(kernel_type + (_use_ad ? "<RESIDUAL>" : ""));
+        InputParameters params = _factory.getValidParams(kernel_type);
         params.set<NonlinearVariableName>("variable") = var_name;
         params.set<MaterialPropertyName>("mob_name") = getParam<MaterialPropertyName>("mobility");
         params.set<MaterialPropertyName>("kappa_name") = getParam<MaterialPropertyName>("kappa");
@@ -252,12 +249,5 @@ GrainGrowthAction::addKernel(const std::string & kernel_type,
                              const std::string & kernel_name,
                              InputParameters params)
 {
-  if (_use_ad)
-  {
-    _problem->addKernel(kernel_type + "<RESIDUAL>", kernel_name + "_residual", params);
-    _problem->addKernel(kernel_type + "<JACOBIAN>", kernel_name + "_jacobian", params);
-    _problem->haveADObjects(true);
-  }
-  else
-    _problem->addKernel(kernel_type, kernel_name, params);
+  _problem->addKernel(kernel_type, kernel_name, params);
 }

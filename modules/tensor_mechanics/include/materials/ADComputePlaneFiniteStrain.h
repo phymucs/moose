@@ -12,17 +12,11 @@
 #include "ADCompute2DFiniteStrain.h"
 #include "SubblockIndexProvider.h"
 
-template <ComputeStage>
-class ADComputePlaneFiniteStrain;
-
-declareADValidParams(ADComputePlaneFiniteStrain);
-
 /**
  * ADComputePlaneFiniteStrain defines strain increment and rotation
  * increment for finite strain under 2D planar assumptions.
  */
-template <ComputeStage compute_stage>
-class ADComputePlaneFiniteStrain : public ADCompute2DFiniteStrain<compute_stage>
+class ADComputePlaneFiniteStrain : public ADCompute2DFiniteStrain
 {
 public:
   static InputParameters validParams();
@@ -60,6 +54,4 @@ protected:
   const ADVariableValue & _out_of_plane_strain;
   const VariableValue & _out_of_plane_strain_old;
   ///@}
-
-  usingCompute2DFiniteStrainMembers;
 };

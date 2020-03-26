@@ -14,7 +14,6 @@
 #include "LevelSetVelocityInterface.h"
 
 // Forward declarations
-template <ComputeStage>
 class LevelSetTimeDerivativeSUPG;
 
 declareADValidParams(LevelSetTimeDerivativeSUPG);
@@ -22,8 +21,7 @@ declareADValidParams(LevelSetTimeDerivativeSUPG);
 /**
  * Applies SUPG stabilization to the time derivative.
  */
-template <ComputeStage compute_stage>
-class LevelSetTimeDerivativeSUPG : public LevelSetVelocityInterface<ADTimeKernelGrad<compute_stage>>
+class LevelSetTimeDerivativeSUPG : public LevelSetVelocityInterface<ADTimeKernelGrad>
 {
 public:
   static InputParameters validParams();
@@ -33,8 +31,7 @@ public:
 protected:
   virtual ADRealVectorValue precomputeQpResidual() override;
 
-  usingTimeKernelGradMembers;
-  using LevelSetVelocityInterface<ADTimeKernelGrad<compute_stage>>::computeQpVelocity;
-  using LevelSetVelocityInterface<ADTimeKernelGrad<compute_stage>>::_velocity;
+  using LevelSetVelocityInterface<ADTimeKernelGrad>::computeQpVelocity;
+  using LevelSetVelocityInterface<ADTimeKernelGrad>::_velocity;
 };
 

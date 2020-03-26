@@ -18,19 +18,17 @@ defineADValidParams(
     params.addRequiredCoupledVar(
         "c", "Coupled variable used to help verify automatic differentiation capability"););
 
-template <ComputeStage compute_stage>
-ADThermalConductivityTest<compute_stage>::ADThermalConductivityTest(
+ADThermalConductivityTest::ADThermalConductivityTest(
     const InputParameters & parameters)
-  : ADMaterial<compute_stage>(parameters),
+  : ADMaterial(parameters),
     _diffusivity(declareADProperty<Real>("thermal_conductivity")),
     _temperature(adCoupledValue("temperature")),
     _c(adCoupledValue("c"))
 {
 }
 
-template <ComputeStage compute_stage>
 void
-ADThermalConductivityTest<compute_stage>::computeQpProperties()
+ADThermalConductivityTest::computeQpProperties()
 {
   _diffusivity[_qp] = _temperature[_qp] * _c[_qp];
 }

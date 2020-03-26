@@ -14,11 +14,10 @@
 
 defineADLegacyParams(ADComputeStrainBase);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeStrainBase<compute_stage>::validParams()
+ADComputeStrainBase::validParams()
 {
-  InputParameters params = ADMaterial<compute_stage>::validParams();
+  InputParameters params = ADMaterial::validParams();
   params.addRequiredCoupledVar(
       "displacements",
       "The displacements appropriate for the simulation geometry and coordinate system");
@@ -37,9 +36,8 @@ ADComputeStrainBase<compute_stage>::validParams()
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeStrainBase<compute_stage>::ADComputeStrainBase(const InputParameters & parameters)
-  : ADMaterial<compute_stage>(parameters),
+ADComputeStrainBase::ADComputeStrainBase(const InputParameters & parameters)
+  : ADMaterial(parameters),
     _ndisp(coupledComponents("displacements")),
     _disp(3),
     _grad_disp(3),
@@ -68,9 +66,8 @@ ADComputeStrainBase<compute_stage>::ADComputeStrainBase(const InputParameters & 
     paramError("use_displaced_mesh", "The strain calculator needs to run on the undisplaced mesh.");
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeStrainBase<compute_stage>::initialSetup()
+ADComputeStrainBase::initialSetup()
 {
   displacementIntegrityCheck();
   // fetch coupled variables and gradients (as stateful properties if necessary)
@@ -88,9 +85,8 @@ ADComputeStrainBase<compute_stage>::initialSetup()
   }
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeStrainBase<compute_stage>::displacementIntegrityCheck()
+ADComputeStrainBase::displacementIntegrityCheck()
 {
   // Checking for consistency between mesh size and length of the provided displacements vector
   if (_ndisp != _mesh.dimension())
@@ -99,13 +95,11 @@ ADComputeStrainBase<compute_stage>::displacementIntegrityCheck()
         "The number of variables supplied in 'displacements' must match the mesh dimension.");
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeStrainBase<compute_stage>::initQpStatefulProperties()
+ADComputeStrainBase::initQpStatefulProperties()
 {
   _mechanical_strain[_qp].zero();
   _total_strain[_qp].zero();
 }
 
-// explicit instantiation is required for AD base classes
-adBaseClass(ADComputeStrainBase);
+

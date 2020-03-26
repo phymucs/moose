@@ -11,7 +11,6 @@
 
 #include "ADComputeMeanThermalExpansionEigenstrainBase.h"
 
-template <ComputeStage>
 class ADComputeMeanThermalExpansionFunctionEigenstrain;
 
 declareADValidParams(ADComputeMeanThermalExpansionFunctionEigenstrain);
@@ -20,9 +19,8 @@ declareADValidParams(ADComputeMeanThermalExpansionFunctionEigenstrain);
  * ADComputeMeanThermalExpansionFunctionEigenstrain computes an eigenstrain for thermal
  * expansion according to a mean thermal expansion function.
  */
-template <ComputeStage compute_stage>
 class ADComputeMeanThermalExpansionFunctionEigenstrain
-  : public ADComputeMeanThermalExpansionEigenstrainBase<compute_stage>
+  : public ADComputeMeanThermalExpansionEigenstrainBase
 {
 public:
   static InputParameters validParams();
@@ -48,5 +46,4 @@ protected:
 
   const Real & _thexp_func_ref_temp;
 
-  usingComputeMeanThermalExpansionEigenstrainBaseMembers;
 };

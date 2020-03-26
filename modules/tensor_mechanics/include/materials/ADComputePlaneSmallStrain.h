@@ -12,18 +12,12 @@
 #include "ADCompute2DSmallStrain.h"
 #include "SubblockIndexProvider.h"
 
-template <ComputeStage>
-class ADComputePlaneSmallStrain;
-
-declareADValidParams(ADComputePlaneSmallStrain);
-
 /**
  * ADComputePlaneSmallStrain defines small strains under generalized
  * plane strain and plane stress assumptions, where the out of plane strain
  * can be uniformly or non-uniformly zero or nonzero.
  */
-template <ComputeStage compute_stage>
-class ADComputePlaneSmallStrain : public ADCompute2DSmallStrain<compute_stage>
+class ADComputePlaneSmallStrain : public ADCompute2DSmallStrain
 {
 public:
   static InputParameters validParams();
@@ -58,6 +52,4 @@ private:
 
   /// The out-of-plane strain scalar variables
   std::vector<const ADVariableValue *> _scalar_out_of_plane_strain;
-
-  usingCompute2DSmallStrainMembers;
 };

@@ -14,11 +14,10 @@
 
 #define usingComputeThermalExpansionEigenstrainBaseMembers                                         \
   usingComputeEigenstrainBaseMembers;                                                              \
-  using ADComputeThermalExpansionEigenstrainBase<compute_stage>::_temperature;                     \
-  using ADComputeThermalExpansionEigenstrainBase<compute_stage>::_stress_free_temperature;         \
-  using ADComputeThermalExpansionEigenstrainBase<compute_stage>::computeThermalStrain
+  using ADComputeThermalExpansionEigenstrainBase::_temperature;                     \
+  using ADComputeThermalExpansionEigenstrainBase::_stress_free_temperature;         \
+  using ADComputeThermalExpansionEigenstrainBase::computeThermalStrain
 
-template <ComputeStage>
 class ADComputeThermalExpansionEigenstrainBase;
 template <typename>
 class RankTwoTensorTempl;
@@ -30,8 +29,7 @@ declareADValidParams(ADComputeThermalExpansionEigenstrainBase);
  * ADComputeThermalExpansionEigenstrainBase is a base class for all models that
  * compute eigenstrains due to thermal expansion of a material.
  */
-template <ComputeStage compute_stage>
-class ADComputeThermalExpansionEigenstrainBase : public ADComputeEigenstrainBase<compute_stage>,
+class ADComputeThermalExpansionEigenstrainBase : public ADComputeEigenstrainBase,
                                                  public DerivativeMaterialPropertyNameInterface
 {
 public:
@@ -54,5 +52,4 @@ protected:
   const ADVariableValue & _temperature;
   const ADVariableValue & _stress_free_temperature;
 
-  usingComputeEigenstrainBaseMembers;
 };

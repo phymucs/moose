@@ -18,29 +18,26 @@ registerMooseObject("TensorMechanicsApp", ADComputeRSphericalFiniteStrain);
 
 defineADLegacyParams(ADComputeRSphericalFiniteStrain);
 
-template <ComputeStage compute_stage>
 InputParameters
-ADComputeRSphericalFiniteStrain<compute_stage>::validParams()
+ADComputeRSphericalFiniteStrain::validParams()
 {
-  InputParameters params = ADComputeFiniteStrain<compute_stage>::validParams();
+  InputParameters params = ADComputeFiniteStrain::validParams();
   params.addClassDescription("Compute a strain increment and rotation increment for finite strains "
                              "in 1D spherical symmetry problems.");
   return params;
 }
 
-template <ComputeStage compute_stage>
-ADComputeRSphericalFiniteStrain<compute_stage>::ADComputeRSphericalFiniteStrain(
+ADComputeRSphericalFiniteStrain::ADComputeRSphericalFiniteStrain(
     const InputParameters & parameters)
-  : ADComputeFiniteStrain<compute_stage>(parameters),
+  : ADComputeFiniteStrain(parameters),
     _disp_old_0(coupledValueOld("displacements", 0))
 {
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeRSphericalFiniteStrain<compute_stage>::initialSetup()
+ADComputeRSphericalFiniteStrain::initialSetup()
 {
-  ADComputeIncrementalStrainBase<compute_stage>::initialSetup();
+  ADComputeIncrementalStrainBase::initialSetup();
 
   const auto & subdomainIDs = _mesh.meshSubdomains();
   for (auto subdomainID : subdomainIDs)
@@ -48,9 +45,8 @@ ADComputeRSphericalFiniteStrain<compute_stage>::initialSetup()
       mooseError("The coordinate system must be set to RSPHERICAL for 1D R spherical simulations.");
 }
 
-template <ComputeStage compute_stage>
 void
-ADComputeRSphericalFiniteStrain<compute_stage>::computeProperties()
+ADComputeRSphericalFiniteStrain::computeProperties()
 {
   for (_qp = 0; _qp < _qrule->n_points(); ++_qp)
   {

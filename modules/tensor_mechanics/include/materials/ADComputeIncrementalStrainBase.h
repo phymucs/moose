@@ -13,16 +13,15 @@
 
 #define usingComputeIncrementalStrainBaseMembers                                                   \
   usingComputeStrainBaseMembers;                                                                   \
-  using ADComputeIncrementalStrainBase<compute_stage>::_grad_disp_old;                             \
-  using ADComputeIncrementalStrainBase<compute_stage>::_strain_rate;                               \
-  using ADComputeIncrementalStrainBase<compute_stage>::_strain_increment;                          \
-  using ADComputeIncrementalStrainBase<compute_stage>::_rotation_increment;                        \
-  using ADComputeIncrementalStrainBase<compute_stage>::_mechanical_strain_old;                     \
-  using ADComputeIncrementalStrainBase<compute_stage>::_total_strain_old;                          \
-  using ADComputeIncrementalStrainBase<compute_stage>::_eigenstrains_old;                          \
-  using ADComputeIncrementalStrainBase<compute_stage>::subtractEigenstrainIncrementFromStrain
+  using ADComputeIncrementalStrainBase::_grad_disp_old;                             \
+  using ADComputeIncrementalStrainBase::_strain_rate;                               \
+  using ADComputeIncrementalStrainBase::_strain_increment;                          \
+  using ADComputeIncrementalStrainBase::_rotation_increment;                        \
+  using ADComputeIncrementalStrainBase::_mechanical_strain_old;                     \
+  using ADComputeIncrementalStrainBase::_total_strain_old;                          \
+  using ADComputeIncrementalStrainBase::_eigenstrains_old;                          \
+  using ADComputeIncrementalStrainBase::subtractEigenstrainIncrementFromStrain
 
-template <ComputeStage>
 class ADComputeIncrementalStrainBase;
 
 declareADValidParams(ADComputeIncrementalStrainBase);
@@ -31,8 +30,7 @@ declareADValidParams(ADComputeIncrementalStrainBase);
  * ADComputeIncrementalStrainBase is the base class for strain tensors using incremental
  * formulations
  */
-template <ComputeStage compute_stage>
-class ADComputeIncrementalStrainBase : public ADComputeStrainBase<compute_stage>
+class ADComputeIncrementalStrainBase : public ADComputeStrainBase
 {
 public:
   static InputParameters validParams();
@@ -48,14 +46,13 @@ protected:
 
   std::vector<const VariableGradient *> _grad_disp_old;
 
-  ADMaterialProperty(RankTwoTensor) & _strain_rate;
-  ADMaterialProperty(RankTwoTensor) & _strain_increment;
-  ADMaterialProperty(RankTwoTensor) & _rotation_increment;
+  ADMaterialProperty<RankTwoTensor> & _strain_rate;
+  ADMaterialProperty<RankTwoTensor> & _strain_increment;
+  ADMaterialProperty<RankTwoTensor> & _rotation_increment;
 
   const MaterialProperty<RankTwoTensor> & _mechanical_strain_old;
   const MaterialProperty<RankTwoTensor> & _total_strain_old;
 
   std::vector<const MaterialProperty<RankTwoTensor> *> _eigenstrains_old;
 
-  usingComputeStrainBaseMembers;
 };
