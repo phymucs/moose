@@ -16,8 +16,8 @@
 
 #define usingComputeElasticityTensorBaseMembers                                                    \
   usingMaterialMembers;                                                                            \
-  using ADComputeElasticityTensorBase::_elasticity_tensor_name;                     \
-  using ADComputeElasticityTensorBase::_elasticity_tensor;                          \
+  using ADComputeElasticityTensorBase::_elasticity_tensor_name;                                    \
+  using ADComputeElasticityTensorBase::_elasticity_tensor;                                         \
   using ADComputeElasticityTensorBase::issueGuarantee
 
 class ADComputeElasticityTensorBase;

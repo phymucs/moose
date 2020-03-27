@@ -18,8 +18,7 @@ defineADLegacyParams(ADComputeMeanThermalExpansionFunctionEigenstrain);
 InputParameters
 ADComputeMeanThermalExpansionFunctionEigenstrain::validParams()
 {
-  InputParameters params =
-      ADComputeMeanThermalExpansionEigenstrainBase::validParams();
+  InputParameters params = ADComputeMeanThermalExpansionEigenstrainBase::validParams();
   params.addClassDescription("Computes eigenstrain due to thermal expansion using a function that "
                              "describes the mean thermal expansion as a function of temperature");
   params.addRequiredParam<FunctionName>(
@@ -32,8 +31,8 @@ ADComputeMeanThermalExpansionFunctionEigenstrain::validParams()
   return params;
 }
 
-ADComputeMeanThermalExpansionFunctionEigenstrain::
-    ADComputeMeanThermalExpansionFunctionEigenstrain(const InputParameters & parameters)
+ADComputeMeanThermalExpansionFunctionEigenstrain::ADComputeMeanThermalExpansionFunctionEigenstrain(
+    const InputParameters & parameters)
   : ADComputeMeanThermalExpansionEigenstrainBase(parameters),
     _thermal_expansion_function(getFunction("thermal_expansion_function")),
     _thexp_func_ref_temp(getParam<Real>("thermal_expansion_function_reference_temperature"))

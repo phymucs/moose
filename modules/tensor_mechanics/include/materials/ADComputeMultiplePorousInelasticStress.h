@@ -21,8 +21,7 @@ declareADValidParams(ADComputeMultiplePorousInelasticStress);
  * is defined and is calcuated from the trace of inelastic strain increment.
  */
 
-class ADComputeMultiplePorousInelasticStress
-  : public ADComputeMultipleInelasticStress
+class ADComputeMultiplePorousInelasticStress : public ADComputeMultipleInelasticStress
 {
 public:
   static InputParameters validParams();

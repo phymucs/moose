@@ -13,12 +13,12 @@
 
 #define usingComputeMultipleInelasticStressMembers                                                 \
   usingComputeFiniteStrainElasticStressMembers;                                                    \
-  using ADComputeMultipleInelasticStress::computeQpStressIntermediateConfiguration; \
-  using ADComputeMultipleInelasticStress::finiteStrainRotation;                     \
-  using ADComputeMultipleInelasticStress::updateQpState;                            \
-  using ADComputeMultipleInelasticStress::updateQpStateSingleModel;                 \
-  using ADComputeMultipleInelasticStress::computeAdmissibleState;                   \
-  using ADComputeMultipleInelasticStress::_inelastic_strain;                        \
+  using ADComputeMultipleInelasticStress::computeQpStressIntermediateConfiguration;                \
+  using ADComputeMultipleInelasticStress::finiteStrainRotation;                                    \
+  using ADComputeMultipleInelasticStress::updateQpState;                                           \
+  using ADComputeMultipleInelasticStress::updateQpStateSingleModel;                                \
+  using ADComputeMultipleInelasticStress::computeAdmissibleState;                                  \
+  using ADComputeMultipleInelasticStress::_inelastic_strain;                                       \
   using ADComputeMultipleInelasticStress::_inelastic_strain_old
 
 // Forward Declarations

@@ -34,6 +34,5 @@ protected:
   virtual ADRealVectorValue precomputeQpResidual() override;
 
   const ADMaterialProperty<Real> & _rho;
-
 };
 

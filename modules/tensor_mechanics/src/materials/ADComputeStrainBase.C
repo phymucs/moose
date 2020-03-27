@@ -101,5 +101,3 @@ ADComputeStrainBase::initQpStatefulProperties()
   _mechanical_strain[_qp].zero();
   _total_strain[_qp].zero();
 }
-
-

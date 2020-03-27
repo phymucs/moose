@@ -13,7 +13,7 @@
 
 #define usingSplitCHBaseMembers                                                                    \
   usingKernelMembers;                                                                              \
-  using ADSplitCHBase::computeQpResidual;                                           \
+  using ADSplitCHBase::computeQpResidual;                                                          \
   using ADSplitCHBase::computeDFDC
 
 // Forward Declarations

@@ -24,8 +24,7 @@ ADComputeRSphericalSmallStrain::validParams()
   return params;
 }
 
-ADComputeRSphericalSmallStrain::ADComputeRSphericalSmallStrain(
-    const InputParameters & parameters)
+ADComputeRSphericalSmallStrain::ADComputeRSphericalSmallStrain(const InputParameters & parameters)
   : ADComputeSmallStrain(parameters)
 {
 }

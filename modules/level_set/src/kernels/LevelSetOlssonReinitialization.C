@@ -30,8 +30,7 @@ LevelSetOlssonReinitialization::validParams()
   return params;
 }
 
-LevelSetOlssonReinitialization::LevelSetOlssonReinitialization(
-    const InputParameters & parameters)
+LevelSetOlssonReinitialization::LevelSetOlssonReinitialization(const InputParameters & parameters)
   : ADKernelGrad(parameters),
     _grad_levelset_0(adCoupledGradient("phi_0")),
     _epsilon(getPostprocessorValue("epsilon")),

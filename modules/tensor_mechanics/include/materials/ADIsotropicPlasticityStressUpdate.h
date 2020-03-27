@@ -13,14 +13,14 @@
 
 #define usingIsotropicPlasticityStressUpdateMembers                                                \
   usingRadialReturnStressUpdateMembers;                                                            \
-  using ADIsotropicPlasticityStressUpdate::computeYieldStress;                      \
-  using ADIsotropicPlasticityStressUpdate::computeHardeningValue;                   \
-  using ADIsotropicPlasticityStressUpdate::computeHardeningDerivative;              \
-  using ADIsotropicPlasticityStressUpdate::_yield_stress;                           \
-  using ADIsotropicPlasticityStressUpdate::_yield_condition;                        \
-  using ADIsotropicPlasticityStressUpdate::_plastic_strain;                         \
-  using ADIsotropicPlasticityStressUpdate::_plastic_strain_old;                     \
-  using ADIsotropicPlasticityStressUpdate::_hardening_variable;                     \
+  using ADIsotropicPlasticityStressUpdate::computeYieldStress;                                     \
+  using ADIsotropicPlasticityStressUpdate::computeHardeningValue;                                  \
+  using ADIsotropicPlasticityStressUpdate::computeHardeningDerivative;                             \
+  using ADIsotropicPlasticityStressUpdate::_yield_stress;                                          \
+  using ADIsotropicPlasticityStressUpdate::_yield_condition;                                       \
+  using ADIsotropicPlasticityStressUpdate::_plastic_strain;                                        \
+  using ADIsotropicPlasticityStressUpdate::_plastic_strain_old;                                    \
+  using ADIsotropicPlasticityStressUpdate::_hardening_variable;                                    \
   using ADIsotropicPlasticityStressUpdate::_hardening_variable_old
 
 class ADIsotropicPlasticityStressUpdate;

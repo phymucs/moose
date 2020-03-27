@@ -14,18 +14,18 @@
 #include "InputParameters.h"
 
 #define usingSingleVariableReturnMappingSolutionMembers                                            \
-  using ADSingleVariableReturnMappingSolution::returnMappingSolve;                  \
-  using ADSingleVariableReturnMappingSolution::minimumPermissibleValue;             \
-  using ADSingleVariableReturnMappingSolution::maximumPermissibleValue;             \
-  using ADSingleVariableReturnMappingSolution::initialGuess;                        \
-  using ADSingleVariableReturnMappingSolution::computeResidual;                     \
-  using ADSingleVariableReturnMappingSolution::computeDerivative;                   \
-  using ADSingleVariableReturnMappingSolution::computeReferenceResidual;            \
-  using ADSingleVariableReturnMappingSolution::iterationFinalize;                   \
-  using ADSingleVariableReturnMappingSolution::outputIterationSummary;              \
-  using ADSingleVariableReturnMappingSolution::_check_range;                        \
-  using ADSingleVariableReturnMappingSolution::_line_search;                        \
-  using ADSingleVariableReturnMappingSolution::_bracket_solution;                   \
+  using ADSingleVariableReturnMappingSolution::returnMappingSolve;                                 \
+  using ADSingleVariableReturnMappingSolution::minimumPermissibleValue;                            \
+  using ADSingleVariableReturnMappingSolution::maximumPermissibleValue;                            \
+  using ADSingleVariableReturnMappingSolution::initialGuess;                                       \
+  using ADSingleVariableReturnMappingSolution::computeResidual;                                    \
+  using ADSingleVariableReturnMappingSolution::computeDerivative;                                  \
+  using ADSingleVariableReturnMappingSolution::computeReferenceResidual;                           \
+  using ADSingleVariableReturnMappingSolution::iterationFinalize;                                  \
+  using ADSingleVariableReturnMappingSolution::outputIterationSummary;                             \
+  using ADSingleVariableReturnMappingSolution::_check_range;                                       \
+  using ADSingleVariableReturnMappingSolution::_line_search;                                       \
+  using ADSingleVariableReturnMappingSolution::_bracket_solution;                                  \
   using ADSingleVariableReturnMappingSolution::converged
 
 // Forward declarations

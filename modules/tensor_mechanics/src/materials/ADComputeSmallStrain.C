@@ -69,5 +69,3 @@ ADComputeSmallStrain::computeProperties()
 
   copyDualNumbersToValues();
 }
-
-

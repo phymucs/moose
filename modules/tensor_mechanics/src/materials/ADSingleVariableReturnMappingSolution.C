@@ -93,8 +93,9 @@ ADSingleVariableReturnMappingSolution::maximumPermissibleValue(
 }
 
 void
-ADSingleVariableReturnMappingSolution::returnMappingSolve(
-    const ADReal & effective_trial_stress, ADReal & scalar, const ConsoleStream & console)
+ADSingleVariableReturnMappingSolution::returnMappingSolve(const ADReal & effective_trial_stress,
+                                                          ADReal & scalar,
+                                                          const ConsoleStream & console)
 {
   // construct the stringstream here only if the debug level is set to ALL
   std::unique_ptr<std::stringstream> iter_output =
@@ -153,8 +154,9 @@ ADSingleVariableReturnMappingSolution::returnMappingSolve(
 }
 
 typename ADSingleVariableReturnMappingSolution::SolveState
-ADSingleVariableReturnMappingSolution::internalSolve(
-    const ADReal effective_trial_stress, ADReal & scalar, std::stringstream * iter_output)
+ADSingleVariableReturnMappingSolution::internalSolve(const ADReal effective_trial_stress,
+                                                     ADReal & scalar,
+                                                     std::stringstream * iter_output)
 {
   scalar = initialGuess(effective_trial_stress);
   ADReal scalar_old = scalar;
@@ -291,8 +293,7 @@ ADSingleVariableReturnMappingSolution::internalSolve(
 }
 
 bool
-ADSingleVariableReturnMappingSolution::converged(const ADReal & ad_residual,
-                                                                const Real reference)
+ADSingleVariableReturnMappingSolution::converged(const ADReal & ad_residual, const Real reference)
 {
   const Real residual = MetaPhysicL::raw_value(ad_residual);
   return (std::abs(residual) <= _absolute_tolerance ||
@@ -301,7 +302,7 @@ ADSingleVariableReturnMappingSolution::converged(const ADReal & ad_residual,
 
 bool
 ADSingleVariableReturnMappingSolution::convergedAcceptable(const unsigned int it,
-                                                                          const Real reference)
+                                                           const Real reference)
 {
   // Require that we have at least done _num_resids evaluations before we allow for
   // acceptable convergence
@@ -322,13 +323,12 @@ ADSingleVariableReturnMappingSolution::convergedAcceptable(const unsigned int it
 }
 
 void
-ADSingleVariableReturnMappingSolution::checkPermissibleRange(
-    ADReal & scalar,
-    ADReal & scalar_increment,
-    const ADReal & scalar_old,
-    const ADReal min_permissible_scalar,
-    const ADReal max_permissible_scalar,
-    std::stringstream * iter_output)
+ADSingleVariableReturnMappingSolution::checkPermissibleRange(ADReal & scalar,
+                                                             ADReal & scalar_increment,
+                                                             const ADReal & scalar_old,
+                                                             const ADReal min_permissible_scalar,
+                                                             const ADReal max_permissible_scalar,
+                                                             std::stringstream * iter_output)
 {
   if (scalar > max_permissible_scalar)
   {
@@ -353,11 +353,11 @@ ADSingleVariableReturnMappingSolution::checkPermissibleRange(
 
 void
 ADSingleVariableReturnMappingSolution::updateBounds(const ADReal & scalar,
-                                                                   const ADReal & residual,
-                                                                   const Real init_resid_sign,
-                                                                   ADReal & scalar_upper_bound,
-                                                                   ADReal & scalar_lower_bound,
-                                                                   std::stringstream * iter_output)
+                                                    const ADReal & residual,
+                                                    const Real init_resid_sign,
+                                                    ADReal & scalar_upper_bound,
+                                                    ADReal & scalar_lower_bound,
+                                                    std::stringstream * iter_output)
 {
   // Update upper/lower bounds as applicable
   if (residual * init_resid_sign < 0.0 && scalar < scalar_upper_bound)
@@ -379,11 +379,10 @@ ADSingleVariableReturnMappingSolution::updateBounds(const ADReal & scalar,
 }
 
 void
-ADSingleVariableReturnMappingSolution::outputIterationStep(
-    std::stringstream * iter_output,
-    const ADReal & effective_trial_stress,
-    const ADReal & scalar,
-    const Real reference_residual)
+ADSingleVariableReturnMappingSolution::outputIterationStep(std::stringstream * iter_output,
+                                                           const ADReal & effective_trial_stress,
+                                                           const ADReal & scalar,
+                                                           const Real reference_residual)
 {
   if (iter_output)
   {
@@ -401,13 +400,11 @@ ADSingleVariableReturnMappingSolution::outputIterationStep(
 }
 
 void
-ADSingleVariableReturnMappingSolution::outputIterationSummary(
-    std::stringstream * iter_output, const unsigned int total_it)
+ADSingleVariableReturnMappingSolution::outputIterationSummary(std::stringstream * iter_output,
+                                                              const unsigned int total_it)
 {
   if (iter_output)
     *iter_output << "In " << total_it << " iterations the residual went from "
                  << MetaPhysicL::raw_value(_initial_residual) << " to "
                  << MetaPhysicL::raw_value(_residual) << " in '" << _svrms_name << "'.\n";
 }
-
-

@@ -34,5 +34,4 @@ protected:
 
   // Chemical potential property evaluated at material points
   const ADMaterialProperty<Real> & _chemical_potential;
-
 };

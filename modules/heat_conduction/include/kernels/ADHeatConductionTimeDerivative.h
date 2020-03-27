@@ -30,6 +30,5 @@ protected:
 
   /// Density material property
   const ADMaterialProperty<Real> & _density;
-
 };
 

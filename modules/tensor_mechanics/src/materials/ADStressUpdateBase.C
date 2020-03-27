@@ -56,5 +56,3 @@ ADStressUpdateBase::computeTimeStepLimit()
 {
   return std::numeric_limits<Real>::max();
 }
-
-

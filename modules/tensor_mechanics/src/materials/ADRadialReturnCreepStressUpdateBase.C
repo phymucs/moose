@@ -50,5 +50,3 @@ ADRadialReturnCreepStressUpdateBase::computeStressFinalize(
 {
   _creep_strain[_qp] = _creep_strain_old[_qp] + plastic_strain_increment;
 }
-
-

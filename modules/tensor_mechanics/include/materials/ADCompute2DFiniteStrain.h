@@ -13,8 +13,8 @@
 
 #define usingCompute2DFiniteStrainMembers                                                          \
   usingComputeFiniteStrainMembers;                                                                 \
-  using ADCompute2DFiniteStrain::_out_of_plane_direction;                           \
-  using ADCompute2DFiniteStrain::computeOutOfPlaneGradDisp;                         \
+  using ADCompute2DFiniteStrain::_out_of_plane_direction;                                          \
+  using ADCompute2DFiniteStrain::computeOutOfPlaneGradDisp;                                        \
   using ADCompute2DFiniteStrain::computeOutOfPlaneGradDispOld
 
 class ADCompute2DFiniteStrain;

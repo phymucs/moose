@@ -33,6 +33,5 @@ protected:
 
   /// The strong residual of the mass equation, computed using INSADMaterial
   const ADMaterialProperty<Real> & _mass_strong_residual;
-
 };
 

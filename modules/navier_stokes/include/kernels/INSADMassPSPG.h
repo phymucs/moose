@@ -36,6 +36,5 @@ protected:
   const ADMaterialProperty<Real> & _tau;
   /// The strong residual of the momentum equation, computed using INSADMaterial
   const ADMaterialProperty<RealVectorValue> & _momentum_strong_residual;
-
 };
 

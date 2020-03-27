@@ -14,10 +14,10 @@
 
 #define usingComputeStressBaseMembers                                                              \
   usingMaterialMembers;                                                                            \
-  using ADComputeStressBase::_stress;                                               \
-  using ADComputeStressBase::_mechanical_strain;                                    \
-  using ADComputeStressBase::_elastic_strain;                                       \
-  using ADComputeStressBase::_base_name;                                            \
+  using ADComputeStressBase::_stress;                                                              \
+  using ADComputeStressBase::_mechanical_strain;                                                   \
+  using ADComputeStressBase::_elastic_strain;                                                      \
+  using ADComputeStressBase::_base_name;                                                           \
   using ADComputeStressBase::_initial_stress_fcn
 
 // Forward Declarations

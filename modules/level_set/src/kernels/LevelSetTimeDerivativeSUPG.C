@@ -23,8 +23,7 @@ LevelSetTimeDerivativeSUPG::validParams()
   return params;
 }
 
-LevelSetTimeDerivativeSUPG::LevelSetTimeDerivativeSUPG(
-    const InputParameters & parameters)
+LevelSetTimeDerivativeSUPG::LevelSetTimeDerivativeSUPG(const InputParameters & parameters)
   : LevelSetVelocityInterface<ADTimeKernelGrad>(parameters)
 {
 }

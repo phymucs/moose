@@ -148,5 +148,3 @@ ADRadialReturnStressUpdate::outputIterationSummary(std::stringstream * iter_outp
   }
   ADSingleVariableReturnMappingSolution::outputIterationSummary(iter_output, total_it);
 }
-
-

@@ -29,8 +29,7 @@ ADComputeFiniteShellStrain::validParams()
   return params;
 }
 
-ADComputeFiniteShellStrain::ADComputeFiniteShellStrain(
-    const InputParameters & parameters)
+ADComputeFiniteShellStrain::ADComputeFiniteShellStrain(const InputParameters & parameters)
   : ADComputeIncrementalShellStrain(parameters), _B_nl()
 {
   _B_nl.resize(_t_points.size());

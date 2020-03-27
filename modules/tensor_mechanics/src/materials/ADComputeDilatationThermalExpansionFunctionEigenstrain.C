@@ -18,8 +18,7 @@ defineADLegacyParams(ADComputeDilatationThermalExpansionFunctionEigenstrain);
 InputParameters
 ADComputeDilatationThermalExpansionFunctionEigenstrain::validParams()
 {
-  InputParameters params =
-      ADComputeDilatationThermalExpansionEigenstrainBase::validParams();
+  InputParameters params = ADComputeDilatationThermalExpansionEigenstrainBase::validParams();
   params.addClassDescription("Computes eigenstrain due to thermal expansion using a function that "
                              "describes the total dilatation as a function of temperature");
   params.addRequiredParam<FunctionName>(

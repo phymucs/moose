@@ -19,8 +19,7 @@ declareADValidParams(ADComputeThermalExpansionEigenstrain);
  * ADComputeThermalExpansionEigenstrain computes an eigenstrain for thermal expansion
  * with a constant expansion coefficient.
  */
-class ADComputeThermalExpansionEigenstrain
-  : public ADComputeThermalExpansionEigenstrainBase
+class ADComputeThermalExpansionEigenstrain : public ADComputeThermalExpansionEigenstrainBase
 {
 public:
   static InputParameters validParams();

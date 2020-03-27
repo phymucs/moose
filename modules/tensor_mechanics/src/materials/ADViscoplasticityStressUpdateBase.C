@@ -97,5 +97,3 @@ ADViscoplasticityStressUpdateBase::updateIntermediatePorosity(
   _intermediate_porosity =
       (1.0 - _porosity_old[_qp]) * inelastic_volumetric_increment.trace() + _porosity_old[_qp];
 }
-
-

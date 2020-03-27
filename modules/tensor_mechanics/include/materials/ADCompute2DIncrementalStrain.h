@@ -13,8 +13,8 @@
 
 #define usingCompute2DIncrementalStrainMembers                                                     \
   usingComputeIncrementalSmallStrainMembers;                                                       \
-  using ADCompute2DIncrementalStrain::_out_of_plane_direction;                      \
-  using ADCompute2DIncrementalStrain::computeOutOfPlaneGradDisp;                    \
+  using ADCompute2DIncrementalStrain::_out_of_plane_direction;                                     \
+  using ADCompute2DIncrementalStrain::computeOutOfPlaneGradDisp;                                   \
   using ADCompute2DIncrementalStrain::computeOutOfPlaneGradDispOld
 
 class ADCompute2DIncrementalStrain;

@@ -27,8 +27,7 @@ ADComputeAxisymmetricRZFiniteStrain::validParams()
 
 ADComputeAxisymmetricRZFiniteStrain::ADComputeAxisymmetricRZFiniteStrain(
     const InputParameters & parameters)
-  : ADCompute2DFiniteStrain(parameters),
-    _disp_old_0(coupledValueOld("displacements", 0))
+  : ADCompute2DFiniteStrain(parameters), _disp_old_0(coupledValueOld("displacements", 0))
 {
 }
 

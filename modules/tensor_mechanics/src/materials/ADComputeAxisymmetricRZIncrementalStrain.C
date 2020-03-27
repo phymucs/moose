@@ -27,8 +27,7 @@ ADComputeAxisymmetricRZIncrementalStrain::validParams()
 
 ADComputeAxisymmetricRZIncrementalStrain::ADComputeAxisymmetricRZIncrementalStrain(
     const InputParameters & parameters)
-  : ADCompute2DIncrementalStrain(parameters),
-    _disp_old_0(coupledValueOld("displacements", 0))
+  : ADCompute2DIncrementalStrain(parameters), _disp_old_0(coupledValueOld("displacements", 0))
 {
 }
 

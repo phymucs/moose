@@ -25,8 +25,7 @@ GapConductanceConstraint::validParams()
   return params;
 }
 
-GapConductanceConstraint::GapConductanceConstraint(
-    const InputParameters & parameters)
+GapConductanceConstraint::GapConductanceConstraint(const InputParameters & parameters)
   : ADMortarConstraint(parameters), _k(getParam<Real>("k"))
 {
 }

@@ -32,8 +32,7 @@ ADStressDivergenceRZTensors::validParams()
   return params;
 }
 
-ADStressDivergenceRZTensors::ADStressDivergenceRZTensors(
-    const InputParameters & parameters)
+ADStressDivergenceRZTensors::ADStressDivergenceRZTensors(const InputParameters & parameters)
   : ADStressDivergenceTensors(parameters)
 {
 }

@@ -23,8 +23,7 @@ ADComputeIncrementalSmallStrain::validParams()
   return params;
 }
 
-ADComputeIncrementalSmallStrain::ADComputeIncrementalSmallStrain(
-    const InputParameters & parameters)
+ADComputeIncrementalSmallStrain::ADComputeIncrementalSmallStrain(const InputParameters & parameters)
   : ADComputeIncrementalStrainBase(parameters)
 {
 }
@@ -93,5 +92,3 @@ ADComputeIncrementalSmallStrain::computeTotalStrainIncrement(
 
   total_strain_increment = 0.5 * (A + A.transpose());
 }
-
-

@@ -14,11 +14,11 @@
 
 #define usingComputeFiniteStrainElasticStressMembers                                               \
   usingComputeStressBaseMembers;                                                                   \
-  using ADComputeFiniteStrainElasticStress::_elasticity_tensor;                     \
-  using ADComputeFiniteStrainElasticStress::_elasticity_tensor_name;                \
-  using ADComputeFiniteStrainElasticStress::_strain_increment;                      \
-  using ADComputeFiniteStrainElasticStress::_rotation_increment;                    \
-  using ADComputeFiniteStrainElasticStress::_stress_old;                            \
+  using ADComputeFiniteStrainElasticStress::_elasticity_tensor;                                    \
+  using ADComputeFiniteStrainElasticStress::_elasticity_tensor_name;                               \
+  using ADComputeFiniteStrainElasticStress::_strain_increment;                                     \
+  using ADComputeFiniteStrainElasticStress::_rotation_increment;                                   \
+  using ADComputeFiniteStrainElasticStress::_stress_old;                                           \
   using ADComputeFiniteStrainElasticStress::_elastic_strain_old
 
 class ADComputeFiniteStrainElasticStress;
@@ -29,8 +29,7 @@ declareADValidParams(ADComputeFiniteStrainElasticStress);
  * ADComputeFiniteStrainElasticStress computes the stress following elasticity
  * theory for finite strains
  */
-class ADComputeFiniteStrainElasticStress : public ADComputeStressBase,
-                                           public GuaranteeConsumer
+class ADComputeFiniteStrainElasticStress : public ADComputeStressBase, public GuaranteeConsumer
 {
 public:
   static InputParameters validParams();

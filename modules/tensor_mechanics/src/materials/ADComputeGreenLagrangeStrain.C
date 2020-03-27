@@ -22,8 +22,7 @@ ADComputeGreenLagrangeStrain::validParams()
   return params;
 }
 
-ADComputeGreenLagrangeStrain::ADComputeGreenLagrangeStrain(
-    const InputParameters & parameters)
+ADComputeGreenLagrangeStrain::ADComputeGreenLagrangeStrain(const InputParameters & parameters)
   : ADComputeStrainBase(parameters)
 {
   // error out if unsupported features are to be used

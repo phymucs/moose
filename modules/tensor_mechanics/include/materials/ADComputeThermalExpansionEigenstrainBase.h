@@ -14,8 +14,8 @@
 
 #define usingComputeThermalExpansionEigenstrainBaseMembers                                         \
   usingComputeEigenstrainBaseMembers;                                                              \
-  using ADComputeThermalExpansionEigenstrainBase::_temperature;                     \
-  using ADComputeThermalExpansionEigenstrainBase::_stress_free_temperature;         \
+  using ADComputeThermalExpansionEigenstrainBase::_temperature;                                    \
+  using ADComputeThermalExpansionEigenstrainBase::_stress_free_temperature;                        \
   using ADComputeThermalExpansionEigenstrainBase::computeThermalStrain
 
 class ADComputeThermalExpansionEigenstrainBase;

@@ -54,5 +54,3 @@ ADComputeMeanThermalExpansionEigenstrainBase::computeThermalStrain(ADReal & ther
   thermal_strain =
       (thexp_current_temp - thexp_stress_free_temperature) / (1.0 + thexp_stress_free_temperature);
 }
-
-

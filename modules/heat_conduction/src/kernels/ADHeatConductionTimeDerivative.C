@@ -28,8 +28,7 @@ ADHeatConductionTimeDerivative::validParams()
   return params;
 }
 
-ADHeatConductionTimeDerivative::ADHeatConductionTimeDerivative(
-    const InputParameters & parameters)
+ADHeatConductionTimeDerivative::ADHeatConductionTimeDerivative(const InputParameters & parameters)
   : ADTimeDerivative(parameters),
     _specific_heat(getADMaterialProperty<Real>("specific_heat")),
     _density(getADMaterialProperty<Real>("density_name"))
@@ -39,6 +38,5 @@ ADHeatConductionTimeDerivative::ADHeatConductionTimeDerivative(
 ADReal
 ADHeatConductionTimeDerivative::precomputeQpResidual()
 {
-  return _specific_heat[_qp] * _density[_qp] *
-         ADTimeDerivative::precomputeQpResidual();
+  return _specific_heat[_qp] * _density[_qp] * ADTimeDerivative::precomputeQpResidual();
 }

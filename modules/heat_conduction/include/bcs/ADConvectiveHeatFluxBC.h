@@ -37,5 +37,4 @@ protected:
 
   /// Derivative of convective heat transfer coefficient with respect to temperature
   const ADMaterialProperty<Real> & _htc_dT;
-
 };

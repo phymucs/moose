@@ -13,13 +13,13 @@
 
 #define usingComputeIncrementalStrainBaseMembers                                                   \
   usingComputeStrainBaseMembers;                                                                   \
-  using ADComputeIncrementalStrainBase::_grad_disp_old;                             \
-  using ADComputeIncrementalStrainBase::_strain_rate;                               \
-  using ADComputeIncrementalStrainBase::_strain_increment;                          \
-  using ADComputeIncrementalStrainBase::_rotation_increment;                        \
-  using ADComputeIncrementalStrainBase::_mechanical_strain_old;                     \
-  using ADComputeIncrementalStrainBase::_total_strain_old;                          \
-  using ADComputeIncrementalStrainBase::_eigenstrains_old;                          \
+  using ADComputeIncrementalStrainBase::_grad_disp_old;                                            \
+  using ADComputeIncrementalStrainBase::_strain_rate;                                              \
+  using ADComputeIncrementalStrainBase::_strain_increment;                                         \
+  using ADComputeIncrementalStrainBase::_rotation_increment;                                       \
+  using ADComputeIncrementalStrainBase::_mechanical_strain_old;                                    \
+  using ADComputeIncrementalStrainBase::_total_strain_old;                                         \
+  using ADComputeIncrementalStrainBase::_eigenstrains_old;                                         \
   using ADComputeIncrementalStrainBase::subtractEigenstrainIncrementFromStrain
 
 class ADComputeIncrementalStrainBase;

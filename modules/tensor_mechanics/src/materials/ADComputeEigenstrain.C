@@ -28,8 +28,7 @@ ADComputeEigenstrain::validParams()
 }
 
 ADComputeEigenstrain::ADComputeEigenstrain(const InputParameters & parameters)
-  : ADComputeEigenstrainBase(parameters),
-    _prefactor(getADMaterialProperty<Real>("prefactor"))
+  : ADComputeEigenstrainBase(parameters), _prefactor(getADMaterialProperty<Real>("prefactor"))
 {
   _eigen_base_tensor.fillFromInputVector(getParam<std::vector<Real>>("eigen_base"));
 }

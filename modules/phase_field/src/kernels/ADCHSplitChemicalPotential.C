@@ -24,10 +24,8 @@ ADCHSplitChemicalPotential::validParams()
   return params;
 }
 
-ADCHSplitChemicalPotential::ADCHSplitChemicalPotential(
-    const InputParameters & parameters)
-  : ADKernel(parameters),
-    _chemical_potential(getADMaterialProperty<Real>("chemical_potential"))
+ADCHSplitChemicalPotential::ADCHSplitChemicalPotential(const InputParameters & parameters)
+  : ADKernel(parameters), _chemical_potential(getADMaterialProperty<Real>("chemical_potential"))
 {
 }
 

@@ -13,14 +13,14 @@
 
 #define usingStressDivergenceTensorsMembers                                                        \
   usingKernelMembers;                                                                              \
-  using ADStressDivergenceTensors::_base_name;                                      \
-  using ADStressDivergenceTensors::_stress;                                         \
-  using ADStressDivergenceTensors::_component;                                      \
-  using ADStressDivergenceTensors::_ndisp;                                          \
-  using ADStressDivergenceTensors::_disp_var;                                       \
-  using ADStressDivergenceTensors::_avg_grad_test;                                  \
-  using ADStressDivergenceTensors::_out_of_plane_strain_coupled;                    \
-  using ADStressDivergenceTensors::_out_of_plane_strain;                            \
+  using ADStressDivergenceTensors::_base_name;                                                     \
+  using ADStressDivergenceTensors::_stress;                                                        \
+  using ADStressDivergenceTensors::_component;                                                     \
+  using ADStressDivergenceTensors::_ndisp;                                                         \
+  using ADStressDivergenceTensors::_disp_var;                                                      \
+  using ADStressDivergenceTensors::_avg_grad_test;                                                 \
+  using ADStressDivergenceTensors::_out_of_plane_strain_coupled;                                   \
+  using ADStressDivergenceTensors::_out_of_plane_strain;                                           \
   using ADStressDivergenceTensors::_volumetric_locking_correction
 
 // Forward Declarations

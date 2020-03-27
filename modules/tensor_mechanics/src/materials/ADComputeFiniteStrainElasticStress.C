@@ -60,5 +60,3 @@ ADComputeFiniteStrainElasticStress::computeQpStress()
   // Assign value for elastic strain, which is equal to the mechanical strain
   _elastic_strain[_qp] = _mechanical_strain[_qp];
 }
-
-

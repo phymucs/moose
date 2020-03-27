@@ -27,10 +27,8 @@ ADComputeRSphericalFiniteStrain::validParams()
   return params;
 }
 
-ADComputeRSphericalFiniteStrain::ADComputeRSphericalFiniteStrain(
-    const InputParameters & parameters)
-  : ADComputeFiniteStrain(parameters),
-    _disp_old_0(coupledValueOld("displacements", 0))
+ADComputeRSphericalFiniteStrain::ADComputeRSphericalFiniteStrain(const InputParameters & parameters)
+  : ADComputeFiniteStrain(parameters), _disp_old_0(coupledValueOld("displacements", 0))
 {
 }
 

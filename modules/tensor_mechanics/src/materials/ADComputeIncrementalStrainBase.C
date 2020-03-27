@@ -19,8 +19,7 @@ ADComputeIncrementalStrainBase::validParams()
   return params;
 }
 
-ADComputeIncrementalStrainBase::ADComputeIncrementalStrainBase(
-    const InputParameters & parameters)
+ADComputeIncrementalStrainBase::ADComputeIncrementalStrainBase(const InputParameters & parameters)
   : ADComputeStrainBase(parameters),
     _grad_disp_old(3),
     _strain_rate(declareADProperty<RankTwoTensor>(_base_name + "strain_rate")),
@@ -55,8 +54,7 @@ ADComputeIncrementalStrainBase::initQpStatefulProperties()
 }
 
 void
-ADComputeIncrementalStrainBase::subtractEigenstrainIncrementFromStrain(
-    ADRankTwoTensor & strain)
+ADComputeIncrementalStrainBase::subtractEigenstrainIncrementFromStrain(ADRankTwoTensor & strain)
 {
   for (unsigned int i = 0; i < _eigenstrains.size(); ++i)
   {
@@ -64,5 +62,3 @@ ADComputeIncrementalStrainBase::subtractEigenstrainIncrementFromStrain(
     strain += (*_eigenstrains_old[i])[_qp];
   }
 }
-
-

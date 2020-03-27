@@ -13,7 +13,7 @@
 
 #define usingSplitCHCResMembers                                                                    \
   usingSplitCHBaseMembers;                                                                         \
-  using ADSplitCHCRes::_kappa;                                                      \
+  using ADSplitCHCRes::_kappa;                                                                     \
   using ADSplitCHCRes::_w
 
 // Forward Declarations

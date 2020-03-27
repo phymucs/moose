@@ -13,7 +13,7 @@
 
 #define usingComputeLinearElasticStressMembers                                                     \
   usingComputeStressBaseMembers;                                                                   \
-  using ADComputeLinearElasticStress::_elasticity_tensor;                           \
+  using ADComputeLinearElasticStress::_elasticity_tensor;                                          \
   using ADComputeLinearElasticStress::_elasticity_tensor_name;
 
 class ADComputeLinearElasticStress;
@@ -40,5 +40,4 @@ protected:
   const std::string _elasticity_tensor_name;
   /// Elasticity tensor material property
   const ADMaterialProperty<RankFourTensor> & _elasticity_tensor;
-
 };

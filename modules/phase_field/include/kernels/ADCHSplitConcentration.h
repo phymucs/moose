@@ -34,5 +34,4 @@ protected:
 
   // Mobility property name
   const ADMaterialProperty<Real> & _mobility;
-
 };

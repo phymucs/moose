@@ -42,5 +42,3 @@ ADComputeThermalExpansionEigenstrainBase::computeQpEigenstrain()
   _eigenstrain[_qp].zero();
   _eigenstrain[_qp].addIa(thermal_strain);
 }
-
-

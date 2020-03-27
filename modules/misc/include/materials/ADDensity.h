@@ -34,6 +34,5 @@ private:
 
   const Real _initial_density;
   ADMaterialProperty<Real> & _density;
-
 };
 

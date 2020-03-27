@@ -13,16 +13,16 @@
 
 #define usingComputeStrainBaseMembers                                                              \
   usingMaterialMembers;                                                                            \
-  using ADComputeStrainBase::_ndisp;                                                \
-  using ADComputeStrainBase::_disp;                                                 \
-  using ADComputeStrainBase::_grad_disp;                                            \
-  using ADComputeStrainBase::_base_name;                                            \
-  using ADComputeStrainBase::_mechanical_strain;                                    \
-  using ADComputeStrainBase::_global_strain;                                        \
-  using ADComputeStrainBase::_volumetric_locking_correction;                        \
-  using ADComputeStrainBase::_current_elem_volume;                                  \
-  using ADComputeStrainBase::_eigenstrain_names;                                    \
-  using ADComputeStrainBase::_eigenstrains;                                         \
+  using ADComputeStrainBase::_ndisp;                                                               \
+  using ADComputeStrainBase::_disp;                                                                \
+  using ADComputeStrainBase::_grad_disp;                                                           \
+  using ADComputeStrainBase::_base_name;                                                           \
+  using ADComputeStrainBase::_mechanical_strain;                                                   \
+  using ADComputeStrainBase::_global_strain;                                                       \
+  using ADComputeStrainBase::_volumetric_locking_correction;                                       \
+  using ADComputeStrainBase::_current_elem_volume;                                                 \
+  using ADComputeStrainBase::_eigenstrain_names;                                                   \
+  using ADComputeStrainBase::_eigenstrains;                                                        \
   using ADComputeStrainBase::_total_strain
 
 // Forward Declarations

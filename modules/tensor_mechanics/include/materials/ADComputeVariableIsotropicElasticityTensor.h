@@ -20,8 +20,7 @@ declareADValidParams(ADComputeVariableIsotropicElasticityTensor);
  * isotropic materials in which the elastic constants (Young's modulus and Poisson's ratio)
  * vary as defined by material properties.
  */
-class ADComputeVariableIsotropicElasticityTensor
-  : public ADComputeElasticityTensorBase
+class ADComputeVariableIsotropicElasticityTensor : public ADComputeElasticityTensorBase
 {
 public:
   static InputParameters validParams();
@@ -36,5 +35,4 @@ protected:
 
   /// Material defining the Poisson's Ratio
   const ADMaterialProperty<Real> & _poissons_ratio;
-
 };

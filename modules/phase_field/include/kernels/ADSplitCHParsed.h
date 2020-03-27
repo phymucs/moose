@@ -22,8 +22,7 @@ declareADValidParams(ADSplitCHParsed);
  * provided by an ADMaterial. Derivatives w.r.t DOFs provided by the MOOSE AD
  * system are required for a correct Jacobian to be formed.
  */
-class ADSplitCHParsed : public ADSplitCHCRes,
-                        public DerivativeMaterialPropertyNameInterface
+class ADSplitCHParsed : public ADSplitCHCRes, public DerivativeMaterialPropertyNameInterface
 {
 public:
   static InputParameters validParams();
@@ -38,6 +37,5 @@ protected:
 
   /// chemical potential property
   const ADMaterialProperty<Real> & _dFdc;
-
 };
 

@@ -21,8 +21,7 @@ declareADValidParams(ADMathFreeEnergy);
  * Material class that creates the math free energy and its derivatives
  * for use with ADSplitCHParsed. \f$ F = \frac14(1 + c)^2(1 - c)^2 \f$.
  */
-class ADMathFreeEnergy : public ADMaterial,
-                         public DerivativeMaterialPropertyNameInterface
+class ADMathFreeEnergy : public ADMaterial, public DerivativeMaterialPropertyNameInterface
 {
 public:
   static InputParameters validParams();
@@ -43,6 +42,5 @@ protected:
 
   /// function value derivative
   ADMaterialProperty<Real> & _prop_dFdc;
-
 };
 

@@ -14,13 +14,13 @@
 
 #define usingACInterfaceMembers                                                                    \
   usingKernelMembers;                                                                              \
-  using ADACInterface::_prop_L;                                                     \
-  using ADACInterface::_name_L;                                                     \
-  using ADACInterface::_kappa;                                                      \
-  using ADACInterface::_variable_L;                                                 \
-  using ADACInterface::_dLdop;                                                      \
-  using ADACInterface::_nvar;                                                       \
-  using ADACInterface::_dLdarg;                                                     \
+  using ADACInterface::_prop_L;                                                                    \
+  using ADACInterface::_name_L;                                                                    \
+  using ADACInterface::_kappa;                                                                     \
+  using ADACInterface::_variable_L;                                                                \
+  using ADACInterface::_dLdop;                                                                     \
+  using ADACInterface::_nvar;                                                                      \
+  using ADACInterface::_dLdarg;                                                                    \
   using ADACInterface::_gradarg
 
 class ADACInterface;

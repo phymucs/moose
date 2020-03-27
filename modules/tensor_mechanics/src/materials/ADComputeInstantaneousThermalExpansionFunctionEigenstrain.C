@@ -13,7 +13,7 @@
 #include "RankTwoTensor.h"
 
 registerMooseObject("TensorMechanicsApp",
-                      ADComputeInstantaneousThermalExpansionFunctionEigenstrain);
+                    ADComputeInstantaneousThermalExpansionFunctionEigenstrain);
 
 defineADLegacyParams(ADComputeInstantaneousThermalExpansionFunctionEigenstrain);
 

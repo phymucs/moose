@@ -24,10 +24,8 @@ LevelSetForcingFunctionSUPG::validParams()
   return params;
 }
 
-LevelSetForcingFunctionSUPG::LevelSetForcingFunctionSUPG(
-    const InputParameters & parameters)
-  : LevelSetVelocityInterface<ADKernelGrad>(parameters),
-    _function(getFunction("function"))
+LevelSetForcingFunctionSUPG::LevelSetForcingFunctionSUPG(const InputParameters & parameters)
+  : LevelSetVelocityInterface<ADKernelGrad>(parameters), _function(getFunction("function"))
 {
 }
 

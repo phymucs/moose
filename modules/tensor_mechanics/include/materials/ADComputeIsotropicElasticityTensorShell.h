@@ -49,5 +49,4 @@ protected:
 
   /// Material property for ge matrix
   std::vector<const ADMaterialProperty<RankTwoTensor> *> _ge;
-
 };

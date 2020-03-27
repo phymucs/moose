@@ -32,6 +32,5 @@ protected:
   virtual ADRealVectorValue precomputeQpResidual() override;
 
   const ADMaterialProperty<RealVectorValue> & _convective_strong_residual;
-
 };
 

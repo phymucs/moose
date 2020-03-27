@@ -120,7 +120,7 @@ ADComputeFiniteStrain::computeQpStrain()
 
 void
 ADComputeFiniteStrain::computeQpIncrements(ADRankTwoTensor & total_strain_increment,
-                                                          ADRankTwoTensor & rotation_increment)
+                                           ADRankTwoTensor & rotation_increment)
 {
   switch (_decomposition_method)
   {
@@ -227,5 +227,3 @@ ADComputeFiniteStrain::computeQpIncrements(ADRankTwoTensor & total_strain_increm
                  "EigenSolution.");
   }
 }
-
-

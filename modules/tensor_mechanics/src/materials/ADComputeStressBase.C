@@ -62,5 +62,3 @@ ADComputeStressBase::computeQpProperties()
   for (MooseIndex(_extra_stresses) i = 0; i < _extra_stresses.size(); ++i)
     _stress[_qp] += (*_extra_stresses[i])[_qp];
 }
-
-

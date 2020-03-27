@@ -13,16 +13,16 @@
 
 #define usingViscoplasticityStressUpdateBaseMembers                                                \
   usingStressUpdateBaseMembers;                                                                    \
-  using ADViscoplasticityStressUpdateBase::updateIntermediatePorosity;              \
-  using ADViscoplasticityStressUpdateBase::computeStressInitialize;                 \
-  using ADViscoplasticityStressUpdateBase::computeStressFinalize;                   \
-  using ADViscoplasticityStressUpdateBase::_intermediate_porosity;                  \
-  using ADViscoplasticityStressUpdateBase::_effective_inelastic_strain;             \
-  using ADViscoplasticityStressUpdateBase::_effective_inelastic_strain_old;         \
-  using ADViscoplasticityStressUpdateBase::_inelastic_strain;                       \
-  using ADViscoplasticityStressUpdateBase::_inelastic_strain_old;                   \
-  using ADViscoplasticityStressUpdateBase::_verbose;                                \
-  using ADViscoplasticityStressUpdateBase::_porosity_old;                           \
+  using ADViscoplasticityStressUpdateBase::updateIntermediatePorosity;                             \
+  using ADViscoplasticityStressUpdateBase::computeStressInitialize;                                \
+  using ADViscoplasticityStressUpdateBase::computeStressFinalize;                                  \
+  using ADViscoplasticityStressUpdateBase::_intermediate_porosity;                                 \
+  using ADViscoplasticityStressUpdateBase::_effective_inelastic_strain;                            \
+  using ADViscoplasticityStressUpdateBase::_effective_inelastic_strain_old;                        \
+  using ADViscoplasticityStressUpdateBase::_inelastic_strain;                                      \
+  using ADViscoplasticityStressUpdateBase::_inelastic_strain_old;                                  \
+  using ADViscoplasticityStressUpdateBase::_verbose;                                               \
+  using ADViscoplasticityStressUpdateBase::_porosity_old;                                          \
   using ADViscoplasticityStressUpdateBase::_max_inelastic_increment
 
 class ADViscoplasticityStressUpdateBase;

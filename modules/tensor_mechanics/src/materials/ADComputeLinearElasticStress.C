@@ -21,8 +21,7 @@ ADComputeLinearElasticStress::validParams()
   return params;
 }
 
-ADComputeLinearElasticStress::ADComputeLinearElasticStress(
-    const InputParameters & parameters)
+ADComputeLinearElasticStress::ADComputeLinearElasticStress(const InputParameters & parameters)
   : ADComputeStressBase(parameters),
     _elasticity_tensor_name(_base_name + "elasticity_tensor"),
     _elasticity_tensor(getADMaterialProperty<RankFourTensor>(_elasticity_tensor_name))

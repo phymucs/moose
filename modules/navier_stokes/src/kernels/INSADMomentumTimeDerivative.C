@@ -27,10 +27,8 @@ INSADMomentumTimeDerivative::validParams()
   return params;
 }
 
-INSADMomentumTimeDerivative::INSADMomentumTimeDerivative(
-    const InputParameters & parameters)
-  : ADVectorTimeKernelValue(parameters),
-    _rho(getADMaterialProperty<Real>("rho_name"))
+INSADMomentumTimeDerivative::INSADMomentumTimeDerivative(const InputParameters & parameters)
+  : ADVectorTimeKernelValue(parameters), _rho(getADMaterialProperty<Real>("rho_name"))
 {
 }
 

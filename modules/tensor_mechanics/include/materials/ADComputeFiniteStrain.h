@@ -13,8 +13,8 @@
 
 #define usingComputeFiniteStrainMembers                                                            \
   usingComputeIncrementalStrainBaseMembers;                                                        \
-  using ADComputeFiniteStrain::_Fhat;                                               \
-  using ADComputeFiniteStrain::computeQpStrain;                                     \
+  using ADComputeFiniteStrain::_Fhat;                                                              \
+  using ADComputeFiniteStrain::computeQpStrain;                                                    \
   using ADComputeFiniteStrain::computeQpIncrements
 
 class ADComputeFiniteStrain;

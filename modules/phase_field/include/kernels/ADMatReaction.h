@@ -39,5 +39,4 @@ protected:
 
   /// Reaction rate
   const ADMaterialProperty<Real> & _mob;
-
 };

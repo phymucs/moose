@@ -27,8 +27,7 @@ NormalMortarMechanicalContact::validParams()
   return params;
 }
 
-NormalMortarMechanicalContact::NormalMortarMechanicalContact(
-    const InputParameters & parameters)
+NormalMortarMechanicalContact::NormalMortarMechanicalContact(const InputParameters & parameters)
   : ADMortarConstraint(parameters), _component(getParam<MooseEnum>("component"))
 {
 }

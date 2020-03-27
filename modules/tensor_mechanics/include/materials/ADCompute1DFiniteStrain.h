@@ -13,9 +13,9 @@
 
 #define usingCompute1DFiniteStrainMembers                                                          \
   usingComputeFiniteStrainMembers;                                                                 \
-  using ADCompute1DFiniteStrain::computeGradDispYY;                                 \
-  using ADCompute1DFiniteStrain::computeGradDispYYOld;                              \
-  using ADCompute1DFiniteStrain::computeGradDispZZ;                                 \
+  using ADCompute1DFiniteStrain::computeGradDispYY;                                                \
+  using ADCompute1DFiniteStrain::computeGradDispYYOld;                                             \
+  using ADCompute1DFiniteStrain::computeGradDispZZ;                                                \
   using ADCompute1DFiniteStrain::computeGradDispZZOld
 
 class ADCompute1DFiniteStrain;

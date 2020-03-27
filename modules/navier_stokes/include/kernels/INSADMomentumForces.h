@@ -33,6 +33,5 @@ protected:
 
   const ADMaterialProperty<RealVectorValue> & _gravity_strong_residual;
   const ADMaterialProperty<RealVectorValue> & _mms_function_strong_residual;
-
 };
 

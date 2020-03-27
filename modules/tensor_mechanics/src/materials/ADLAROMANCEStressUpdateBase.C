@@ -575,5 +575,3 @@ ADLAROMANCEStressUpdateBase::getMakeFrameHelper() const
 
   return v;
 }
-
-

@@ -43,5 +43,4 @@ protected:
 
   /// Material property to store the B_nl matrix at each quadrature point
   std::vector<ADMaterialProperty<DenseMatrix<Real>> *> _B_nl;
-
 };

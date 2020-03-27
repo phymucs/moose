@@ -26,5 +26,4 @@ protected:
   virtual ADRealVectorValue precomputeQpResidual() override;
 
   const ADMaterialProperty<Real> & _thermal_conductivity;
-
 };

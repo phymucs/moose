@@ -13,8 +13,8 @@
 
 #define usingWeakPlaneStressMembers                                                                \
   usingKernelValueMembers;                                                                         \
-  using ADWeakPlaneStress::_base_name;                                              \
-  using ADWeakPlaneStress::_stress;                                                 \
+  using ADWeakPlaneStress::_base_name;                                                             \
+  using ADWeakPlaneStress::_stress;                                                                \
   using ADWeakPlaneStress::_direction;
 
 // Forward Declarations

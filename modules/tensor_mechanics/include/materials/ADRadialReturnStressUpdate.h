@@ -15,10 +15,10 @@
 #define usingRadialReturnStressUpdateMembers                                                       \
   usingStressUpdateBaseMembers;                                                                    \
   usingSingleVariableReturnMappingSolutionMembers;                                                 \
-  using ADRadialReturnStressUpdate::propagateQpStatefulPropertiesRadialReturn;      \
-  using ADRadialReturnStressUpdate::_three_shear_modulus;                           \
-  using ADRadialReturnStressUpdate::_effective_inelastic_strain;                    \
-  using ADRadialReturnStressUpdate::_effective_inelastic_strain_old;                \
+  using ADRadialReturnStressUpdate::propagateQpStatefulPropertiesRadialReturn;                     \
+  using ADRadialReturnStressUpdate::_three_shear_modulus;                                          \
+  using ADRadialReturnStressUpdate::_effective_inelastic_strain;                                   \
+  using ADRadialReturnStressUpdate::_effective_inelastic_strain_old;                               \
   using ADRadialReturnStressUpdate::_max_inelastic_increment
 
 // Forward declarations

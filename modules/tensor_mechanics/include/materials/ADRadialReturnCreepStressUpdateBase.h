@@ -13,7 +13,7 @@
 
 #define usingRadialReturnCreepStressUpdateBaseMembers                                              \
   usingRadialReturnStressUpdateMembers;                                                            \
-  using ADRadialReturnCreepStressUpdateBase::_creep_strain;                         \
+  using ADRadialReturnCreepStressUpdateBase::_creep_strain;                                        \
   using ADRadialReturnCreepStressUpdateBase::_creep_strain_old
 
 // Forward Declarations

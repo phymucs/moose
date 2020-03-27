@@ -29,8 +29,7 @@ ADComputeRSphericalIncrementalStrain::validParams()
 
 ADComputeRSphericalIncrementalStrain::ADComputeRSphericalIncrementalStrain(
     const InputParameters & parameters)
-  : ADComputeIncrementalSmallStrain(parameters),
-    _disp_old_0(coupledValueOld("displacements", 0))
+  : ADComputeIncrementalSmallStrain(parameters), _disp_old_0(coupledValueOld("displacements", 0))
 {
 }
 

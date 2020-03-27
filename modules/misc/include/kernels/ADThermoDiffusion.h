@@ -27,6 +27,5 @@ protected:
 
   const ADVariableGradient & _grad_temp;
   const ADMaterialProperty<Real> & _soret_coeff;
-
 };
 

@@ -13,7 +13,7 @@
 
 #define usingCompute1DSmallStrainMembers                                                           \
   usingComputeSmallStrainMembers;                                                                  \
-  using ADCompute1DSmallStrain::computeStrainYY;                                    \
+  using ADCompute1DSmallStrain::computeStrainYY;                                                   \
   using ADCompute1DSmallStrain::computeStrainZZ
 
 class ADCompute1DSmallStrain;

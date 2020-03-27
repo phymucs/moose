@@ -13,9 +13,9 @@
 
 #define usingCompute1DIncrementalStrainMembers                                                     \
   usingComputeIncrementalSmallStrainMembers;                                                       \
-  using ADCompute1DIncrementalStrain::computeGradDispYY;                            \
-  using ADCompute1DIncrementalStrain::computeGradDispYYOld;                         \
-  using ADCompute1DIncrementalStrain::computeGradDispZZ;                            \
+  using ADCompute1DIncrementalStrain::computeGradDispYY;                                           \
+  using ADCompute1DIncrementalStrain::computeGradDispYYOld;                                        \
+  using ADCompute1DIncrementalStrain::computeGradDispZZ;                                           \
   using ADCompute1DIncrementalStrain::computeGradDispZZOld
 
 class ADCompute1DIncrementalStrain;

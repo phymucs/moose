@@ -13,9 +13,9 @@
 
 #define usingINSMaterialMembers                                                                    \
   usingMaterialMembers;                                                                            \
-  using INSADMaterial::_mu;                                                         \
-  using INSADMaterial::_rho;                                                        \
-  using INSADMaterial::_velocity;                                                   \
+  using INSADMaterial::_mu;                                                                        \
+  using INSADMaterial::_rho;                                                                       \
+  using INSADMaterial::_velocity;                                                                  \
   using INSADMaterial::_transient_term
 
 class INSADMaterial;

@@ -26,8 +26,7 @@ ADComputeElasticityTensorBase::validParams()
   return params;
 }
 
-ADComputeElasticityTensorBase::ADComputeElasticityTensorBase(
-    const InputParameters & parameters)
+ADComputeElasticityTensorBase::ADComputeElasticityTensorBase(const InputParameters & parameters)
   : ADMaterial(parameters),
     GuaranteeProvider(this),
     _base_name(isParamValid("base_name") ? getParam<std::string>("base_name") + "_" : ""),
@@ -48,5 +47,3 @@ ADComputeElasticityTensorBase::computeQpProperties()
   if (_prefactor_function)
     _elasticity_tensor[_qp] *= _prefactor_function->value(_t, _q_point[_qp]);
 }
-
-

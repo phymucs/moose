@@ -37,5 +37,4 @@ protected:
   virtual ADReal computeDFDOP();
 
   const ADMaterialProperty<Real> & _gamma;
-
 };

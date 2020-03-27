@@ -33,8 +33,7 @@ ADPowerLawCreepStressUpdate::validParams()
   return params;
 }
 
-ADPowerLawCreepStressUpdate::ADPowerLawCreepStressUpdate(
-    const InputParameters & parameters)
+ADPowerLawCreepStressUpdate::ADPowerLawCreepStressUpdate(const InputParameters & parameters)
   : ADRadialReturnCreepStressUpdateBase(parameters),
     _temperature(isParamValid("temperature") ? &adCoupledValue("temperature") : nullptr),
     _coefficient(getParam<Real>("coefficient")),
@@ -52,8 +51,8 @@ ADPowerLawCreepStressUpdate::ADPowerLawCreepStressUpdate(
 }
 
 void
-ADPowerLawCreepStressUpdate::computeStressInitialize(
-    const ADReal & /*effective_trial_stress*/, const ADRankFourTensor & /*elasticity_tensor*/)
+ADPowerLawCreepStressUpdate::computeStressInitialize(const ADReal & /*effective_trial_stress*/,
+                                                     const ADRankFourTensor & /*elasticity_tensor*/)
 {
   if (_temperature)
     _exponential = std::exp(-_activation_energy / (_gas_constant * (*_temperature)[_qp]));
@@ -63,7 +62,7 @@ ADPowerLawCreepStressUpdate::computeStressInitialize(
 
 ADReal
 ADPowerLawCreepStressUpdate::computeResidual(const ADReal & effective_trial_stress,
-                                                            const ADReal & scalar)
+                                             const ADReal & scalar)
 {
   const ADReal stress_delta = effective_trial_stress - _three_shear_modulus * scalar;
   const ADReal creep_rate =
@@ -73,7 +72,7 @@ ADPowerLawCreepStressUpdate::computeResidual(const ADReal & effective_trial_stre
 
 ADReal
 ADPowerLawCreepStressUpdate::computeDerivative(const ADReal & effective_trial_stress,
-                                                              const ADReal & scalar)
+                                               const ADReal & scalar)
 {
   const ADReal stress_delta = effective_trial_stress - _three_shear_modulus * scalar;
   const ADReal creep_rate_derivative = -_coefficient * _three_shear_modulus * _n_exponent *
@@ -81,5 +80,3 @@ ADPowerLawCreepStressUpdate::computeDerivative(const ADReal & effective_trial_st
                                        _exp_time;
   return creep_rate_derivative * _dt - 1.0;
 }
-
-

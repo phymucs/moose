@@ -13,7 +13,7 @@
 
 #define usingCompute2DSmallStrainMembers                                                           \
   usingComputeSmallStrainMembers;                                                                  \
-  using ADCompute2DSmallStrain::_out_of_plane_direction;                            \
+  using ADCompute2DSmallStrain::_out_of_plane_direction;                                           \
   using ADCompute2DSmallStrain::computeOutOfPlaneStrain
 
 class ADCompute2DSmallStrain;
