@@ -36,5 +36,3 @@ ADCHSplitConcentration::computeQpResidual()
 {
   return _mobility[_qp] * _grad_mu[_qp] * _grad_test[_i][_qp];
 }
-
-adBaseClass(ADCHSplitConcentration);

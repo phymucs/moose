@@ -112,7 +112,6 @@ ADComputeFiniteShellStrain::computeProperties()
       (*_total_strain[j])[i] = (*_total_strain_old[j])[i] + (*_strain_increment[j])[i];
     }
   }
-  copyDualNumbersToValues();
 }
 
 void

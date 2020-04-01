@@ -40,5 +40,3 @@ ADMathFreeEnergy::computeQpProperties()
   _prop_F[_qp] = 1.0 / 4.0 * (1.0 + _c[_qp]) * (1.0 + _c[_qp]) * (1.0 - _c[_qp]) * (1.0 - _c[_qp]);
   _prop_dFdc[_qp] = _c[_qp] * (_c[_qp] * _c[_qp] - 1.0);
 }
-
-adBaseClass(ADMathFreeEnergy);

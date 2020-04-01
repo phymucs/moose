@@ -73,8 +73,6 @@ ADComputeIncrementalSmallStrain::computeProperties()
     // incremental small strain does not include rotation
     _rotation_increment[_qp].setToIdentity();
   }
-
-  copyDualNumbersToValues();
 }
 
 void

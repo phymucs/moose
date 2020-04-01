@@ -26,5 +26,3 @@ ADMatAnisoDiffusion::ADMatAnisoDiffusion(const InputParameters & parameters)
   : ADMatDiffusionBase<RealTensorValue>(parameters)
 {
 }
-
-adBaseClass(ADMatAnisoDiffusion);

@@ -37,5 +37,3 @@ ADSplitCHParsed::computeDFDC()
 {
   return _dFdc[_qp];
 }
-
-adBaseClass(ADSplitCHParsed);

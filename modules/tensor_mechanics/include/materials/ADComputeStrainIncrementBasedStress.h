@@ -39,7 +39,7 @@ protected:
   const MaterialProperty<RankTwoTensor> & _mechanical_strain_old;
   ///
   ///@{ Vectors of current and old states of the inelastic strain material properties
-  std::vector<const MaterialProperty<RankTwoTensor> *> _inelastic_strains;
+  std::vector<const ADMaterialProperty<RankTwoTensor> *> _inelastic_strains;
   std::vector<const MaterialProperty<RankTwoTensor> *> _inelastic_strains_old;
   ///@}
 
@@ -47,5 +47,4 @@ protected:
   std::vector<MaterialPropertyName> _inelastic_strain_names;
   /// Number of inelastic models
   unsigned int _num_inelastic_strain_models;
-
 };
