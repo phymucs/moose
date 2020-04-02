@@ -11,13 +11,15 @@
 #include "RotationTensor.h"
 
 registerMooseObject("TensorMechanicsApp", ComputeElasticityTensor);
+registerMooseObject("TensorMechanicsApp", ADComputeElasticityTensor);
 
 defineLegacyParams(ComputeElasticityTensor);
 
+template <bool is_ad>
 InputParameters
-ComputeElasticityTensor::validParams()
+ComputeElasticityTensorTempl<is_ad>::validParams()
 {
-  InputParameters params = ComputeRotatedElasticityTensorBase::validParams();
+  InputParameters params = ComputeRotatedElasticityTensorBaseTempl<is_ad>::validParams();
   params.addClassDescription("Compute an elasticity tensor.");
   params.addRequiredParam<std::vector<Real>>("C_ijkl", "Stiffness tensor for material");
   params.addParam<MooseEnum>(
@@ -25,10 +27,12 @@ ComputeElasticityTensor::validParams()
   return params;
 }
 
-ComputeElasticityTensor::ComputeElasticityTensor(const InputParameters & parameters)
-  : ComputeRotatedElasticityTensorBase(parameters),
-    _Cijkl(getParam<std::vector<Real>>("C_ijkl"),
-           (RankFourTensor::FillMethod)(int)getParam<MooseEnum>("fill_method"))
+template <bool is_ad>
+ComputeElasticityTensorTempl<is_ad>::ComputeElasticityTensorTempl(
+    const InputParameters & parameters)
+  : ComputeRotatedElasticityTensorBaseTempl<is_ad>(parameters),
+    _Cijkl(this->template getParam<std::vector<Real>>("C_ijkl"),
+           (RankFourTensor::FillMethod)(int)this->template getParam<MooseEnum>("fill_method"))
 {
   if (!isParamValid("elasticity_tensor_prefactor"))
     issueGuarantee(_elasticity_tensor_name, Guarantee::CONSTANT_IN_TIME);
@@ -45,9 +49,13 @@ ComputeElasticityTensor::ComputeElasticityTensor(const InputParameters & paramet
   }
 }
 
+template <bool is_ad>
 void
-ComputeElasticityTensor::computeQpElasticityTensor()
+ComputeElasticityTensorTempl<is_ad>::computeQpElasticityTensor()
 {
   // Assign elasticity tensor at a given quad point
   _elasticity_tensor[_qp] = _Cijkl;
 }
+
+template class ComputeElasticityTensorTempl<false>;
+template class ComputeElasticityTensorTempl<true>;

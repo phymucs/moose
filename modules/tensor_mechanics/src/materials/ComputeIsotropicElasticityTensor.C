@@ -10,11 +10,13 @@
 #include "ComputeIsotropicElasticityTensor.h"
 
 registerMooseObject("TensorMechanicsApp", ComputeIsotropicElasticityTensor);
+registerMooseObject("TensorMechanicsApp", ADComputeIsotropicElasticityTensor);
 
 defineLegacyParams(ComputeIsotropicElasticityTensor);
 
+template <bool is_ad>
 InputParameters
-ComputeIsotropicElasticityTensor::validParams()
+ComputeIsotropicElasticityTensorTempl<is_ad>::validParams()
 {
   InputParameters params = ComputeElasticityTensorBase::validParams();
   params.addClassDescription("Compute a constant isotropic elasticity tensor.");
@@ -26,19 +28,20 @@ ComputeIsotropicElasticityTensor::validParams()
   return params;
 }
 
-ComputeIsotropicElasticityTensor::ComputeIsotropicElasticityTensor(
+template <bool is_ad>
+ComputeIsotropicElasticityTensorTempl<is_ad>::ComputeIsotropicElasticityTensorTempl(
     const InputParameters & parameters)
-  : ComputeElasticityTensorBase(parameters),
+  : ComputeElasticityTensorBaseTempl<is_ad>(parameters),
     _bulk_modulus_set(parameters.isParamValid("bulk_modulus")),
     _lambda_set(parameters.isParamValid("lambda")),
     _poissons_ratio_set(parameters.isParamValid("poissons_ratio")),
     _shear_modulus_set(parameters.isParamValid("shear_modulus")),
     _youngs_modulus_set(parameters.isParamValid("youngs_modulus")),
-    _bulk_modulus(_bulk_modulus_set ? getParam<Real>("bulk_modulus") : -1),
-    _lambda(_lambda_set ? getParam<Real>("lambda") : -1),
-    _poissons_ratio(_poissons_ratio_set ? getParam<Real>("poissons_ratio") : -1),
-    _shear_modulus(_shear_modulus_set ? getParam<Real>("shear_modulus") : -1),
-    _youngs_modulus(_youngs_modulus_set ? getParam<Real>("youngs_modulus") : -1),
+    _bulk_modulus(_bulk_modulus_set ? this->template getParam<Real>("bulk_modulus") : -1),
+    _lambda(_lambda_set ? this->template getParam<Real>("lambda") : -1),
+    _poissons_ratio(_poissons_ratio_set ? this->template getParam<Real>("poissons_ratio") : -1),
+    _shear_modulus(_shear_modulus_set ? this->template getParam<Real>("shear_modulus") : -1),
+    _youngs_modulus(_youngs_modulus_set ? this->template getParam<Real>("youngs_modulus") : -1),
     _effective_stiffness_local(parameters.isParamValid("effective_stiffness_local"))
 {
   unsigned int num_elastic_constants = _bulk_modulus_set + _lambda_set + _poissons_ratio_set +
@@ -186,8 +189,9 @@ ComputeIsotropicElasticityTensor::ComputeIsotropicElasticityTensor(
   _Cijkl.fillFromInputVector(iso_const, RankFourTensor::symmetric_isotropic);
 }
 
+template <bool is_ad>
 void
-ComputeIsotropicElasticityTensor::computeQpElasticityTensor()
+ComputeIsotropicElasticityTensorTempl<is_ad>::computeQpElasticityTensor()
 {
   // Assign elasticity tensor at a given quad point
   _elasticity_tensor[_qp] = _Cijkl;
@@ -195,3 +199,6 @@ ComputeIsotropicElasticityTensor::computeQpElasticityTensor()
   // Assign effective stiffness at a given quad point
   _effective_stiffness[_qp] = _effective_stiffness_local;
 }
+
+template class ComputeIsotropicElasticityTensorTempl<false>;
+template class ComputeIsotropicElasticityTensorTempl<true>;

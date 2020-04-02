@@ -12,7 +12,10 @@
 #include "NodalPatchRecovery.h"
 #include "RankTwoTensor.h"
 
-class RankTwoAux;
+template <bool>
+class RankTwoAuxTempl;
+typedef RankTwoAuxTempl<false> RankTwoAux;
+typedef RankTwoAuxTempl<true> ADRankTwoAux;
 
 /**
  * RankTwoAux is designed to take the data in the RankTwoTensor material
@@ -23,18 +26,19 @@ class RankTwoAux;
 template <>
 InputParameters validParams<RankTwoAux>();
 
-class RankTwoAux : public NodalPatchRecovery
+template <bool is_ad>
+class RankTwoAuxTempl : public NodalPatchRecovery
 {
 public:
   static InputParameters validParams();
 
-  RankTwoAux(const InputParameters & parameters);
+  RankTwoAuxTempl(const InputParameters & parameters);
 
 protected:
   virtual Real computeValue();
 
 private:
-  const MaterialProperty<RankTwoTensor> & _tensor;
+  const GenericMaterialProperty<RankTwoTensor, is_ad> & _tensor;
   const unsigned int _i;
   const unsigned int _j;
 

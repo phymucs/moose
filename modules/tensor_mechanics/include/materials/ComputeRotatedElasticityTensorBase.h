@@ -11,7 +11,10 @@
 
 #include "ComputeElasticityTensorBase.h"
 
-class ComputeRotatedElasticityTensorBase;
+template <bool>
+class ComputeRotatedElasticityTensorBaseTempl;
+typedef ComputeRotatedElasticityTensorBaseTempl<false> ComputeRotatedElasticityTensorBase;
+typedef ComputeRotatedElasticityTensorBaseTempl<true> ADComputeRotatedElasticityTensorBase;
 
 template <>
 InputParameters validParams<ComputeRotatedElasticityTensorBase>();
@@ -20,12 +23,13 @@ InputParameters validParams<ComputeRotatedElasticityTensorBase>();
  * ComputeRotatedElasticityTensorBase is an intermediate base class that rotates an elasticity
  * tensor based on euler angles.
  */
-class ComputeRotatedElasticityTensorBase : public ComputeElasticityTensorBase
+template <bool is_ad>
+class ComputeRotatedElasticityTensorBaseTempl : public ComputeElasticityTensorBaseTempl<is_ad>
 {
 public:
   static InputParameters validParams();
 
-  ComputeRotatedElasticityTensorBase(const InputParameters & parameters);
+  ComputeRotatedElasticityTensorBaseTempl(const InputParameters & parameters);
 
 protected:
   RealVectorValue _Euler_angles;

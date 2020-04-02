@@ -76,6 +76,7 @@
     issues = '#12650 #13260'
     requirement = 'Finite strain methods in Tensor Mechanics should be able to adequately simulate a
                    tensile test simulation in 3D using AD and calculate perfect Jacobians'
+    valgrind = 'none' # too slow especially after #14547
   [../]
   [./3d_bar_Bbar-jac]
     type = PetscJacobianTester
@@ -90,5 +91,6 @@
     requirement = 'Finite strain methods in Tensor Mechanics should be able to adequately simulate a
                    tensile test simulation in 3D using a volumetric locking correction using AD and
                    calculate perfect Jacobians'
+    valgrind = 'none' # too slow especially after #14547
   [../]
 []

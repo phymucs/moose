@@ -11,7 +11,10 @@
 
 #include "ComputeRotatedElasticityTensorBase.h"
 
-class ComputeElasticityTensor;
+template <bool>
+class ComputeElasticityTensorTempl;
+typedef ComputeElasticityTensorTempl<false> ComputeElasticityTensor;
+typedef ComputeElasticityTensorTempl<true> ADComputeElasticityTensor;
 
 template <>
 InputParameters validParams<ComputeElasticityTensor>();
@@ -19,16 +22,24 @@ InputParameters validParams<ComputeElasticityTensor>();
 /**
  * ComputeElasticityTensor defines an elasticity tensor material object with a given base name.
  */
-class ComputeElasticityTensor : public ComputeRotatedElasticityTensorBase
+template <bool is_ad>
+class ComputeElasticityTensorTempl : public ComputeRotatedElasticityTensorBaseTempl<is_ad>
 {
 public:
   static InputParameters validParams();
 
-  ComputeElasticityTensor(const InputParameters & parameters);
+  ComputeElasticityTensorTempl(const InputParameters & parameters);
 
 protected:
   virtual void computeQpElasticityTensor() override;
 
   /// Individual material information
   RankFourTensor _Cijkl;
+
+  using ComputeRotatedElasticityTensorBaseTempl<is_ad>::isParamValid;
+  using ComputeRotatedElasticityTensorBaseTempl<is_ad>::_elasticity_tensor_name;
+  using ComputeRotatedElasticityTensorBaseTempl<is_ad>::_Euler_angles;
+  using ComputeRotatedElasticityTensorBaseTempl<is_ad>::_elasticity_tensor;
+  using ComputeRotatedElasticityTensorBaseTempl<is_ad>::_qp;
+  using ComputeRotatedElasticityTensorBaseTempl<is_ad>::issueGuarantee;
 };

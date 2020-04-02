@@ -12,7 +12,10 @@
 #include "AuxKernel.h"
 #include "RankFourTensor.h"
 
-class RankFourAux;
+template <bool>
+class RankFourAuxTempl;
+typedef RankFourAuxTempl<false> RankFourAux;
+typedef RankFourAuxTempl<true> ADRankFourAux;
 
 /**
  * RankFourAux is designed to take the data in the RankFourTensor material
@@ -23,20 +26,21 @@ class RankFourAux;
 template <>
 InputParameters validParams<RankFourAux>();
 
-class RankFourAux : public AuxKernel
+template <bool is_ad>
+class RankFourAuxTempl : public AuxKernel
 {
 public:
   static InputParameters validParams();
 
-  RankFourAux(const InputParameters & parameters);
+  RankFourAuxTempl(const InputParameters & parameters);
 
-  virtual ~RankFourAux() {}
+  virtual ~RankFourAuxTempl() {}
 
 protected:
   virtual Real computeValue();
 
 private:
-  const MaterialProperty<RankFourTensor> & _tensor;
+  const GenericMaterialProperty<RankFourTensor, is_ad> & _tensor;
   const unsigned int _i;
   const unsigned int _j;
   const unsigned int _k;
