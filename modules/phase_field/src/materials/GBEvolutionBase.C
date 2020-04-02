@@ -11,8 +11,9 @@
 
 defineLegacyParams(GBEvolutionBase);
 
+template <bool is_ad>
 InputParameters
-GBEvolutionBase::validParams()
+GBEvolutionBaseTempl<is_ad>::validParams()
 {
   InputParameters params = Material::validParams();
   params.addClassDescription(
@@ -34,7 +35,8 @@ GBEvolutionBase::validParams()
   return params;
 }
 
-GBEvolutionBase::GBEvolutionBase(const InputParameters & parameters)
+template <bool is_ad>
+GBEvolutionBaseTempl<is_ad>::GBEvolutionBaseTempl(const InputParameters & parameters)
   : DerivativeMaterialInterface<Material>(parameters),
     _f0s(getParam<Real>("f0s")),
     _wGB(getParam<Real>("wGB")),
@@ -45,19 +47,19 @@ GBEvolutionBase::GBEvolutionBase(const InputParameters & parameters)
     _GBMobility(getParam<Real>("GBMobility")),
     _molar_vol(getParam<Real>("molar_volume")),
     _T(coupledValue("T")),
-    _sigma(declareProperty<Real>("sigma")),
-    _M_GB(declareProperty<Real>("M_GB")),
-    _kappa(declareProperty<Real>("kappa_op")),
-    _gamma(declareProperty<Real>("gamma_asymm")),
-    _L(declareProperty<Real>("L")),
+    _sigma(declareGenericProperty<Real, is_ad>("sigma")),
+    _M_GB(declareGenericProperty<Real, is_ad>("M_GB")),
+    _kappa(declareGenericProperty<Real, is_ad>("kappa_op")),
+    _gamma(declareGenericProperty<Real, is_ad>("gamma_asymm")),
+    _L(declareGenericProperty<Real, is_ad>("L")),
     _dLdT(parameters.hasDefaultCoupledValue("T")
               ? nullptr
               : &declarePropertyDerivative<Real>("L", getVar("T", 0)->name())),
-    _l_GB(declareProperty<Real>("l_GB")),
-    _mu(declareProperty<Real>("mu")),
-    _entropy_diff(declareProperty<Real>("entropy_diff")),
-    _molar_volume(declareProperty<Real>("molar_volume")),
-    _act_wGB(declareProperty<Real>("act_wGB")),
+    _l_GB(declareGenericProperty<Real, is_ad>("l_GB")),
+    _mu(declareGenericProperty<Real, is_ad>("mu")),
+    _entropy_diff(declareGenericProperty<Real, is_ad>("entropy_diff")),
+    _molar_volume(declareGenericProperty<Real, is_ad>("molar_volume")),
+    _act_wGB(declareGenericProperty<Real, is_ad>("act_wGB")),
     _kb(8.617343e-5),     // Boltzmann constant in eV/K
     _JtoeV(6.24150974e18) // Joule to eV conversion
 {
@@ -65,8 +67,9 @@ GBEvolutionBase::GBEvolutionBase(const InputParameters & parameters)
     mooseError("Either a value for GBMobility or for GBmob0 and Q must be provided");
 }
 
+template <bool is_ad>
 void
-GBEvolutionBase::computeQpProperties()
+GBEvolutionBaseTempl<is_ad>::computeQpProperties()
 {
   const Real length_scale4 = _length_scale * _length_scale * _length_scale * _length_scale;
 
@@ -79,7 +82,7 @@ GBEvolutionBase::computeQpProperties()
     const Real M0 = _GBmob0 * _time_scale / (_JtoeV * length_scale4);
 
     _M_GB[_qp] = M0 * std::exp(-_Q / (_kb * _T[_qp]));
-    dM_GBdT = _M_GB[_qp] * _Q / (_kb * _T[_qp] * _T[_qp]);
+    dM_GBdT = MetaPhysicL::raw_value(_M_GB[_qp] * _Q / (_kb * _T[_qp] * _T[_qp]));
   }
   else
   {
@@ -93,7 +96,7 @@ GBEvolutionBase::computeQpProperties()
 
   _L[_qp] = 4.0 / 3.0 * _M_GB[_qp] / _l_GB[_qp];
   if (_dLdT)
-    (*_dLdT)[_qp] = 4.0 / 3.0 * dM_GBdT / _l_GB[_qp];
+    (*_dLdT)[_qp] = MetaPhysicL::raw_value(4.0 / 3.0 * dM_GBdT / _l_GB[_qp]);
   _kappa[_qp] = 3.0 / 4.0 * _sigma[_qp] * _l_GB[_qp];
   _gamma[_qp] = 1.5;
   _mu[_qp] = 3.0 / 4.0 * 1.0 / _f0s * _sigma[_qp] / _l_GB[_qp];
@@ -105,3 +108,6 @@ GBEvolutionBase::computeQpProperties()
   _molar_volume[_qp] = _molar_vol / (_length_scale * _length_scale * _length_scale);
   _act_wGB[_qp] = 0.5e-9 / _length_scale;
 }
+
+template class GBEvolutionBaseTempl<false>;
+template class GBEvolutionBaseTempl<true>;

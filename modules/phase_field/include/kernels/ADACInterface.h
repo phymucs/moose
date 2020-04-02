@@ -12,21 +12,6 @@
 #include "ADKernel.h"
 #include "DerivativeMaterialPropertyNameInterface.h"
 
-#define usingACInterfaceMembers                                                                    \
-  usingKernelMembers;                                                                              \
-  using ADACInterface::_prop_L;                                                                    \
-  using ADACInterface::_name_L;                                                                    \
-  using ADACInterface::_kappa;                                                                     \
-  using ADACInterface::_variable_L;                                                                \
-  using ADACInterface::_dLdop;                                                                     \
-  using ADACInterface::_nvar;                                                                      \
-  using ADACInterface::_dLdarg;                                                                    \
-  using ADACInterface::_gradarg
-
-class ADACInterface;
-
-declareADValidParams(ADACInterface);
-
 /**
  * Compute the Allen-Cahn interface term with the weak form residual
  * \f$ \left( \kappa_i \nabla\eta_i, \nabla (L_i \psi) \right) \f$
@@ -63,5 +48,4 @@ protected:
 
   /// Gradients for all coupled variables
   std::vector<const ADVariableGradient *> _gradarg;
-
 };
